@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Fazer login</title>
+      <style>
+            .fundo{
+                  display: flex;
+                  background-image: linear-gradient(-45deg, #004c78b2, #011b3e7a,#4d0d3275);
+                  width: 100%;
+                  height: 900px;
+            }
+
+            .header{
+                  width: 100%;
+                  background-color: #2F2E41;
+                  height: 80px;
+                  display: inline-block;
+            }
+
+            .header > ul > a {
+                  display: inline-block;
+            }
+
+            .caixa-formulario{
+                  display: inline-block;
+                  background-color: rgba(0, 0, 0, 0);
+                  width: 100%;
+                  height: 800px;
+                  margin-top: 50px;
+                  margin-left: -1382px;
+            }
+
+            .caixa-formulario > div{
+                  display: inline-block;
+                  width: 500px;
+                  height: 600px;
+                  margin-top: 100px;
+            }
+
+
+            .box{
+                  
+                  
+                  background-color: transparent;
+                  border-color: transparent;
+                  border-style: solid;
+                  border-width: 3px;
+                  border-radius: 15px;
+            }
+
+            .img{
+                  
+                  display: flex;
+                  margin-left: 150px;
+                  background-color: rgba(0, 0, 0, 0);
+                  
+                  
+            }
+
+            #imagem{
+                  width: 95%;
+                  height: 95% ;
+            }
+
+
+            .box > input{
+                  position: relative;
+            }
+            
+
+
+
+
+
+
+
+            
+            .box{
+                  
+                  margin-left: 50px;
+                  position: absolute;
+                  font-family: Arial, Helvetica, sans-serif;
+                  color: white;
+            
+            }
+
+            fieldset{
+                  border: 2px solid #4322fd;
+                  background-color: #3F3D56;
+                  border-radius: 10px;
+            }
+
+            legend{
+                  border: 1px solid #4322fd;
+                  padding: 10px;
+                  text-align: center;
+                  background-color: #4322fd;
+                  border-radius: 8px;
+                  
+            }
+
+            .inputBox{
+                  position: relative;
+            }
+
+            .inputUser{
+                  background: none;
+                  border: none;
+                  border-bottom: 1px solid white;
+                  outline: none;
+                  color: white;
+                  font-size: 15px;
+                  width: 100%;
+                  letter-spacing: 2px;
+            }
+
+            .labelInput{
+                  position: absolute;
+                  top: 0px;
+                  left: 0px;
+                  pointer-events: none;
+                  transition: .5s;
+            }
+
+            .inputUser:focus ~ .labelInput,
+            .inputUser:valid ~ .labelInput{
+                  top: -20px;
+                  font-size: 12px;
+                  color: #535fff;
+
+            }
+
+            #data_nascimento{
+                  border: none;
+                  padding: 8px;
+                  border-radius: 10px;
+                  outline: none;
+                  font-size: 15px;
+            }
+
+            #submit{
+                  background: #4322fd;
+                  color: white;
+                  width: 100%;
+                  padding: 15px;
+                  border: none;
+                  font-size: 15px;
+                  cursor: pointer;
+                  border-radius: 10px;
+            }
+
+            #submit:hover{
+                  background-color: #4e2fff;
+            }
+
+            #submit:active{
+                  background-color: #2910b6;
+            }
+
+
+            .radio{
+                  appearance: none;
+                  background-color: rgb(255, 255, 255);
+                  width: 10px;
+                  height: 10px;
+                  border-radius: 50%;
+            }
+
+            .radio:checked{
+                  background-color: #4322fd;
+            }
+
+            
+
+            .link > a{
+                  margin-left: 50px;
+                  font-size: 22px;
+                  font-family: Arial, Helvetica, sans-serif;
+                  text-decoration: none;
+                  color: white;
+                  
+                  padding: 10px;
+                  border-radius: 8px;
+            }
+
+            @keyframes loading{
+                  from{
+                        outline: 0px solid #4322fd;
+                  }
+                  to{
+                        outline: 10px solid  #4322fd00;
+                  }
+            }
+
+            .contato{
+                  animation: loading 1s ease-out infinite;
+                  background-color: #4322fd;
+            }
+
+            .dois:hover{
+                  transform: translateY(-5px);
+                  text-decoration: underline;
+                  color: #4322fd;
+                  transition: 0.5s;
+                  
+
+            }
+
+            .logo{
+                  margin-right: 680px;
+                  color: #4322fd;
+            }
+
+
+      </style>
+</head>
+<body>
+      <div class="fundo">
+            <div class="header">
+                  <ul class="link">
+                        <a href="#" class="logo">Logo aqui</a>
+                        <a href="#" class="dois">Home</a>
+                        <a href="#" class="dois">Sobre</a>
+                        <a href="#" class="contato">Contato</a>
+                  </ul>
+            </div>
+
+            <div class="caixa-formulario">
+                  <div class="img">
+                        <img id="imagem" src="imagens/undraw_secure_login_pdn4 (1).svg" alt="">
+                  </div>
+                  <div class="box">
+                        <form action="">
+                              <fieldset>
+                                    <legend><b>Formulário de clientes</b></legend>
+                                    <div class="inputBox">
+                                          <input type="text" name="nome" id="nome" class="inputUser" required >
+                                          <label for="nome" class="labelInput">Nome completo</label>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="inputBox">
+                                          <input type="text" name="emal" id="email" class="inputUser" required >
+                                           <label for="email" class="labelInput">Email</label>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="inputBox">
+                                          <input type="tel" name="telefone" id="telefone" class="inputUser" required >
+                                          <label for="telefone" class="labelInput">Telefone</label>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <p>Sexo</p>
+                                    
+                                    <input class="radio" type="radio" name="sexo" id="feminino" value="feminino" required>
+                                    <label for="feminino" >Feminino</label>
+                                    <br>
+                                    <br>
+                                    <input class="radio" type="radio" name="sexo" id="masculino" value="masculino" required>
+                                    <label for="Masculino" >Masculino</label>
+                                    <br>
+                                    <br>
+                                    <input class="radio" type="radio" name="sexo" id="outro" value="outro" required>
+                                    <label for="outro">Outro</label>
+                                    <br>
+                                    <br>
+                                    
+                                    <label for="data_nascimento"><b>Data de nascimento</b></label>
+                                    <input type="date" name="data_nascimento" id="data_nascimento"  required >
+                              
+                                    <br>
+                                    <br>
+                                    <div class="inputBox">
+                                          <input type="text" name="cidade" id="cidade" class="inputUser" required >
+                                          <label for="cidade" class="labelInput">Cidade</label>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="inputBox">
+                                          <input type="text" name="estado" id="estado" class="inputUser" required >
+                                           <label for="estado" class="labelInput">Estado</label>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="inputBox">
+                                          <input type="text" name="endereco" id="endereco" class="inputUser" required >
+                                          <label for="endereco" class="labelInput">Endereço</label>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <input type="submit" name="submit" id="submit">
+                              </fieldset>
+                              
+                              
+                              
+                              
+                        </form>
+                  </div>
+            </div>
+      </div>
+      
+</body>
+</html>

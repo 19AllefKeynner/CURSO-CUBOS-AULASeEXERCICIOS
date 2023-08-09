@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Temporizador</title>
+      <style>
+            *{
+                  padding: 0;
+                  margin: 0;
+                  font-family: 'Orbitron', sans-serif;
+                  color: white;
+            }
+
+            body{
+                  background-color: rgb(0, 0, 0);
+            }
+
+            .container-todo{
+                  padding-top: 150px;
+                  display: flex;
+                  align-items: center;
+                  flex-direction: column;
+                  gap: 2rem;
+            }
+
+            .container-todo h1{
+                  font-size: 75px;
+            }
+
+            .container-todo , .separador{
+                  font-size: 75px;
+            }
+
+          
+            .timer{
+                  display: flex;
+            }
+
+            .time{
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin-right: 10px;
+                  min-width: 190px;
+            }
+
+            .btns{
+                  margin-top: 60px;
+                  
+            }
+
+            button{
+                  color: rgb(140, 0, 255);
+                  border: 2px solid rgb(140, 0, 255);
+                  background-color: white;
+                  padding: 10px 20px 10px 20px;
+                  border-radius: 5px;
+                  font-weight: 700;
+                  font-size: 20px;
+                  margin-right: 5px;
+                  transition: 0.3s ease-in-out;
+                  
+            }
+
+            button:hover{
+                  transform: scale(1.1);
+            }
+
+            button:active{
+                  transform: scale(0.70);
+            }
+
+            #iniciar, #retomar{
+                  background-color: rgb(140, 0, 255);
+                  color: white;
+            }
+
+            .invisivel{
+                  display: none;
+            }
+
+            .hoverNone:active, .hoverNone:hover{
+                  transform: scale(1);
+            }
+
+            #parar{
+                  background-color: rgb(255, 41, 41);
+                  border-color: rgb(255, 41, 41) ;
+                  color: white;
+            }
+
+
+      </style>
+</head>
+<body>
+      <div class="container-todo">
+            <h1>Cronômetro</h1>
+            <div class="timer">
+                  <div class="time" id="minutos">00</div>
+                  <div class="separador">:</div>
+                  <div class="time" id="segundos">00</div>
+                  <div class="separador">:</div>
+                  <div class="time" id="milisegundos">000</div>
+            </div>
+            <div class="btns">
+                  <button id="iniciar" >Iniciar</button>
+                  <button id="pausar" class="invisivel">Pausar</button>
+                  <button id="parar" class="invisivel">Parar</button>
+                  <button id="retomar" class="invisivel">Retomar</button>
+            </div>
+      </div>
+
+      <script>
+            const minutosDiv = document.getElementById('minutos')
+            const segundosDiv = document.getElementById('segundos')
+            const miliDiv = document.getElementById('milisegundos')
+
+            const iniciar = document.getElementById('iniciar')
+            const parar = document.getElementById('parar')
+            const pausar = document.getElementById('pausar')
+            const retomar = document.getElementById('retomar')
+
+            let segundos = 0
+            let minutos = 0
+            let milisegundos = 0
+            let estaPausado = false
+
+
+            function startTimer(){
+                  intervalo = setInterval(() => {
+                        if(!estaPausado){
+                              milisegundos += 10
+
+                              if (milisegundos === 1000){
+                                    segundos++
+                                    milisegundos = 0
+                              }
+
+                              if (segundos === 60){
+                                    minutos++
+                                    segundos = 0
+                              }
+                        }
+
+                        minutosDiv.textContent = minutos
+                        segundosDiv.textContent = segundos
+                        miliDiv.textContent = milisegundos
+
+                  },10)
+            }
+
+            iniciar.addEventListener("click", function(){
+                  startTimer()
+                  pausar.classList.remove('invisivel')
+                  iniciar.style.backgroundColor = 'rgb(43, 0, 78)'
+                  iniciar.classList.add('hoverNone')
+            })
+
+            pausar.addEventListener("click", function(){
+                  estaPausado = true
+                        iniciar.classList.remove('hoverNone')
+                        iniciar.classList.add("invisivel")
+                        pausar.classList.add("invisivel")
+                        parar.classList.remove('invisivel')
+                        retomar.classList.remove('invisivel')
+                  })
+
+            parar.addEventListener("click", function(){
+                        window.location.reload()
+            })
+
+            retomar.addEventListener('click', function(){
+                  estaPausado = false
+                  pausar.classList.remove('invisivel')
+                  iniciar.classList.remove('invisivel')
+                  parar.classList.add('invisivel')
+                  retomar.classList.add('invisivel')
+                  iniciar.classList.add('hoverNone')
+            })
+
+
+
+      </script>
+      
+</body>
+</html>

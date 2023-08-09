@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>ET</title>
+      <style>
+            body{
+                  padding-top: 50px;
+                  display: flex;
+                  background-color: rgb(22, 22, 22);
+                  align-items: center;
+                  justify-content: center;
+            }
+
+            .cabeca{
+                  transform: rotate(45deg);
+                  border-top-left-radius: 50%;
+                  border-top-right-radius: 50%;
+                  border-bottom-left-radius: 300px;
+                  width: 600px;
+                  height: 600px;
+                  background-color: chartreuse;
+                  animation: animate-outline 1s ease-out infinite;
+
+            }
+            @keyframes animate-outline {
+                  from{
+                  outline: 0px solid rgba(128, 255, 0, 0.589);
+                  }
+                  to{
+                  outline: 30px solid rgba(128, 255, 0, 0);
+                  }
+            }
+
+            .olho{
+                  display: inline-block;
+                  position: relative;
+                  width: 80px;
+                  height: 250px;
+                  background-color: black;
+                  border-radius: 60%;
+                  margin-left: 100px;
+                  margin-right: 236px;
+                  transform: rotate(-45deg);
+                  
+            }
+
+            .olho2{
+                  display: inline-block;
+                  position: relative;
+                  width: 80px;
+                  height: 250px;
+                  background-color: black;
+                  border-radius: 60%;
+                  margin-right: 100px;
+                  margin-top: 180px;
+                  transform: rotate(45deg);
+                  
+            }
+
+            .centralizar{
+                  
+                  align-items: center;
+                  justify-content: center;
+                  transform: rotate(-45deg);
+                  display: inline-block;
+                  background-color: rgba(0, 0, 0, 0);
+                  width: 600px;
+                  height: 600px;
+            }
+
+            .boca{
+                  margin-top: 100px;
+                  margin-left: 225px;
+                  width: 150px;
+                  height: 50px;
+                  background-color: black;
+                  border-bottom-left-radius: 170px;
+                  border-bottom-right-radius: 170px;
+            }
+
+            
+
+
+      </style>
+</head>
+<body>
+      <div class="cabeca">
+            <div class="centralizar">
+                  <div class="olho"></div>
+                  <div class="olho2"></div>
+                  <br>
+                  <div class="boca"></div>
+
+            </div>
+            
+      </div>
+      <br>
+      
+      
+</body>
+</html>
