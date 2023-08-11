@@ -93,6 +93,10 @@
                   color: white;
             }
 
+            #milisegundos{
+                  margin-left: 30px;
+            }
+
 
       </style>
 </head>
@@ -146,8 +150,19 @@
                               }
                         }
 
-                        minutosDiv.textContent = minutos
-                        segundosDiv.textContent = segundos
+                        if(minutos < 10){
+                              minutosDiv.textContent = `0${minutos}`
+                        }else{
+                              minutosDiv.textContent = minutos
+                        }
+                        
+                        if (segundos < 10){
+                              segundosDiv.textContent = `0${segundos}`
+                        }else{
+
+                              segundosDiv.textContent = `${segundos}`
+                        }
+
                         miliDiv.textContent = milisegundos
 
                   },10)
