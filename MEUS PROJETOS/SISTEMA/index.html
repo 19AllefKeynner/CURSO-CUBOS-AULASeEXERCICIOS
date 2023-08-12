@@ -27,7 +27,7 @@
                   padding-top: 20px;
                   background-color: rgba(255, 255, 255, 0);
                   width: 100%;
-                  height: 650px;
+                  height: 550px;
                   text-align: center;
                   font-family: Arial, Helvetica, sans-serif;
             }
@@ -227,9 +227,6 @@
                   transform: scale(0.7);
             }
 
-            
-            
-
             #ganhos{
                   font-size: 28px;
                   font-weight: bold;
@@ -255,8 +252,11 @@
                   margin-left: 980px;
                   margin-top: 10px;
             }
+            .espaco{
+                  width: 100%;
+                  height: 300px;
+            }
           
-
       </style>
 </head>
 <body>
@@ -283,7 +283,6 @@
             <h3 id="ganhos">Ganhos: 0,0 </h3>
             <h3 id="investidos">Investidos: 0,0 </h3>
             
-      
             <div id="container-tarefas">
                          
             </div>
@@ -322,16 +321,24 @@
                         </button>
                   </div>
             </div>
+            <div id="add-tarefas-todo4" class="invisivel">
+                  <div id="adicionar">
+                        <h3 id="editar-add">Preço desejado</h3>
+                        <input type="number" id="tarefa-input3" placeholder="Digite quanto deseja pelo produto: ">
+                        <button id="click-add3" >
+                              <i class="fa-thin fa-plus"></i>
+                        </button>
 
-           
+                  </div>
+            </div>
+
             <button id="add-tarefas"><p>Adicionar produto</p></button>
       </div>
-      
-      
+      <div class="espaco">
 
-
+      </div>
+      
       <script>
-
             // Função para recuperar o valor de um cookie por seu nome
             function getCookie(nome) {
                   var nomeIgual = nome + "=";
@@ -347,7 +354,6 @@
                   }
                   return "";
             }
-
 
             function cookieExiste(nome) {
                   var cookies = document.cookie.split(';');
@@ -378,25 +384,39 @@
                   var expiracao = "expires=" + dataExpiracao.toUTCString();
                   document.cookie = nome + "=; " + expiracao + "; path=/";
             }
+
+            function scrollToBottom() {
+                  const startPosition = window.scrollY;
+                  const documentHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
+                  const windowHeight = window.innerHeight;
+                  const scrollStep = 5; // Quantidade de pixels para rolar em cada passo
+                  const scrollDuration = 15; // Duração do intervalo em milissegundos
+
+                  function scroll() {
+                        if (window.scrollY + windowHeight < documentHeight) {
+                              window.scrollBy(0, scrollStep);
+                              setTimeout(scroll, scrollDuration);
+                        }
+                  }
+
+                  scroll();
+            }
            
-
-  
-
             const ClickAdd = document.getElementById('click-add')
             const ClickAdd2 = document.getElementById('click-add2')
+            const ClickAdd3 = document.getElementById('click-add3')
             const telaH3 = document.getElementById('tela')
             const ProdutosDiv = document.getElementById('add-tarefas-todo')
             const ProdutosDiv2 = document.getElementById('add-tarefas-todo2')
+            const ProdutosDiv3 = document.getElementById('add-tarefas-todo4')
             const telaH3div = document.getElementById("mostrador")
             const btnAdd = document.getElementById('add-tarefas')
             const inputProdutos = String(document.getElementById('tarefa-input').value)
             const inputProdutos2 = Number(document.getElementById('tarefa-input2').value)
+            const inputProdutos3 = Number(document.getElementById('tarefa-input3').value)
 
             const definir = document.getElementById('definir')
             const usarSugerido = document.getElementById('usar-sugerido')
-
-            
-
 
             let espaco = 0
             let nome = []
@@ -407,10 +427,6 @@
 
             let conteProdutos = 0
             
-            
-            
-            
-            
             const totalProdutos = {
                   nome: [],
                   preco: [],
@@ -418,13 +434,10 @@
 
             }
 
-            let a = 0
-
-            
-
-            
-
+            let a = -1
+            let margem = 0
             let b = 0
+      
             // Função para listar todos os cookies e seus valores
             function listarCookies() {
                   var cookies = document.cookie.split(';');
@@ -439,27 +452,29 @@
                                     var listaRecuperada = JSON.parse(cookieListaItens);
                                     
                               }
-                        a += 1 
+                        a += 1
                         
-                          
-                        while (b < a){
+                        if (a > 4 ){
+                              margem += 50
+                              
+
+                        }
+                        
+                        while (b < a ){
                               conteProdutos++
-                              console.log('entrou')
 
                               if (conteProdutos > 3){
                                     espaco += 100
-
                                     console.log(espaco)
                                     const chaveEspaco = document.getElementById('chaveEspaco')
                                     chaveEspaco.style.marginTop = `${espaco}px`
-
-
                               }
 
                               let nome
                               let precoCliente
                               let valorPago
                               let contea = 0
+
                               for(let item of listaRecuperada){
                                     
                                     if (contea === 0){
@@ -474,18 +489,9 @@
                                     if (contea === 2){
                                           valorPago = item
                                     }
+
                                     contea++
                               }
-
-                              console.log(nome)
-                              console.log(precoCliente)
-                              console.log(valorPago)
-
-                              
-
-                              
-
-                             
 
                               totalInvestimentos += valorPago
 
@@ -493,7 +499,6 @@
 
                               const container = document.createElement('div')
                               container.id = "tarefa"
-
 
                               const deletar = document.createElement('button')
                               deletar.classList.add('remove-todo')
@@ -516,13 +521,12 @@
                               container.appendChild(deletar)
                               containerTarefas.appendChild(container)
 
-                              
                               const totalInvestimento = document.getElementById('investidos')
                               totalInvestimento.textContent = `Investidos: R$${totalInvestimentos.toFixed(2)}`
-                              
 
                               let conteum = 0
                               confere.addEventListener('click', function(){
+                                    descer = true
                                     const buttonAdd = document.getElementById('add-tarefas')
                                     const totalLucro = document.getElementById('ganhos')
                                     const divTarefas = document.getElementById('add-tarefas-todo')
@@ -530,7 +534,6 @@
                                     buttonAdd.classList.remove('invisivel')
 
                                     let lucrO = precoCliente - valorPago
-                                    
                                     
                                     if (conteum % 2 === 0){
                                           lucroTotal += lucrO
@@ -562,39 +565,38 @@
                                     divTarefas.classList.add('invisivel')
                                     buttonAdd.classList.remove('invisivel')
 
+                                    margem -= 50
+                                    buttonAdd.style.marginTop = margem
+
                                     container.parentNode.removeChild(container)
                                     excluirCookie(nomeCookie)
-                                    
                                     
                                     totalInvestimentos -= valorPago
                                     totalInvestimento.textContent = `Investidos: R$${totalInvestimentos.toFixed(2)}`
                                     let lucrO = precoCliente - valorPago
+
                                     if (conteum % 2 != 0){
                                           lucroTotal -= lucrO
                                           totalLucro.textContent = `Ganhos: R$${lucroTotal.toFixed(2)}`
                                     }
+                                    window.location.reload()
+                                    
                               })
-                        
+
                               b += 1
-
+                              
                         }
-                        
-           
-
                   }
             }
 
             // Chamar a função para listar todos os cookies
             listarCookies();
 
-
-            
-
-
             btnAdd.addEventListener("click", function(){
                   btnAdd.classList.add('invisivel')
                   ProdutosDiv.classList.remove('invisivel')
-
+                  scrollToBottom()
+                  
             })
 
             ClickAdd.addEventListener('click', function(){
@@ -602,9 +604,6 @@
                   nome.push(inputProdutos)
                   ProdutosDiv2.classList.remove('invisivel')
                   ProdutosDiv.classList.add('invisivel')
-                  
-                  
-
             })
 
             ClickAdd2.addEventListener("click", function(){
@@ -615,19 +614,11 @@
                   const cobrar = 70 * inputProdutos2/100 + inputProdutos2
                   ProdutosDiv2.classList.add('invisivel')
                   telaH3div.classList.remove('invisivel')
-                  telaH3.textContent = `Sugerimos voçê cobrar R$${cobrar.toFixed(2)} , lucro de 70% do valor pago! `
-                  
-
-                              
-                  
-
-
-
-
-                  
+                  telaH3.textContent = `Sugerimos voçê cobrar R$${cobrar.toFixed(2)} , lucro de 70% do valor pago! `   
             })
 
             usarSugerido.addEventListener('click', function(){
+                  const buttonAdd = document.getElementById('add-tarefas')
                   const inputProdutos2 = Number(document.getElementById('tarefa-input2').value)
                   const cobrar = 70 * inputProdutos2/100 + inputProdutos2
                   quantoVaiCobrar.push(cobrar.toFixed(2))
@@ -643,6 +634,43 @@
                   quantoVaiCobraR.push(quantoVaiCobrar)
                   quantoVaiCobrar = []
 
+                  // Definir uma lista de itens
+                  const listaItens = [nomE[0], quantoVaiCobraR[0], quantoPagoU[0]];
+
+                  // Converter a lista para uma string JSON
+                  var listaItensJSON = JSON.stringify(listaItens);
+
+                  if (cookieExiste("listaItens")) {
+                        const nomeGerado = gerarNomeAleatorio(8)
+                        document.cookie = `${nomeGerado}=` + listaItensJSON + "; expires=Thu, 31 Dec 2023 23:59:59 UTC; path=/";
+                  } else {
+                        // Definir o cookie com a string JSON
+                        document.cookie = "listaItens=" + listaItensJSON + "; expires=Thu, 31 Dec 2023 23:59:59 UTC; path=/";
+                  }
+                  window.location.reload()
+                  buttonAdd.style.marginTop = margem
+
+            })
+
+            definir.addEventListener('click', function(){
+                  telaH3div.classList.add('invisivel')
+                  ProdutosDiv3.classList.remove('invisivel')
+            })
+
+            ClickAdd3.addEventListener('click', function(){
+                  const inputProdutos3 = Number(document.getElementById('tarefa-input3').value)
+                  btnAdd.classList.remove('invisivel')
+                  ProdutosDiv3.classList.add('invisivel')
+                  quantoVaiCobrar.push(inputProdutos3.toFixed(2))
+
+                  let nomE = nome
+                  nome = []
+                  let quantoPagoU = quantoPagou
+                  quantoPagou = []
+
+                  let quantoVaiCobraR = []
+                  quantoVaiCobraR.push(quantoVaiCobrar)
+                  quantoVaiCobrar = []
 
                   // Definir uma lista de itens
                   const listaItens = [nomE[0], quantoVaiCobraR[0], quantoPagoU[0]];
@@ -657,36 +685,14 @@
                         // Definir o cookie com a string JSON
                         document.cookie = "listaItens=" + listaItensJSON + "; expires=Thu, 31 Dec 2023 23:59:59 UTC; path=/";
                   }
+                  window.location.reload()
+                  buttonAdd.style.marginTop = margem
 
-
+                  
             })
 
 
-
-
-            
-            
-
-
-            
-            
-
-            
-            
-
-
-            
-
-           
-            
-      
-
-            
-
-            
-            
+     
       </script>
-      
-      
 </body>
 </html>
