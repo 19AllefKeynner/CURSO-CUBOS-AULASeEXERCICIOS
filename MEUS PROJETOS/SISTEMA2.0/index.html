@@ -1,62 +1,26 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt-=br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,200;1,800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/button.css">
-    <link rel="stylesheet" href="css/records.css">
-    <link rel="stylesheet" href="css/modal.css">
-    <script src="main.js" defer></script>
-    <title>CRUD</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Loading</title>
+      <link rel="stylesheet" href="css/loading.css">
 </head>
-
 <body>
-    <header>
-        <h1 class="header-title">Cadastro de Produtos</h1>
-    </header>
-    <main>
-        <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar Produto</button>
-        <table id="tableClient" class="records">
-            <thead>
-                <tr>
-                    <th>Nome do produto</th>
-                    <th>Preço de compra</th>
-                    <th>Preço de venda</th>
-                    <th>Lucro</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-        <div class="modal" id="modal">
-            <div class="modal-content">
-                <header class="modal-header">
-                    <h2>Novo Produto</h2>
-                    <span class="modal-close" id="modalClose">&#10006;</span>
-                </header>
-                <form id="form" class="modal-form">
-                    <input type="text" id="nome" data-index="new" class="modal-field" placeholder="Nome do produto"
-                        required>
-                    <input type="number" id="email" class="modal-field" placeholder="Preço que pagou pelo produto" required>
-                    <input type="number" id="celular" class="modal-field" placeholder="Preço à cobrar pelo produto" required>
-                    
-                </form>
-                <footer class="modal-footer">
-                    <button id="salvar" class="button green">Salvar</button>
-                    <button id="cancelar" class="button blue">Cancelar</button>
-                </footer>
+      <body>
+            <div class="wrapper">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="shadow"></div>
+                <div class="shadow"></div>
+                <div class="shadow"></div>
             </div>
-        </div>
-    </main>
-    
+        </body>
+      <script>
+            intervalo = setInterval(() => {
+                  window.location.href = "paginaInicial.html"
+            },3000)
+      </script>
 </body>
-
 </html>
