@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Objetos em Movimento</title>
+<style>
+  body {
+    padding-top: 300px;
+    margin: 0;
+    overflow: hidden;
+    background-color: black;
+  }
+
+  .object {
+    margin-top: 30px;
+    width: 400px;
+    height: 200px;
+    background-color: blue;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    transform: translate(0, -50%);
+    animation: moveObject 4s linear infinite;
+  }
+
+  .object2 {
+    margin-top: 250px;
+    width: 400px;
+    height: 200px;
+    background-color: rgb(0, 255, 55);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+    animation: moveObject 4s linear infinite;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+
+  .object3 {
+      margin-top: -190px;
+      width: 400px;
+      height: 200px;
+      background-color: rgb(251, 255, 0);
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%);
+      animation: moveObject 4s linear infinite;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+  }
+  .chegada{
+    margin-top: -290px;
+    width: 100%;
+    height: 50px;
+    background-color: orange ; 
+    color: rgb(250, 240, 240); 
+    font-size: 32px;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+
+  #personagem {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(255, 0, 191);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .mensagem{background-color: rgba(0, 0, 0, 0.226);
+    color: rgb(255, 255, 255);
+    padding-top: 150px;
+    text-align: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 168px;
+    margin-top: -150px;
+    position: absolute;
+    width:  100%;
+    height: 800px;
+    
+  }
+</style>
+</head>
+<body>
+  <div class="object"></div>
+  <div class="object2"></div>
+  <div class="object3"></div>
+  <div id="personagem"></div> 
+  <div class="mensagem">Você venceu!</div>
+  <div class="chegada">Linha de chegada (fase 1)</div>
+  <script>
+    
+    document.addEventListener("DOMContentLoaded", function() {
+      const objeto = document.querySelector('.object');
+      const objeto2 = document.querySelector('.object2')
+      const objeto3 = document.querySelector('.object3')
+      const chegada = document.querySelector('.chegada')
+      const larguraTela = window.innerWidth;
+      const personagem = document.getElementById('personagem');
+
+      let personagemTop = 0;
+      const stepSize = 100;
+      let podeTestar = true
+      
+
+      window.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowUp') {
+                  personagemTop += stepSize;
+                  personagem.style.bottom = personagemTop + 'px';
+            } else if (event.key === 'ArrowDown') {
+                  personagemTop -= stepSize;
+                  personagem.style.bottom = personagemTop + 'px';
+            }
+
+            if (podeTestar){
+              checkCollision();
+            }
+      });
+
+      function moveimentação(objeto, velocidadeEmPixels ) {
+        let posicaoAtual = 0;
+        let contt  = 0 
+
+        function animate() {
+          if (podeTestar){
+            if (contt % 2 === 0){
+              posicaoAtual += velocidadeEmPixels;
+            if (podeTestar){
+              checkCollision();
+            }
+            }else{
+              posicaoAtual += (velocidadeEmPixels * 2);
+              if (podeTestar){
+                checkCollision();
+              }
+            }
+          
+            if (posicaoAtual >= (larguraTela + 150)) {
+              contt ++
+              posicaoAtual = -400;
+              console.log(posicaoAtual)
+              console.log(larguraTela)
+            }
+            objeto.style.left = posicaoAtual + 'px';
+            requestAnimationFrame(animate);
+            
+          }
+          
+        }
+
+        animate();
+        
+      }
+
+      function moveimentaçãoEsquerda(objeto, velocidadeEmPixels ) {
+        let posicaoAtual = (larguraTela + 150);
+        let contt  = 0
+
+        function animate() {
+          if (podeTestar){
+            if (contt % 2 === 0){
+              posicaoAtual -= velocidadeEmPixels;
+            if (podeTestar){
+              checkCollision();
+            }
+            }else{
+              posicaoAtual -= (velocidadeEmPixels * 2);
+              if (podeTestar){
+                checkCollision();
+              }
+            }
+          
+            if (posicaoAtual < -400 ) {
+              contt ++
+              posicaoAtual = (larguraTela + 170);
+              console.log(posicaoAtual)
+              console.log(larguraTela)
+            }
+            objeto.style.left = posicaoAtual + 'px';
+            requestAnimationFrame(animate);
+          }
+        }
+          
+
+        animate();
+    
+      }
+
+      function checkCollision() {
+            const personagemRect = personagem.getBoundingClientRect();
+            const obstaculoRect = objeto.getBoundingClientRect();
+            const obstaculoRect2 = objeto2.getBoundingClientRect();
+            const obstaculoRect3 = objeto3.getBoundingClientRect();
+            const chegadaRect = chegada.getBoundingClientRect();
+      
+            
+            
+
+            if (
+                  personagemRect.bottom >= obstaculoRect.top &&
+                  personagemRect.top <= obstaculoRect.bottom &&
+                  personagemRect.right >= obstaculoRect.left &&
+                  personagemRect.left <= obstaculoRect.right
+            ) {
+                  alert("Encostou!");
+                  personagemTop = 0
+                  personagem.style.bottom = personagemTop + 'px';
+            }
+
+            if (
+                  personagemRect.bottom >= obstaculoRect2.top &&
+                  personagemRect.top <= obstaculoRect2.bottom &&
+                  personagemRect.right >= obstaculoRect2.left &&
+                  personagemRect.left <= obstaculoRect2.right
+            ) {
+                  alert("Encostou!");
+                  personagemTop = 0
+                  personagem.style.bottom = personagemTop + 'px';
+            }
+
+            if (
+                  personagemRect.bottom >= obstaculoRect3.top &&
+                  personagemRect.top <= obstaculoRect3.bottom &&
+                  personagemRect.right >= obstaculoRect3.left &&
+                  personagemRect.left <= obstaculoRect3.right
+            ) {
+                  alert("Encostou!");
+                  personagemTop = 0
+                  personagem.style.bottom = personagemTop + 'px';
+            }
+
+            if (
+                  personagemRect.bottom >= chegadaRect.top &&
+                  personagemRect.top <= chegadaRect.bottom &&
+                  personagemRect.right >= chegadaRect.left &&
+                  personagemRect.left <= chegadaRect.right
+            ) {
+                  alert("Chegouuu");
+                  podeTestar = false
+                  descerTudo()
+                  
+            }
+
+      }
+
+      function animateDivToBottom(div) {
+        const screenHeight = window.innerHeight ;
+        div.style.transition = 'top 5s ease';
+        div.style.top = screenHeight - div.clientHeight + 'px';
+      }
+      
+      function descerTudo(){
+        chegada.style.display = 'none'
+        personagem.style.display = 'none'
+
+        animateDivToBottom(objeto);
+        animateDivToBottom(objeto2);
+        animateDivToBottom(objeto3);
+        animateDivToBottom(personagem);
+      }
+
+      moveimentação(objeto, 10)
+      moveimentaçãoEsquerda(objeto2, 12); 
+      moveimentaçãoEsquerda(objeto3, 7); 
+    });
+  </script>
+</body>
+</html>

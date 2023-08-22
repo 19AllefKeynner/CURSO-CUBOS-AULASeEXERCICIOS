@@ -14,4 +14,6 @@ const minhaFuncao = (array) => {
       console.log(resultado)
 }
 
+
+
 minhaFuncao(array)
