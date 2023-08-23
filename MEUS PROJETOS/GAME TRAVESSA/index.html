@@ -13,9 +13,9 @@
   }
 
   .object {
-    margin-top: 30px;
-    width: 400px;
-    height: 200px;
+    margin-top: 190px;
+    width: 300px;
+    height: 100px;
     background-color: blue;
     position: absolute;
     top: 50%;
@@ -27,9 +27,9 @@
   }
 
   .object2 {
-    margin-top: 250px;
-    width: 400px;
-    height: 200px;
+    margin-top: 300px;
+    width: 300px;
+    height: 100px;
     background-color: rgb(0, 255, 55);
     position: absolute;
     top: 50%;
@@ -41,9 +41,9 @@
   }
 
   .object3 {
-      margin-top: -190px;
-      width: 400px;
-      height: 200px;
+      margin-top: 80px;
+      width: 300px;
+      height: 100px;
       background-color: rgb(251, 255, 0);
       position: absolute;
       top: 50%;
@@ -53,17 +53,47 @@
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
   }
-  .chegada{
-    margin-top: -290px;
-    width: 100%;
-    height: 50px;
-    background-color: orange ; 
-    color: rgb(250, 240, 240); 
-    font-size: 32px;
-    text-align: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  .object4 {
+      margin-top: -30px;
+      width: 300px;
+      height: 100px;
+      background-color: rgb(255, 60, 0);
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%);
+      animation: moveObject 4s linear infinite;
+      border-top-right-radius: 50px;
+      border-bottom-right-radius: 50px;
   }
-  
+
+  .object5 {
+      margin-top: -140px;
+      width: 300px;
+      height: 100px;
+      background-color: rgb(255, 145, 0);
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%);
+      animation: moveObject 4s linear infinite;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+  }
+
+  .object6 {
+      margin-top: -250px;
+      width: 300px;
+      height: 100px;
+      background-color: rgb(255, 0, 64);
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%);
+      animation: moveObject 4s linear infinite;
+      border-top-right-radius: 50px;
+      border-bottom-right-radius: 50px;
+  }
 
   #personagem {
     width: 100px;
@@ -75,41 +105,34 @@
     transform: translateX(-50%);
   }
 
-  .mensagem{background-color: rgba(0, 0, 0, 0.226);
-    color: rgb(255, 255, 255);
-    padding-top: 150px;
-    text-align: center;
-    align-items: center;
-    font-weight: 400;
-    font-size: 168px;
-    margin-top: -150px;
-    position: absolute;
-    width:  100%;
-    height: 800px;
-    
-  }
 </style>
 </head>
 <body>
   <div class="object"></div>
   <div class="object2"></div>
   <div class="object3"></div>
+  <div class="object4"></div>
+  <div class="object5"></div>
+  <div class="object6"></div>
   <div id="personagem"></div> 
-  <div class="mensagem">Você venceu!</div>
-  <div class="chegada">Linha de chegada (fase 1)</div>
+  
   <script>
     
     document.addEventListener("DOMContentLoaded", function() {
       const objeto = document.querySelector('.object');
       const objeto2 = document.querySelector('.object2')
       const objeto3 = document.querySelector('.object3')
-      const chegada = document.querySelector('.chegada')
+      const objeto4 = document.querySelector('.object4')
+      const objeto5 = document.querySelector('.object5')
+      const objeto6 = document.querySelector('.object6')
       const larguraTela = window.innerWidth;
       const personagem = document.getElementById('personagem');
 
       let personagemTop = 0;
       const stepSize = 100;
       let podeTestar = true
+      const minIndex = 10; // O índice mínimo desejado
+      const maxIndex = 30; // O índice máximo desejado
       
 
       window.addEventListener('keydown', (event) => {
@@ -129,26 +152,31 @@
       function moveimentação(objeto, velocidadeEmPixels ) {
         let posicaoAtual = 0;
         let contt  = 0 
+        
 
         function animate() {
           if (podeTestar){
             if (contt % 2 === 0){
               posicaoAtual += velocidadeEmPixels;
-            if (podeTestar){
-              checkCollision();
-            }
-            }else{
-              posicaoAtual += (velocidadeEmPixels * 2);
               if (podeTestar){
                 checkCollision();
+              }
+              if (contt > 3){
+                contt = 0
+              }
+            }else{
+              posicaoAtual += velocidadeEmPixels * contt
+              if (podeTestar){
+                checkCollision();
+              }
+              if (contt > 3){
+                contt = 0
               }
             }
           
             if (posicaoAtual >= (larguraTela + 150)) {
               contt ++
               posicaoAtual = -400;
-              console.log(posicaoAtual)
-              console.log(larguraTela)
             }
             objeto.style.left = posicaoAtual + 'px';
             requestAnimationFrame(animate);
@@ -164,26 +192,31 @@
       function moveimentaçãoEsquerda(objeto, velocidadeEmPixels ) {
         let posicaoAtual = (larguraTela + 150);
         let contt  = 0
-
+        
         function animate() {
           if (podeTestar){
             if (contt % 2 === 0){
               posicaoAtual -= velocidadeEmPixels;
-            if (podeTestar){
-              checkCollision();
-            }
-            }else{
-              posicaoAtual -= (velocidadeEmPixels * 2);
               if (podeTestar){
                 checkCollision();
+              }
+              if (contt > 3){
+                contt = 0
+              }
+            }else{
+              posicaoAtual -= velocidadeEmPixels * contt
+              if (podeTestar){
+                checkCollision();
+              }
+              if (contt > 3){
+                contt = 0
               }
             }
           
             if (posicaoAtual < -400 ) {
               contt ++
               posicaoAtual = (larguraTela + 170);
-              console.log(posicaoAtual)
-              console.log(larguraTela)
+      
             }
             objeto.style.left = posicaoAtual + 'px';
             requestAnimationFrame(animate);
@@ -200,10 +233,9 @@
             const obstaculoRect = objeto.getBoundingClientRect();
             const obstaculoRect2 = objeto2.getBoundingClientRect();
             const obstaculoRect3 = objeto3.getBoundingClientRect();
-            const chegadaRect = chegada.getBoundingClientRect();
-      
-            
-            
+            const obstaculoRect4 = objeto4.getBoundingClientRect();
+            const obstaculoRect5 = objeto5.getBoundingClientRect();
+            const obstaculoRect6 = objeto6.getBoundingClientRect();
 
             if (
                   personagemRect.bottom >= obstaculoRect.top &&
@@ -239,38 +271,52 @@
             }
 
             if (
-                  personagemRect.bottom >= chegadaRect.top &&
-                  personagemRect.top <= chegadaRect.bottom &&
-                  personagemRect.right >= chegadaRect.left &&
-                  personagemRect.left <= chegadaRect.right
+                  personagemRect.bottom >= obstaculoRect4.top &&
+                  personagemRect.top <= obstaculoRect4.bottom &&
+                  personagemRect.right >= obstaculoRect4.left &&
+                  personagemRect.left <= obstaculoRect4.right
             ) {
-                  alert("Chegouuu");
-                  podeTestar = false
-                  descerTudo()
-                  
+                  alert("Encostou!");
+                  personagemTop = 0
+                  personagem.style.bottom = personagemTop + 'px';
             }
 
-      }
+            if (
+                  personagemRect.bottom >= obstaculoRect5.top &&
+                  personagemRect.top <= obstaculoRect5.bottom &&
+                  personagemRect.right >= obstaculoRect5.left &&
+                  personagemRect.left <= obstaculoRect5.right
+            ) {
+                  alert("Encostou!");
+                  personagemTop = 0
+                  personagem.style.bottom = personagemTop + 'px';
+            }
 
-      function animateDivToBottom(div) {
-        const screenHeight = window.innerHeight ;
-        div.style.transition = 'top 5s ease';
-        div.style.top = screenHeight - div.clientHeight + 'px';
-      }
-      
-      function descerTudo(){
-        chegada.style.display = 'none'
-        personagem.style.display = 'none'
+            if (
+                  personagemRect.bottom >= obstaculoRect6.top &&
+                  personagemRect.top <= obstaculoRect6.bottom &&
+                  personagemRect.right >= obstaculoRect6.left &&
+                  personagemRect.left <= obstaculoRect6.right
+            ) {
+                  alert("Encostou!");
+                  personagemTop = 0
+                  personagem.style.bottom = personagemTop + 'px';
+            }
 
-        animateDivToBottom(objeto);
-        animateDivToBottom(objeto2);
-        animateDivToBottom(objeto3);
-        animateDivToBottom(personagem);
+
+
+
+           
+
       }
 
       moveimentação(objeto, 10)
+      moveimentação(objeto4, 15)
+      moveimentação(objeto6, 20)
       moveimentaçãoEsquerda(objeto2, 12); 
       moveimentaçãoEsquerda(objeto3, 7); 
+      moveimentaçãoEsquerda(objeto5, 3); 
+
     });
   </script>
 </body>
