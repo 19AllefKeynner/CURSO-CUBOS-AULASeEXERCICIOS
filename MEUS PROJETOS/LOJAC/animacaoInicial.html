@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>loading</title>
+      <style>
+            *{
+                  padding: 0;
+                  margin: 0;
+                  box-sizing: 0;
+
+            }
+
+            body{
+                  background: fixed;
+                  background-image: url(elegant_hand_painted_alcohol_ink_background_with_gold_glitter_0609.jpg);
+                  width: 100%;
+                  min-height: 100vh;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  
+                  
+            }
+
+            span.loading{
+                  width: 180px;
+                  height: 2px;
+                  background-color: #A65C1C;;
+                  display: block;
+                  border-radius: 50px;
+                  position: relative;
+                  overflow-x: hidden;
+                  
+            }
+
+            span.loading::after{
+                  width: 50%;
+                  height: 2px;
+                  background-color: #ffb16d;
+                  content: '';
+                  position: absolute;
+                  border-radius: 50px;
+                  top: 0;
+                  animation: loading 1.5s infinite  ease-in-out alternate;
+            }
+
+            @keyframes loading{
+                  0%{
+                        transform: translateX(-50%);
+                  }
+                  100%{
+                        transform: translateX(150%);
+                  }
+            }
+      </style>
+</head>
+<body>
+      <span class="loading"></span>
+      
+
+      <script>
+
+            setTimeout(function(){
+                  window.location.href = "index.html"
+            }, 3000);
+            
+      </script>
+</body>
+</html>

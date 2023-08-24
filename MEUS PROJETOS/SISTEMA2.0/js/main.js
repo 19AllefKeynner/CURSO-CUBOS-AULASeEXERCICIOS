@@ -73,7 +73,7 @@ const saveClient = () => {
             closeModal()
         }
     }
-    window.location.href = "index.html"
+    
 }
 
 const telaLucro = document.getElementById('lucro')

@@ -1,94 +1,227 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="Pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-    <!-- or -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet"
-    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Vollkorn:ital,wght@1,500&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            list-style: none;
+            text-decoration: none;
+        }
+        :root{
+            --red:#B85C4F;
+            --white:#fff;
+            --dark:#63465A;
+        }
+        body{
+            color: var(--dark);
+            background: var(--white);
+        }
+        .navigation{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 40px;
+            box-shadow: 0 0.1rem 0.5rem #ccc;
+            width: 100%;
+            background: var(--white);
+            transition: all 0.5s;
+            position: fixed;
+        }
+        .navigation .logo{
+            color: var(--red);
+            font-size: 1.7rem;
+            font-weight: 600;
+        }
+        .logo span{
+            color: var(--dark);
+        }
+        .navigation ul{
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+        }
+        .navigation ul li a{
+            color: var(--dark);
+            font-size: 17px;
+            font-weight: 500;
+            transition: all 0.5s;
+        }
+        .navigation ul li a:hover{
+            color: var(--red);
+        }
+        .navigation i{
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        .menu{
+            cursor: pointer;
+            display: none;
+        }
+        .menu .bar{
+            display: block;
+            width: 28px;
+            height: 3px;
+            border-radius: 3px;
+            background: var(--dark);
+            margin: 5px auto;
+            transition: all 0.3s;
+        }
+        .menu .bar:nth-child(1),
+        .menu .bar:nth-child(3){
+            background: var(--red);
+        }
+        .home{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0px 10%;
+        }
+        .home-text{
+            max-width: 37rem;
+        }
+        .home-text .text-h4{
+            font-size: 1.5rem;
+            color: var(--red);
+            margin-bottom: 1rem;
+        }
+        .home-text .text-h1{
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 4rem;
+        }
+        .home-text p{
+            margin-bottom: 4rem;
+        }
+        .home-btn{
+            padding: 15px 45px;
+            background: var(--red);
+            color: var(--white);
+            border-radius: 10px;
+            font-weight: 700;
+            transition: all 0.5s;
+        }
+        .home-btn:hover{
+            background: #ec624f;
+        }
+        .home-img i{
+            width: 100%;
+            transform: rotate(15deg);
+            font-size: 300px;
+            margin-left: -350px;
+        }
+        @media (max-width:785px) {
+            .navigation{
+                padding: 18px 20px;
+            }
+            .menu{
+                display: block;
+            }
+            .menu.ativo .bar:nth-child(1){
+                transform:  translateY(8px) rotate(45deg);
+            }
+            .menu.ativo .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .menu.ativo .bar:nth-child(3){
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            .nav-menu{
+                position: fixed;
+                right: -100%;
+                top: 70px;
+                width: 100%;
+                height: 100%;
+                flex-direction: column;
+                background: var(--white);
+                gap: -10px;
+                transition: 0.3s;
+            }
+            .nav-menu.ativo{
+                right: 0;
+            }
+            .nav-item{
+                margin: 16px 0;
+            }
+            /*main*/
+            .home{
+                padding: 100px 2%;
+                flex-direction: column;
+                text-align: center;
+                overflow: hidden;
+                gap: 5rem;
+            }
+            .home .text-h4{
+                font-size: 15px;
+            }
+            .home .text-h1{
+                font-size: 2.5rem;
+                line-height: 3rem;
+            }
+            .home p{
+                font-size: 15px;
+            }
+            .home-i{
+                width: 125%;
+            }
+        }
+
+        .ptext{
+            font-size: 22px;
+        }
+    </style>
     <title>Loja</title>
 </head>
 <body>
-
     <header>
-        <a href="#" class="logo"><i class="fa-solid fa-wand-magic-sparkles"></i>AcCloset</a>
-
-        <ul class="navegação">
-            <li><a href="#">Visão geral</a></li>
-            <li><a href="#">Teach Specs</a></li>
-            <li><a href="#">Reviews</a></li>
-            <li><a href="#">Contact Us</a></li>
-        </ul><!--navegação-->
-
-        <div class="header-icons">
-            <a class="carrinho" href="catalogo.html"><i class='bx bx-cart'></i></a>
-            <div id="menu"><i class='bx bx-menu'></i></div>
-        </div><!--header-icons-->
+        <nav class="navigation">
+            <a href="#" class="logo">A<span>Cc</span>lo<span>se</span>t</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#">Home</a></li>
+                <li class="nav-item"><a href="#">About</a></li>
+                <li class="nav-item"><a href="#">Sobre</a></li>
+                <li class="nav-item"><a href="#">Contact</a></li>
+                <i class='bx bx-search'></i>
+            </ul>
+            <div class="menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
     </header>
-
-    <section class="home">
-        <div class="home-img">
-            <img src="img/product3 (1).png" class="one">
-        </div><!--home-img-->
-
-        <div class="home-text">
-
-            <h1>Wireless <br> Headphones</h1>
-            <h5>The smarter way to listen</h5>
-            <h3>$199.00</h3>
-            <a href="#" class="btn">Shop Now</a>
-            
-        </div><!--home-text-->
-    </section><!--home-->
-
-
-    <div class="main">
-        <div class="row">
-            <li><img src="img/main3 (1).png" onclick="slider('img/product3 (1).png')"></li>
-        </div><!--row-->
-
-        <div class="row2">
-            <li><img src="img/main2 (1).png" onclick="slider('img/product2 (1).png')"></li>
-        </div><!--row2-->
-
-        <div class="row3">
-            <li><img src="img/main3 (1).png" onclick="slider('img/product3 (1).png')"></li>
-        </div><!--row3-->
-    </div><!--main-->
-
-
-
-
-
-     
-  
+    <main>
+        <section class="home">
+            <div class="home-text">
+                <h4 class="text-h4">Bem vindo a AcCloset</h4>
+                <h1 class="text-h1">Criamos essa loja pra você!</h1>
+                <p class="ptext">Temos o melhor da moda atual e com preços incríveis, confira o nosso catálogo</p>
+                <a href="catalogo.html" class="home-btn">Conferir</a>
+            </div>
+            <div class="home-img">
+                <p><i class="fa-solid fa-bag-shopping"></i></p>
+            </div>
+        </section>
+    </main>
     <script>
-        function slider (anything){
-            document.querySelector ('.one') .src = anything;
-        };
+        const menu = document.querySelector('.menu');
+        const NavMenu = document.querySelector('.nav-menu');
 
-       let menu = document.querySelector ('#menu-icon');
-       let navbar = document.querySelector ('.navbar');
-
-       menu.onclick = () => {
-        menu.classList.toggle ('bx-x');
-        navbar.classList.toggle ('open');
-       }
+        menu.addEventListener('click', () => {
+            menu.classList.toggle('ativo');
+            NavMenu.classList.toggle('ativo');
+        })
     </script>
-    
 </body>
 </html>

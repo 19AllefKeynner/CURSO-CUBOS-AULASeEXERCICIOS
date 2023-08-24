@@ -116,16 +116,90 @@ closeButton.addEventListener("click", () => toggleMessage());
 // Save address
 addressForm.addEventListener("submit", (e) => {
   e.preventDefault();
-
   toggleLoader();
+  const cityInput = document.querySelector("#city").value;
 
-  setTimeout(() => {
-    toggleLoader();
+  if (cityInput === 'Teixeira de Freitas' || cityInput === 'teixeira de freitas' || cityInput === 'Medeiros Neto' || cityInput === 'medeiros neto'){
+    setTimeout(() => {
+            toggleLoader();
+        
+            toggleMessage("Endereço salvo com sucesso!");
+        
+            addressForm.reset();
+        
+            toggleDisabled();
+            
+    }, 1000);
+     
+    // Função para serializar o objeto para uma string JSON
+    function serializeObjectToJSON(obj) {
+      return JSON.stringify(obj);
+    }
+    
+    // Função para desserializar uma string JSON para um objeto
+    function deserializeJSONToObject(jsonStr) {
+      return JSON.parse(jsonStr);
+    }
+    
+    // Função para definir um cookie com o objeto serializado
+    function setCookie(name, value, days) {
+      var expires = "";
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    
+    // Função para obter um cookie pelo nome
+    function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
 
-    toggleMessage("Endereço salvo com sucesso!");
+    const cepInput = document.querySelector("#cep").value;
+    const addressInput = document.querySelector("#address").value;
+    const cityInput = document.querySelector("#city").value;
+    const regionInput = document.querySelector("#region").value;
+    const number = document.getElementById('number').value
+    const name = document.getElementById('name').value
 
-    addressForm.reset();
+   
+    
+    // Objeto com as variáveis
+    var userData = {
+      nome: name,
+      cidade: cityInput,
+      numero: number,
+      estado: regionInput,
+      rua: addressInput,
+      cep: cepInput
+    };
+    
+    // Serializa o objeto e define o cookie
+    var serializedData = serializeObjectToJSON(userData);
+    setCookie("userDataCookie", serializedData, 30); // O cookie expira em 30 dias
+    
+    window.location.href = "paginaCompra.html";
 
-    toggleDisabled();
-  }, 1000);
+  }else{
+      setTimeout(() => {
+            toggleLoader();
+
+            toggleMessage("Infelizmente não conseguimos entregar neste endereço ainda!\nLocais disponiveis: Medeiros Neto e Teixeira de Freita");
+            
+            addressForm.reset();
+
+            toggleDisabled();
+
+      }, 1000);
+  }
+  
 });

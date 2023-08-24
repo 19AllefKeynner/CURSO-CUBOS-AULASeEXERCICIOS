@@ -183,9 +183,10 @@
   }
   
   .row{
+      padding-top: 5px;
       background: #FF7186;
-      height: 70px;
-      width: 70px;
+      height: 68px;
+      width: 60px;
       border-radius: 50%;
       justify-content: center;
       transition: all.55s ease;
@@ -199,9 +200,10 @@
   }
   
   .row2{
+      padding-top: 6px;
       background: #A8AFFF;
-      height: 70px;
-      width: 70px;
+      height: 62px;
+      width: 60px;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
@@ -215,9 +217,10 @@
   }
   
   .row3{
+      padding-top: 6px;
       background: #e3aefc;
-      height: 70px;
-      width: 70px;
+      height: 62px;
+      width: 60px;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
@@ -229,4 +232,13 @@
   
   .row3:hover{
       transform: translateY(-8px);
+  }
+
+  .one{
+      border-radius: 800px;
+  }
+
+
+  .main1{
+      border-radius: 50%;
   }

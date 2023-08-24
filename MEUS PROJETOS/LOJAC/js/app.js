@@ -1,3 +1,6 @@
+let totalEnviar = 0
+let arrayProdutos = []
+let quantidade = [];
 
 //Variable que mantiene el estado visible del carrito
 var carritoVisible = false;
@@ -44,9 +47,41 @@ function ready(){
 }
 //Eliminamos todos los elementos del carrito y lo ocultamos
 function pagarClicked(){
-      window.location.href = "endereçoPagamento.html";
-    
-}
+    window.location.href = 'endereçoPagamento.html'
+
+      // Função para definir um cookie
+
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+        
+        // Define o cookie com um valor
+        var myValue = totalEnviar;
+        console.log(totalEnviar)
+        setCookie("myCookie", myValue, 30); // O cookie expira em 30 dias
+
+        // Função para criar o cookie
+
+        function criarCookie(nome, valor, dias) {
+            var data = new Date();
+            data.setTime(data.getTime() + (dias * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + data.toUTCString();
+            document.cookie = nome + "=" + valor + ";" + expires + ";path=/";
+        }
+        
+        // Convertendo a array em uma string JSON
+        var produtosJSON = JSON.stringify(arrayProdutos);
+        
+        // Criando um cookie com a string JSON
+        criarCookie("produtos", produtosJSON, 7); // O cookie irá expirar em 7 dias
+                       
+    }
 //Funciòn que controla el boton clickeado de agregar al carrito
 function agregarAlCarritoClicked(event){
     var button = event.target;
@@ -104,8 +139,11 @@ function agregarItemAlCarrito(titulo, precio, imagenSrc){
             </button>
         </div>
     `
+
+    arrayProdutos.push(titulo)
     item.innerHTML = itemCarritoContenido;
     itemsCarrito.append(item);
+    console.log(arrayProdutos)
 
     //Agregamos la funcionalidad eliminar al nuevo item
      item.getElementsByClassName('btn-eliminar')[0].addEventListener('click', eliminarItemCarrito);
@@ -120,6 +158,8 @@ function agregarItemAlCarrito(titulo, precio, imagenSrc){
 
     //Actualizamos total
     actualizarTotalCarrito();
+
+    
 }
 //Aumento en uno la cantidad del elemento seleccionado
 function sumarCantidad(event){
