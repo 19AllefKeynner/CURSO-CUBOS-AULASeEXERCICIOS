@@ -324,6 +324,13 @@
                   margin-left: -290px;
             }
 
+            #meuInputEmail, #meuNumber{
+                  width: 285px;
+                  padding: 10px;
+                  margin-left: 40px;
+                  margin-bottom: 20px;
+            }
+
       </style>
 </head>
 <body>
@@ -354,7 +361,7 @@
                   <p class="valor" id="valorPix">Você pagará: R$ 495,00</p>
             </div>
 
-            <button class="btn-comfirmar-compra">Confirmar compra</button>
+            <button class="btn-comfirmar-compra" >Dúvida</button>
       </div>  
       <div class="lateral-direita" id="fixa">
             <h3>Resumo da compra</h3>
@@ -367,23 +374,24 @@
             <hr>
             <p class="valor-pagar">Você pagará</p>
             <h3 class="valor-pagarTotal" id="valorTotal">R$ 495,00</h3>
-            <button class="btn-comfirmar-compra2">Confirmar compra</button>
-      </div>
-      <div class="body">
-            <div class="payment-div">
-                  <h1>Pagar compra</h1>
-                  <p class="ps3">1. Acesse seu Internet Banking ou app de pagamentos</p>
-                  <p class="ps">2. Escolha pagar via Pix, uma forma rápida e prática</p>
-                  <p class="ps2">3. Cole o código que está localizado logo abaixo</p>
-                  <p id="valorFinal">4. Digite o valor do produto corretamente: </p>
-                  <button class="larger-text">00020126580014BR.GOV.BCB.PIX0136c9d1f76b...</button>
-                  <button class="copiar" id="botao">Copiar</button>
-                  <p class="atencao">Atenção:</p>
-                  <p class="atencao">É de suma importância digitar o valor correto da sua compra,</p>
-                  <p class="atencao">caso contrário pode haver divergências na hora de enviar sua compra!</p>
-              </div>
-      </div>
 
+            <form action="https://formsubmit.co/allef4670@gmail.com" method="POST">
+                  <input id="meuInputNome" type="text" name="name" placeholder="Digite seu nome" required style="display:none">
+                  <input id="meuInputEmail"type="email" name="email" placeholder="Digite seu e-mail" required >
+                  <input id="meuNumber"type="text" name="number" placeholder="Digite número de telefone" required >
+              
+                  <textarea cols="30" rows="10" name="message" id="minhaMensagem" style="display:none"
+                    placeholder="Digite sua mensagem" required></textarea>
+                  
+                  <button class="btn-comfirmar-compra2" type="submit" id="submit">Confirmar compra</button>
+                  
+                  <input type="hidden" name="_subject" value="Nova venda!">
+                  <input type="text" name="_honey" style="display:none">
+                  <input type="hidden" name="_captcha" value="false">
+                  <input type="hidden" name="_next" value="http://127.0.0.1:5501/paginaCompar2.html">
+            <p>É de suma importancia enviar suas informações corretamente para entrarmos em contato!</p>
+      </div>
+      
       <script src="js/js.js"></script>
 </body>
 </html>

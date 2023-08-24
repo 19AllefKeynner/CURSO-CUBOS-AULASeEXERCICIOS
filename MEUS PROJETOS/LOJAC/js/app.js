@@ -1,6 +1,6 @@
 let totalEnviar = 0
 let arrayProdutos = []
-let quantidade = [];
+let preçoIndividual = [];
 
 //Variable que mantiene el estado visible del carrito
 var carritoVisible = false;
@@ -81,6 +81,23 @@ function pagarClicked(){
         // Criando um cookie com a string JSON
         criarCookie("produtos", produtosJSON, 7); // O cookie irá expirar em 7 dias
                        
+        var quantidadeItensNoCarrinho = obterQuantidadeItensNoCarrinho();
+        console.log(quantidadeItensNoCarrinho);
+
+        // Função para criar o cookie
+        function criarCookie(nome, valor, dias) {
+            var data = new Date();
+            data.setTime(data.getTime() + (dias * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + data.toUTCString();
+            document.cookie = nome + "=" + JSON.stringify(valor) + ";" + expires + ";path=/";
+        }
+        
+        // Exemplo de objeto "quantidade"
+        var quantidade = quantidadeItensNoCarrinho
+        // Criando um cookie com o objeto "quantidade"
+        criarCookie("quantidade_cookie", quantidade, 7); // O cookie irá expirar em 7 dias
+        
+
     }
 //Funciòn que controla el boton clickeado de agregar al carrito
 function agregarAlCarritoClicked(event){
@@ -139,7 +156,7 @@ function agregarItemAlCarrito(titulo, precio, imagenSrc){
             </button>
         </div>
     `
-
+    
     arrayProdutos.push(titulo)
     item.innerHTML = itemCarritoContenido;
     itemsCarrito.append(item);
@@ -222,6 +239,7 @@ function actualizarTotalCarrito(){
         var precio = parseFloat(precioElemento.innerText.replace('R$','').replace('.',''));
         var cantidadItem = item.getElementsByClassName('carrito-item-cantidad')[0];
         console.log(precio);
+        
         var cantidad = cantidadItem.value;
         total = total + (precio * cantidad);
     }
@@ -238,3 +256,18 @@ function actualizarTotalCarrito(){
 
 
 
+function obterQuantidadeItensNoCarrinho() {
+    var carritoItems = document.getElementsByClassName('carrito-item');
+    var quantidadeItens = {};
+
+    for (var i = 0; i < carritoItems.length; i++) {
+        var item = carritoItems[i];
+        var tituloElemento = item.getElementsByClassName('carrito-item-titulo')[0];
+        var quantidadeItem = item.getElementsByClassName('carrito-item-cantidad')[0].value;
+
+        var titulo = tituloElemento.innerText;
+        quantidadeItens[titulo] = parseInt(quantidadeItem);
+    }
+
+    return quantidadeItens;
+}

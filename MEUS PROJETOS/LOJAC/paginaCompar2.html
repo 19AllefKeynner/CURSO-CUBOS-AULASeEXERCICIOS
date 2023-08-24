@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <title>Comfirmar compra</title>
+      <style>
+            *{
+                  margin: 0;
+                  padding: 0;
+                  font-family: Arial, Helvetica, sans-serif;
+            }
+            header{
+                  padding-top: 10px;
+                  font-size: 32px;
+                  display: inline-block;
+                  width: 100%;
+                  height: 50px;
+                  background-color: #EDD5B7;
+                  text-align: center;
+            }
+
+            .logo{     
+                  align-items: center;
+                  color: #B85C4F;
+                  font-size: 30px;
+                  font-weight: 700;
+                  font-family: Arial, Helvetica, sans-serif;
+                  text-decoration: none;
+                  margin-right: 900px;
+                  
+            }
+  
+            .logo i{
+                  transform: rotate(-70deg);
+                  margin-left: 5px;
+                  color: #63465A;
+                  font-size: 26px;
+                  margin-right: 5px;
+            }
+
+            a{    
+                  display: inline-block;
+                  margin-top: -10px;
+                  align-items: center;
+                  color: #63465A;
+                  font-size: 22px;
+                  font-family: Arial, Helvetica, sans-serif;
+                  text-decoration: none;
+                 
+            }
+
+            
+
+            .body {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  min-height: 100vh;
+                  margin: 0;
+                  background-color: #f0f0f0;
+                  font-family: Arial, sans-serif;
+            }
+
+
+            .payment-div {
+                  margin-top: -200px;
+                  text-align: center;
+                  padding: 20px;
+                  background-color: #fff;
+                  border-radius: 10px;
+                  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                  width: 60%;
+                  height: 600px;
+            }
+
+            .payment-div h1{
+                  margin-top: 50px;
+            }
+
+            .payment-div p, button {
+                  margin: 10px 0 40px 0;
+            }
+
+           
+
+            .payment-div h1{
+                  margin-bottom: 20px;
+            }
+
+            .payment-div > .atencao{
+                  margin-bottom: 10px;
+            }
+
+            .larger-text {
+                  font-size: 18px;
+                  background-color: rgba(35, 112, 41, 0.829);
+                  border: 0;
+                  padding: 5px;
+                  border-radius: 3px;
+                  color: white;
+            }
+
+            .copiar{
+                  font-size: 18px;
+                  background-color: rgb(211, 211, 211);
+                  border: 0;
+                  padding: 5px 10px;
+                  border-radius:  3px;
+            }
+
+            .copiar:hover{
+                  background-color: rgb(180, 180, 180);
+                  cursor: pointer;
+            }
+            
+            #valorPix{
+                  margin-left: -290px;
+            }
+
+      </style>
+</head>
+<body>
+      <header>
+            <a href="paginaCompra2.html" class="logo"><i class="fa-solid fa-wand-magic-sparkles"></i>AcCloset</a>
+            <a href="#" class="Contato">Contato</a>
+      </header>    
+      <div class="body">
+            <div class="payment-div">
+                  <h1>Pagar compra</h1>
+                  <p class="ps3">1. Acesse seu Internet Banking ou app de pagamentos</p>
+                  <p class="ps">2. Escolha pagar via Pix, uma forma rápida e prática</p>
+                  <p class="ps2">3. Cole o código que está localizado logo abaixo</p>
+                  <p id="valorFinal">4. Digite o valor do produto corretamente: </p>
+                  <button class="larger-text">00020126580014BR.GOV.BCB.PIX0136c9d1f76b...</button>
+                  <button class="copiar" id="botao">Copiar</button>
+                  <p class="atencao">Atenção:</p>
+                  <p class="atencao">É de suma importância digitar o valor correto da sua compra,</p>
+                  <p class="atencao">caso contrário pode haver divergências na hora de enviar sua compra!</p>
+              </div>
+      </div>
+   
+      <script>
+
+            const textovalorFinal = document.getElementById('valorFinal')
+
+            // Função para desserializar uma string JSON para um objeto
+            function deserializeJSONToObject(jsonStr) {
+                  return JSON.parse(jsonStr);
+            }
+            
+            // Função para obter um cookie pelo nome
+            function getCookie(name) {
+                  var nameEQ = name + "=";
+                  var ca = document.cookie.split(';');
+                  for (var i = 0; i < ca.length; i++) {
+                  var c = ca[i];
+                  while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                  if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                  }
+                  return null;
+            }
+            
+            // Recupera o cookie e desserializa o objeto
+            var storedData = getCookie("userDataCookie");
+            var deserializedData = deserializeJSONToObject(storedData);
+            
+            // Acessa os valores individuais do objeto
+            var nome = deserializedData.nome;
+            var cidade = deserializedData.cidade;
+            var numero = deserializedData.numero;
+            var estado = deserializedData.estado;
+            var rua = deserializedData.rua;
+            var cep = deserializedData.cep;
+            
+            console.log("Cidade:", cidade);
+            console.log("Número:", numero);
+            console.log("Estado:", estado);
+            console.log("Rua:", rua);
+            console.log("CEP:", cep);
+            console.log("CEP:", nome);
+            // Função para obter um cookie pelo nome
+            function getCookie(name) {
+                  var nameEQ = name + "=";
+                  var ca = document.cookie.split(';');
+                  for (var i = 0; i < ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                  }
+                  return null;
+            }
+
+            const textoParaCopiar = "00020126580014BR.GOV.BCB.PIX0136c9d1f76b-9ecb-4c91-9f46-89f124f44f115204000053039865802BR5925Allefe Keiner Souza Silva6009SAO PAULO61080540900062250521xqKTycxwB65SUI71fj764630460D5";
+
+            const botaoElement = document.getElementById("botao");
+
+            botaoElement.addEventListener("click", () => {
+                  // Cria um elemento de input para armazenar o texto
+                  const inputElement = document.createElement("input");
+                  inputElement.value = textoParaCopiar;
+                  document.body.appendChild(inputElement);
+
+                  // Seleciona o texto no input
+                  inputElement.select();
+                  inputElement.setSelectionRange(0, 99999); // Para dispositivos móveis
+
+                  // Executa o comando de cópia
+                  try {
+                        document.execCommand("copy");
+                        console.log("Texto copiado: " + textoParaCopiar);
+                  } catch (err) {
+                        console.error("Erro ao copiar o texto:", err);
+                  }
+
+                  // Remove o input da página
+                  document.body.removeChild(inputElement);
+            })
+
+
+            let fretevalor = 0
+            if (cidade.toLowerCase() === "medeiros neto"){
+                  fretevalor = 10
+
+            }else if(cidade.toLowerCase() === "teixeira de freitas"){
+                  fretevalor = 8
+            }
+
+            // Obtém o valor do cookie
+            var myCookieValue = getCookie("myCookie");
+
+            if (myCookieValue !== null) {
+                  console.log("Valor do cookie:", myCookieValue);
+                  textovalorFinal.textContent = `4. Digite o valor do produto corretamente: R$ ${Number(myCookieValue) + fretevalor},00`
+
+            } else {
+                  console.log("Cookie não encontrado");
+            }
+      </script>
+</body>
+</html>

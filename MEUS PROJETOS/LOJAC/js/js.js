@@ -7,12 +7,12 @@ const frete = document.getElementById('frete')
 const valorPix = document.getElementById('valorPix')
 const valorTotal = document.getElementById('valorTotal')
 const valorProduts = document.getElementById('valorTotalProduts')
-const comfirmarCompra = document.querySelector('.btn-comfirmar-compra')
 const comfirmarCompra2 = document.querySelector('.btn-comfirmar-compra2')
 const textovalorFinal = document.getElementById('valorFinal')
 const lateral = document.querySelector('.lateral')
 const lateralDireita = document.querySelector('.lateral-direita')
 const body = document.querySelector('.body')
+const btn = document.getElementById('submit')
 
 
 window.addEventListener("scroll", function() {
@@ -113,11 +113,23 @@ function deserializeJSONToObject(jsonStr) {
       return null;
     }
 
+      // Lendo o cookie e convertendo de volta para um objeto
+      var quantidadeArmazenada = lerCookie("quantidade_cookie");
+      if (quantidadeArmazenada !== null) {
+        console.log("Objeto 'quantidade' armazenado no cookie:", quantidadeArmazenada);
+      } else {
+        console.log("Nenhum objeto 'quantidade' encontrado no cookie.");
+      }
+  
+
+    let produtosName = ''
     // Lendo o cookie e convertendo de volta para uma array
     var produtosArmazenadosJSON = lerCookie("produtos");
     if (produtosArmazenadosJSON !== null) {
       var produtosArmazenados = JSON.parse(produtosArmazenadosJSON);
       console.log("Produtos armazenados no cookie:", produtosArmazenados);
+
+      
 
       let conte = 1
       for ( let item of produtosArmazenados){
@@ -129,21 +141,24 @@ function deserializeJSONToObject(jsonStr) {
                               <h4>Chegará no seu endereço em até 24 horas </h4>
                               <p class="imagem"><i class="fa-solid fa-image"></i> </p>
                               <p class="produtoNome">${item}</p>
-                              <p class="quantidade">quantidade: 1</p>
+                              <p class="quantidade">quantidade: ${quantidadeArmazenada[item]}</p>
                             `
 
 
         let elementoPai = document.getElementById("produtosinformation");
         elementoPai.appendChild(novaDiv);
         console.log(item)
+        console.log(produtosName)
         conte ++
+
+        produtosName += `${item} Quantidade (${quantidadeArmazenada[item]})\n`
       }
 
     } else {
       console.log("Nenhum produto encontrado no cookie.");
     }
 
-    
+    console.log(produtosName)
     city.textContent = `${cidade} , ${pegarEstado(estado)} -  CEP ${cep}`
     city.style.marginLeft = '-103px'
     ruaTela.textContent = `${rua}, ${numero}`
@@ -160,72 +175,75 @@ function deserializeJSONToObject(jsonStr) {
       fretevalor = 8
     }
 
-    // Função para obter um cookie pelo nome
-  function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    // Função para ler o cookie
+    function lerCookie(nome) {
+      var nomeIgual = nome + "=";
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        while (cookie.charAt(0) === ' ') {
+          cookie = cookie.substring(1);
+        }
+        if (cookie.indexOf(nomeIgual) === 0) {
+          return JSON.parse(cookie.substring(nomeIgual.length, cookie.length));
+        }
+      }
+      return null;
     }
-    return null;
-  }
 
-  // Obtém o valor do cookie
-  var myCookieValue = getCookie("myCookie");
+  
+    
+    btn.addEventListener('click', function(){
+      inserirValor()
+    })
 
-  if (myCookieValue !== null) {
-    console.log("Valor do cookie:", myCookieValue);
-    valorPix.textContent = `Você pagará: R$ ${myCookieValue},00`
-    valorTotal.textContent = `R$ ${Number(myCookieValue) + fretevalor},00`
-    valorProduts.textContent = `R$ ${myCookieValue},00`
+    
+    function inserirValor() {
+          var valor = `${nome}`;
+          const meuNúmeroInput = document.getElementById('meuNumber').value
+          document.getElementById("meuInputNome").value = valor;
 
-  } else {
-    console.log("Cookie não encontrado");
-  }
+          var valor = `Endereço cliente:\n\n${cidade}, ${pegarEstado(estado)}-${cep}\n${rua}, ${numero}
+          \nContato cliente: ${meuNúmeroInput}
+          \nValor total da compra: R$ ${Number(myCookieValue) + fretevalor},00
+          \nPrazo de entrega: 24 horas
+          \nProdutos:
+          \n${produtosName}
+          \nNumeração desejada: Não informado!
+          `;
+          document.getElementById("minhaMensagem").value = valor;
+    }
+
+    function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+}
+
+
+// Obtém o valor do cookie
+var myCookieValue = getCookie("myCookie");
+
+if (myCookieValue !== null) {
+      console.log("Valor do cookie:", myCookieValue);
+
+      valorProduts.textContent = `R$ ${myCookieValue},00`
+      valorPix.textContent = `R$ ${myCookieValue},00`
+      valorTotal.textContent = `R$ ${Number(myCookieValue) + fretevalor},00`
+
+} else {
+      console.log("Cookie não encontrado");
+}
+    
 
 
 
-  comfirmarCompra.addEventListener('click', function(){
-      body.style.display = 'flex'
-      lateralDireita.style.display = 'none'
-      lateral.style.display = 'none'
-      console.log('teste')
-      textovalorFinal.textContent = `4. Digite o valor do produto corretamente: R$ ${Number(myCookieValue) + fretevalor},00`
-  })
+comfirmarCompra2.addEventListener('click', function(){
+  window.location.href = 'paginaCompar2.html'
 
-  comfirmarCompra2.addEventListener('click', function(){
-    body.style.display = 'flex'
-    lateralDireita.style.display = 'none'
-    lateral.style.display = 'none'
-    console.log('teste')
-    textovalorFinal.textContent = `4. Digite o valor do produto corretamente: R$ ${Number(myCookieValue) + fretevalor},00`
-  })
-
-
-const textoParaCopiar = "00020126580014BR.GOV.BCB.PIX0136c9d1f76b-9ecb-4c91-9f46-89f124f44f115204000053039865802BR5925Allefe Keiner Souza Silva6009SAO PAULO61080540900062250521xqKTycxwB65SUI71fj764630460D5";
-
-const botaoElement = document.getElementById("botao");
-
-botaoElement.addEventListener("click", () => {
-  // Cria um elemento de input para armazenar o texto
-  const inputElement = document.createElement("input");
-  inputElement.value = textoParaCopiar;
-  document.body.appendChild(inputElement);
-
-  // Seleciona o texto no input
-  inputElement.select();
-  inputElement.setSelectionRange(0, 99999); // Para dispositivos móveis
-
-  // Executa o comando de cópia
-  try {
-    document.execCommand("copy");
-    console.log("Texto copiado: " + textoParaCopiar);
-  } catch (err) {
-    console.error("Erro ao copiar o texto:", err);
-  }
-
-  // Remove o input da página
-  document.body.removeChild(inputElement);
 })
