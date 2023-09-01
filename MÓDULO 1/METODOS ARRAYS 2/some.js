@@ -8,7 +8,7 @@ console.log(resultado)
 
 const minhaFuncao = (array) => {
       const resultado = array.some((element) => {
-            return element === 5
+            return element < 15
       })
 
       console.log(resultado)
