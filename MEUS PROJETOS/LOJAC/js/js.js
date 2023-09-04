@@ -23,7 +23,7 @@ window.addEventListener("scroll", function() {
     divFixa.style.marginTop = `-1060px`
   } else if (currentScrollTop < lastScrollTop) {
     console.log("Rolagem para cima");
-    divFixa.style.marginTop = `-1000px`
+    divFixa.style.marginTop = `-970px`
   }
 
   lastScrollTop = currentScrollTop;
@@ -140,8 +140,7 @@ function deserializeJSONToObject(jsonStr) {
                               <p class="p1">Envio ${conte}</p>
                               <h4>Chegará no seu endereço em até 24 horas </h4>
                               <p class="imagem"><i class="fa-solid fa-image"></i> </p>
-                              <p class="produtoNome">${item}</p>
-                              <p class="quantidade">quantidade: ${quantidadeArmazenada[item]}</p>
+                              <p class="produtoNome">${item}, quantidade: ${quantidadeArmazenada[item]}</p>
                             `
 
 

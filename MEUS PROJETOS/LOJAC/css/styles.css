@@ -1,8 +1,8 @@
 :root {
-      --bg-color: #EDD5B7;
+      
       --secondary-bg-color: #acacac;
       --primary-color: #4b3143;
-      --secondary-color: #B85C4F;
+      --secondary-color:#A964CC;
       --text-color: #63465A;
       --border-color: #20235b;
     }
@@ -131,7 +131,7 @@
     }
     
     #save-btn {
-      background-color: #B85C4F;
+      background-color: #A964CC;
       border: none;
       height: 3em;
       width: 8em;

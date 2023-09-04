@@ -1,227 +1,277 @@
 <!DOCTYPE html>
-<html lang="Pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Web Design Mastery | Lebaba</title>
+  </head>
+  <body>
+    <nav>
+      <ul class="nav__links">
+        <li class="link"><a href="#">Início</a></li>
+        <li class="link"><a href="https://wa.me/message/GM3D6HJTB6DNA1">Contato</a></li>
+      </ul>
+      <div class="nav__logo">
+        <a href="#">A<span>c</span>Closet<span>.</span></a>
+      </div>
+      <div class="nav__icons">
+        <span>
+          <a href="#"><i class="ri-search-line"></i></a>
+        </span>
+        <span>
+          <a href="#"><i class="ri-user-line"></i></a>
+        </span>
+        <span>
+          <a href="#"><i class="ri-shopping-bag-line"></i></a>
+        </span>
+      </div>
+    </nav>
 
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            list-style: none;
-            text-decoration: none;
-        }
-        :root{
-            --red:#B85C4F;
-            --white:#fff;
-            --dark:#63465A;
-        }
-        body{
-            color: var(--dark);
-            background: var(--white);
-        }
-        .navigation{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 40px;
-            box-shadow: 0 0.1rem 0.5rem #ccc;
-            width: 100%;
-            background: var(--white);
-            transition: all 0.5s;
-            position: fixed;
-        }
-        .navigation .logo{
-            color: var(--red);
-            font-size: 1.7rem;
-            font-weight: 600;
-        }
-        .logo span{
-            color: var(--dark);
-        }
-        .navigation ul{
-            display: flex;
-            align-items: center;
-            gap: 5rem;
-        }
-        .navigation ul li a{
-            color: var(--dark);
-            font-size: 17px;
-            font-weight: 500;
-            transition: all 0.5s;
-        }
-        .navigation ul li a:hover{
-            color: var(--red);
-        }
-        .navigation i{
-            cursor: pointer;
-            font-size: 1.5rem;
-        }
-        .menu{
-            cursor: pointer;
-            display: none;
-        }
-        .menu .bar{
-            display: block;
-            width: 28px;
-            height: 3px;
-            border-radius: 3px;
-            background: var(--dark);
-            margin: 5px auto;
-            transition: all 0.3s;
-        }
-        .menu .bar:nth-child(1),
-        .menu .bar:nth-child(3){
-            background: var(--red);
-        }
-        .home{
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0px 10%;
-        }
-        .home-text{
-            max-width: 37rem;
-        }
-        .home-text .text-h4{
-            font-size: 1.5rem;
-            color: var(--red);
-            margin-bottom: 1rem;
-        }
-        .home-text .text-h1{
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            line-height: 4rem;
-        }
-        .home-text p{
-            margin-bottom: 4rem;
-        }
-        .home-btn{
-            padding: 15px 45px;
-            background: var(--red);
-            color: var(--white);
-            border-radius: 10px;
-            font-weight: 700;
-            transition: all 0.5s;
-        }
-        .home-btn:hover{
-            background: #ec624f;
-        }
-        .home-img i{
-            width: 100%;
-            transform: rotate(15deg);
-            font-size: 300px;
-            margin-left: -350px;
-        }
-        @media (max-width:785px) {
-            .navigation{
-                padding: 18px 20px;
-            }
-            .menu{
-                display: block;
-            }
-            .menu.ativo .bar:nth-child(1){
-                transform:  translateY(8px) rotate(45deg);
-            }
-            .menu.ativo .bar:nth-child(2) {
-                opacity: 0;
-            }
-            .menu.ativo .bar:nth-child(3){
-                transform: translateY(-8px) rotate(-45deg);
-            }
-            .nav-menu{
-                position: fixed;
-                right: -100%;
-                top: 70px;
-                width: 100%;
-                height: 100%;
-                flex-direction: column;
-                background: var(--white);
-                gap: -10px;
-                transition: 0.3s;
-            }
-            .nav-menu.ativo{
-                right: 0;
-            }
-            .nav-item{
-                margin: 16px 0;
-            }
-            /*main*/
-            .home{
-                padding: 100px 2%;
-                flex-direction: column;
-                text-align: center;
-                overflow: hidden;
-                gap: 5rem;
-            }
-            .home .text-h4{
-                font-size: 15px;
-            }
-            .home .text-h1{
-                font-size: 2.5rem;
-                line-height: 3rem;
-            }
-            .home p{
-                font-size: 15px;
-            }
-            .home-i{
-                width: 125%;
-            }
-        }
-
-        .ptext{
-            font-size: 22px;
-        }
-    </style>
-    <title>Loja</title>
-</head>
-<body>
-    <header>
-        <nav class="navigation">
-            <a href="#" class="logo">A<span>Cc</span>lo<span>se</span>t</a>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="#">Home</a></li>
-                <li class="nav-item"><a href="#">About</a></li>
-                <li class="nav-item"><a href="#">Sobre</a></li>
-                <li class="nav-item"><a href="#">Contact</a></li>
-                <i class='bx bx-search'></i>
-            </ul>
-            <div class="menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
+    <header class="section__container header__container">
+      <div class="header__content">
+        <h4>ATÉ 10% DE DESCONTO. <a href="#" id="condicoes">Consulte condições</a></h4>
+        <h1>Moda Feminina</h1>
+        <p>
+            Descubra as últimas tendências e expresse seu estilo
+            único com nosso site de Moda Feminina. Explore uma coleção selecionada
+            de roupas, acessórios e muito mais que atendem a todos os gostos e ocasiões.
+        </p>
+        <button class="btn" id="explorar">EXPLORAR</button>
+      </div>
+      <div class="header__image">
+        <img src="assets/header.png" alt="header" />
+      </div>
     </header>
-    <main>
-        <section class="home">
-            <div class="home-text">
-                <h4 class="text-h4">Bem vindo a AcCloset</h4>
-                <h1 class="text-h1">Criamos essa loja pra você!</h1>
-                <p class="ptext">Temos o melhor da moda atual e com preços incríveis, confira o nosso catálogo</p>
-                <a href="catalogo.html" class="home-btn">Conferir</a>
-            </div>
-            <div class="home-img">
-                <p><i class="fa-solid fa-bag-shopping"></i></p>
-            </div>
-        </section>
-    </main>
-    <script>
-        const menu = document.querySelector('.menu');
-        const NavMenu = document.querySelector('.nav-menu');
 
-        menu.addEventListener('click', () => {
-            menu.classList.toggle('ativo');
-            NavMenu.classList.toggle('ativo');
-        })
-    </script>
-</body>
+    <section class="section__container categories__container">
+      <h2 class="section__header">Top Categorias</h2>
+      <p class="section__subheader">
+            Explore nossas categorias e encontre tudo o que você procura!
+      </p>
+      <div class="categories__grid">
+        <div class="categories__card">
+          <img src="assets/category-1.jpg" alt="categories" />
+          <h4>Acessórios</h4>
+        </div>
+        <div class="categories__card">
+          <img src="assets/category-2.jpg" alt="categories" />
+          <h4>Coleção de Vestidos</h4>
+        </div>
+        <div class="categories__card">
+          <img src="assets/category-3.jpg" alt="categories" />
+          <h4>Jóias</h4>
+        </div>
+        <div class="categories__card">
+          <img src="assets/category-4.jpg" alt="categories" />
+          <h4>Cosméticos</h4>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container hero__container">
+      <div class="hero__card">
+        <img src="assets/card-1.png" alt="hero" />
+        <div class="hero__content">
+          <p>Tendência 2023</p>
+          <h4>Croppeds Femininos</h4>
+          <a id="croppeds" href="catalogo.html">Descubra mais +</a>
+        </div>
+      </div>
+      <div class="hero__card">
+        <img src="assets/card-2.png" alt="hero" />
+        <div class="hero__content">
+          <p>Tendência 2023</p>
+          <h4>Vestidos Femininos</h4>
+          <a id="Vestidos" href="catalogo.html">Descubra mais +</a>
+        </div>
+      </div>
+      <div class="hero__card">
+        <img src="assets/card-3.png" alt="hero" />
+        <div class="hero__content">
+          <p>Tendência 2023</p>
+          <h4>Entre outros</h4>
+          <a id="outros" href="catalogo.html">Descubra mais +</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container banner__container">
+      <div class="banner__card">
+        <span><i class="ri-truck-line"></i></span>
+        <h4>Entregas Grátis</h4>
+        <p>
+            Compre quando quiser, onde quiser: Sua conveniência é nossa prioridade.
+        </p>
+      </div>
+      <div class="banner__card">
+        <span><i class="ri-money-dollar-circle-line"></i></span>
+        <h4>100% de garantia do produto</h4>
+        <p>
+          Receba o que está esperando ou iremos devolver todo o seu dinheiro.
+        </p>
+      </div>
+      <div class="banner__card">
+        <span><i class="ri-user-voice-fill"></i></span>
+        <h4>Conveniência e Suporte</h4>
+        <p>
+            Estamos aqui para você. Nossos serviços de suporte ao cliente estão prontos para responder suas dúvidas e resolver 
+            seus problemas, 24 horas por dia, 7 dias por semana.
+        </p>
+      </div>
+    </section>
+
+    <section class="section__container product__container">
+      <h2 class="section__header">
+            Produtos em alta</h2>
+      <p class="section__subheader">
+           Desperte sua autenticidade com o poder da moda: Explore nossa seleção cuidadosamente curada
+            de produtos femininos em alta e eleve seu estilo para o próximo patamar.
+      </p>
+      <div class="product__grid">
+        <div class="product__card">
+          <img src="assets/product-1.jpg" alt="product" />
+          <div class="product__card__content">
+            <div class="product__rating">
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-half-fill"></i></span>
+              <span><i class="ri-star-line"></i></span>
+            </div>
+            <h4>Vestido Carmem Branco</h4>
+            <p>R$70 <s>$150</s></p>
+          </div>
+        </div>
+        <div class="product__card">
+          <img src="assets/product-2.jpg" alt="product" />
+          <div class="product__card__content">
+            <div class="product__rating">
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-half-fill"></i></span>
+              <span><i class="ri-star-line"></i></span>
+              <span><i class="ri-star-line"></i></span>
+            </div>
+            <h4>Relógio Slim Feminino Prata</h4>
+            <p>R$200 <s>R$350</s></p>
+          </div>
+        </div>
+        <div class="product__card">
+          <img src="assets/product-3.jpg" alt="product" />
+          <div class="product__card__content">
+            <div class="product__rating">
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-half-fill"></i></span>
+              <span><i class="ri-star-line"></i></span>
+            </div>
+            <h4>BOLSA Classique Triomphe Preta</h4>
+            <p>R$150 <s>R$270</s></p>
+          </div>
+        </div>
+        <div class="product__card">
+          <img src="assets/product-4.jpg" alt="product" />
+          <div class="product__card__content">
+            <div class="product__rating">
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-half-fill"></i></span>
+              <span><i class="ri-star-line"></i></span>
+            </div>
+            <h4>Bolsa Gucci</h4>
+            <p>$900 <s>$1200</s></p>
+          </div>
+        </div>
+      </div>
+      <div class="product__btn">
+        <button class="btn" id="explorar2">Ver mais</button>
+      </div>
+    </section>
+
+    <section class="section__container deals__container" id="promocao">
+      <div class="deals__image">
+        <img src="assets/deals.png" alt="deals" />
+      </div>
+      <div class="deals__content">
+        <h5>Get Up To 20% Discount</h5>
+        <h4>Deals Of This Month</h4>
+        <p>
+          Our Women's Fashion Deals of the Month are here to make your style
+          dreams a reality without breaking the bank. Discover a curated
+          collection of exquisite clothing, accessories, and footwear, all
+          handpicked to elevate your wardrobe.
+        </p>
+        <div class="deals__countdown">
+          <div class="deals__countdown__card">
+            <h4>14</h4>
+            <p>Days</p>
+          </div>
+          <div class="deals__countdown__card">
+            <h4>20</h4>
+            <p>Hours</p>
+          </div>
+          <div class="deals__countdown__card">
+            <h4>15</h4>
+            <p>Mins</p>
+          </div>
+          <div class="deals__countdown__card">
+            <h4>05</h4>
+            <p>Secs</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="section__container footer__container">
+      <div class="footer__col">
+        <h4>CONTATO</h4>
+        <p>
+          <span><i class="ri-map-pin-2-fill"></i></span>
+          75, rua venceslau braz, Teixeira de Freitas
+        </p>
+        <p>
+          <span><i class="ri-mail-fill"></i></span>
+          suporteaccloset@gmail.com
+        </p>
+        <p>
+          <span><i class="ri-phone-fill"></i></span>
+          (+55) 73 99147-2696
+        </p>
+      </div>
+      <div class="footer__col">
+        <h4>COMPANHIA</h4>
+        <a href="#">Início</a>
+        <a href="#">Sobre nós</a>
+        <a href="#">Termos & condições</a>
+      </div>
+      <div class="footer__col">
+        <h4>LINKS ÚTEIS</h4>
+        <a href="#">Ajuda</a>
+        <a href="#">Acompanhar o meu pedido </a>
+        <a href="#">O que está achando?</a>
+      </div>
+      <div class="footer__col">
+        <h4>INSTAGRAM</h4>
+        <div class="instagram__grid">
+          <img src="assets/instagram-1.jpg" alt="instagram" />
+          <img src="assets/instagram-2.jpg" alt="instagram" />
+          <img src="assets/instagram-3.jpg" alt="instagram" />
+          <img src="assets/instagram-4.jpg" alt="instagram" />
+          <img src="assets/instagram-5.jpg" alt="instagram" />
+          <img src="assets/instagram-6.jpg" alt="instagram" />
+        </div>
+      </div>
+    </footer>
+    <div class="footer__bar">
+      Copyright © 2023 Ana Clara Closet. Todos os direitos reservados.
+    </div>
+
+    <script src="js/conexao-index.js"></script>
+  </body>
 </html>

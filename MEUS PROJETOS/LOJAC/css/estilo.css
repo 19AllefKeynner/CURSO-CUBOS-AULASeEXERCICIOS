@@ -1,8 +1,125 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&family=Titillium+Web:wght@200;300;400;600;700&display=swap');
-*{
-    margin: 0;
-    padding:0;
-    font-family: 'Open Sans';
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+--primary-color: #A964CC;
+--primary-color-dark: #D37DFF;
+--primary-color-light: #f4e5ec;
+--text-dark: #0f172a;
+--text-light: #64748b;
+--extra-light: #f8fafc;
+--white: #ffffff;
+--max-width-1400: 1400px;
+--max-width-1200: 1200px;
+--max-width-900: 900px;
+--header-font: "Playfair Display", serif;
+}
+
+* {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+font-family: 'Open Sans';
+}
+
+a {
+text-decoration: none;
+}
+
+body {
+font-family: "Poppins", sans-serif;
+}
+
+nav {
+max-width: var(--max-width-1200);
+margin: auto;
+padding: 2rem 1rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.nav__links {
+flex: 1;
+list-style: none;
+display: flex;
+align-items: center;
+gap: 2rem;
+}
+
+.link a {
+font-weight: 500;
+color: var(--text-dark);
+}
+
+.link a:hover {
+color: var(--primary-color);
+}
+
+.nav__logo a {
+font-size: 2rem;
+font-weight: 800;
+font-family: var(--header-font);
+color: var(--text-dark);
+}
+
+.nav__logo a span {
+    font-family: var(--header-font);
+color: var(--primary-color);
+}
+
+.nav__icons {
+flex: 1;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+gap: 2rem;
+}
+
+.nav__icons span a {
+font-size: 1.25rem;
+color: var(--text-dark);
+}
+
+.nav__icons span a:hover {
+color: var(--primary-color);
+}
+
+.busca{
+    background-color: #16005300;
+    display: flex;
+    justify-content: center;
+}
+
+.input-busca > input{
+    margin-right: 30px;
+    height: 40px;
+    width: 300px;
+    border: 0;
+    border-bottom: 2px solid #D37DFF ;
+    
+}
+
+.input-busca > input:focus{
+    border: 0;
+    outline: none;
+    border-bottom: 2px solid #D37DFF ;
+}
+
+.icon-lupa{
+    font-size: 20px;
+    background-color: #D37DFF;
+    padding: 5px;
+    width: 35px;
+    justify-content: center;
+    display: flex;
+    border-radius: 5px;
+   
+}
+
+.lupa{
+    color: #000000;
+    text-decoration: none;
 }
 
 img{
@@ -74,7 +191,7 @@ header h1{
     display: block;
     margin: 10px auto;
     border: none;
-    background-color: black;
+    background-color: #A964CC;
     color: #fff;
     padding: 5px 15px;
     border-radius: 5px;
@@ -96,7 +213,7 @@ header h1{
     opacity: 0;
 }
 .carrito .header-carrito{
-    background-color: #000;
+    background-color: #A964CC;
     color: #fff;
     text-align: center;
     padding: 30px 0;
@@ -184,7 +301,7 @@ header h1{
     display: block;
     width: 100%;
     border: none;
-    background: #000;
+    background: #A964CC;
     color: #fff;
     border-radius: 5px;
     font-size: 18px;
@@ -199,6 +316,13 @@ header h1{
     scale: 1.05;
 }
 
+.btn-radio{
+    display: flex;
+    width: 40%;
+    margin-left: 30%;
+    justify-content: space-between;
+}
+
 /* SECCION RESPONSIVE */
 @media screen and (max-width: 850px) {
     .contenedor {
@@ -211,3 +335,62 @@ header h1{
         width: 100%;
     }
   }
+
+  
+.radio {
+    appearance: none;
+    width: 20px; /* Tamanho do círculo de seleção */
+    height: 20px; /* Tamanho do círculo de seleção */
+    background-color: #dadada;
+    border-radius: 50%; /* Torna o círculo de seleção circular */
+    cursor: pointer; /* Altera o cursor para indicar que é clicável */
+    
+  }
+
+input[type="radio"]:checked + .custom-radio {
+    background-color: #000000; /* Cor de fundo quando marcado */
+    border: 2px solid #063666; /* Cor da borda quando marcado */
+  }
+
+#nao-disponivel{
+    cursor: context-menu;
+}
+
+#preto:checked{
+    background-color: #000;
+}
+
+#cinza:checked{
+    background-color: #707070;
+}
+
+#rosa:checked{
+    background-color: #fd217d;
+}
+
+#bege:checked{
+    background-color: #ffbd87;
+}
+
+#verde:checked{
+    background-color: #00532a;
+}
+
+#marrom:checked{
+    background-color: #834a14;
+}
+
+#branco:checked{
+    background-color: #ffffff;
+    border: 1px solid black;
+}
+
+.tamanho-unico{
+    text-align: center;
+}
+
+#sobre{
+    text-align: center;
+    text-decoration: underline;
+    margin-left: 18px;
+}

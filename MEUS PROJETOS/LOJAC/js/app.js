@@ -1,6 +1,7 @@
 let totalEnviar = 0
 let arrayProdutos = []
 let preçoIndividual = [];
+let id = 0
 
 //Variable que mantiene el estado visible del carrito
 var carritoVisible = false;
@@ -47,7 +48,7 @@ function ready(){
 }
 //Eliminamos todos los elementos del carrito y lo ocultamos
 function pagarClicked(){
-    window.location.href = 'endereçoPagamento.html'
+    window.location.href = 'endereço.html'
 
       // Função para definir um cookie
 
@@ -106,9 +107,18 @@ function agregarAlCarritoClicked(event){
     var titulo = item.getElementsByClassName('titulo-item')[0].innerText;
     var precio = item.getElementsByClassName('precio-item')[0].innerText;
     var imagenSrc = item.getElementsByClassName('img-item')[0].src;
-    console.log(imagenSrc);
+    var div = item.getElementsByClassName('btn-radio')
 
-    agregarItemAlCarrito(titulo, precio, imagenSrc);
+     // Encontre o elemento de rádio dentro da div com a classe "btn-radio"
+     var div = item.getElementsByClassName('btn-radio')[0];
+     var radioInput = div.querySelector('input[type="radio"]');
+ 
+     // Acesse o nome do input radio
+     var nomeDoRadio = radioInput.name;
+ 
+     console.log("Nome do input radio dentro da div: " + nomeDoRadio);
+
+    agregarItemAlCarrito(titulo, precio, imagenSrc, nomeDoRadio);
 
     hacerVisibleCarrito();
 }
@@ -125,19 +135,26 @@ function hacerVisibleCarrito(){
 }
 
 //Funciòn que agrega un item al carrito
-function agregarItemAlCarrito(titulo, precio, imagenSrc){
+function agregarItemAlCarrito(titulo, precio, imagenSrc, nomeDoRadio){
+    id ++
+    var elementosRadio = document.getElementsByName(nomeDoRadio);
+
+    for (var i = 0; i < elementosRadio.length; i++) {
+        if (elementosRadio[i].checked) {
+        var idSelecionado = elementosRadio[i].id;
+        break; // Se um está selecionado, não há necessidade de continuar verificando os outros.
+        }
+    }
+
+
+
     var item = document.createElement('div');
     item.classList.add = ('item');
     var itemsCarrito = document.getElementsByClassName('carrito-items')[0];
 
     //controlamos que el item que intenta ingresar no se encuentre en el carrito
     var nombresItemsCarrito = itemsCarrito.getElementsByClassName('carrito-item-titulo');
-    for(var i=0;i < nombresItemsCarrito.length;i++){
-        if(nombresItemsCarrito[i].innerText==titulo){
-            alert("El item ya se encuentra en el carrito");
-            return;
-        }
-    }
+    
 
     var itemCarritoContenido = `
         <div class="carrito-item">
@@ -150,6 +167,7 @@ function agregarItemAlCarrito(titulo, precio, imagenSrc){
                     <i class="fa-solid fa-plus sumar-cantidad"></i>
                 </div>
                 <span class="carrito-item-precio">${precio}</span>
+                <input type="radio" name="${nomeDoRadio}-carrinho-${id}" id="${idSelecionado}" class="radio" checked>
             </div>
             <button class="btn-eliminar">
                 <i class="fa-solid fa-trash"></i>
@@ -250,12 +268,6 @@ function actualizarTotalCarrito(){
 
 }
 
-
-
-
-
-
-
 function obterQuantidadeItensNoCarrinho() {
     var carritoItems = document.getElementsByClassName('carrito-item');
     var quantidadeItens = {};
@@ -271,3 +283,69 @@ function obterQuantidadeItensNoCarrinho() {
 
     return quantidadeItens;
 }
+
+
+
+const croppedsCard = document.getElementsByClassName('croppeds-femininos');
+const vestidosCard = document.getElementsByClassName('vestidos-femininos');
+const outrosCard = document.getElementsByClassName('entre-outros');
+
+// Função para ocultar elementos com uma classe específica
+function ocultarElementosPorClasse(classe) {
+  const elementos = document.getElementsByClassName(classe);
+  for (let i = 0; i < elementos.length; i++) {
+    elementos[i].style.display = 'none';
+  }
+}
+
+function mostrarElementosPorClasse(classe) {
+    const elementos = document.getElementsByClassName(classe);
+    for (let i = 0; i < elementos.length; i++) {
+      elementos[i].style.display = '';
+    }
+}
+
+
+// Função para ler o valor de um cookie por seu nome
+function lerCookie(nomeCookie) {
+    var nome = nomeCookie + "=";
+    var cookies = document.cookie.split(';');
+    
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim();
+      if (cookie.indexOf(nome) === 0) {
+        return decodeURIComponent(cookie.substring(nome.length, cookie.length));
+      }
+    }
+    return null;
+  }
+  
+  // Lê o valor do cookie "oculta-cards"
+  var valorDoCookie = lerCookie("oculta-cards");
+  
+  if (valorDoCookie !== null) {
+    console.log("O valor do cookie 'oculta-cards' é: " + valorDoCookie);
+  } else {
+    console.log("O cookie 'oculta-cards' não foi encontrado.");
+  }
+  
+
+
+if (valorDoCookie === 'croppeds'){
+    mostrarElementosPorClasse('croppeds-femininos');
+    ocultarElementosPorClasse('vestidos-femininos');
+    ocultarElementosPorClasse('entre-outros');
+}else if(valorDoCookie === 'vestidos'){
+    mostrarElementosPorClasse('vestidos-femininos');
+    ocultarElementosPorClasse('entre-outros');
+    ocultarElementosPorClasse('croppeds-femininos');
+}else if(valorDoCookie === 'outros'){
+    mostrarElementosPorClasse('entre-outros');
+    ocultarElementosPorClasse('croppeds-femininos');
+    ocultarElementosPorClasse('vestidos-femininos');
+}else if(valorDoCookie === 'todos'){
+    mostrarElementosPorClasse('entre-outros');
+    mostrarElementosPorClasse('croppeds-femininos');
+    mostrarElementosPorClasse('vestidos-femininos');
+}
+

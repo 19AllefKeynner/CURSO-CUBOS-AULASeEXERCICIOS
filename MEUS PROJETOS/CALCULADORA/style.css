@@ -86,3 +86,13 @@ button{
       background-color: #9F9F9F;
       color: rgb(0, 0, 0);
 }
+
+hr{
+      color: white;
+      height: 6px;
+      background-color: white;
+      margin-top: 150px;
+      width: 40%;
+      border-radius: 3px;
+      margin-left: 30%;
+}

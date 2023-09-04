@@ -187,7 +187,7 @@ addressForm.addEventListener("submit", (e) => {
     var serializedData = serializeObjectToJSON(userData);
     setCookie("userDataCookie", serializedData, 30); // O cookie expira em 30 dias
     
-    window.location.href = "paginaCompra.html";
+    window.location.href = "confirmarCompra.html";
 
   }else{
       setTimeout(() => {
