@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Imagens</title>
+      <style>
+            body{
+                  display:flex ;
+                  justify-content: center;
+                  align-items: center;
+
+            }
+
+            .container{
+                  margin-top: 200px;
+                  display: block;
+            }
+
+
+            #btn-random{
+                  width: 200px;
+                  height: 50px;
+                  font-size: 22px;
+                  font-weight: bold;
+                  font-family: Arial, Helvetica, sans-serif;
+                  border: 0;
+                  cursor: pointer;
+                  background-color: burlywood;
+                  border-radius: 5px;
+                  margin-top: 50px;
+            }
+      </style>
+</head>
+<body>
+      <div class="container">
+            <img src="https://picsum.photos/id/237/200/300" alt="aleatoria">
+            <br>
+            <button id="btn-random">Imagem aleatoria</button>
+      </div>
+      
+      <script>
+            const btn = document.getElementById('btn-random')
+            const img = document.querySelector('img')
+
+            let indice = 237
+
+            btn.onclick = function(){
+                  img.src = `https://picsum.photos/id/${indice}/200/300`
+                  indice ++
+            }
+      </script>
+</body>
+</html>

@@ -29,6 +29,23 @@ window.addEventListener("scroll", function() {
   lastScrollTop = currentScrollTop;
 });
 
+  // Função para ler uma array de um cookie
+  function lerCookieComoArray(nome) {
+    var cookie = document.cookie;
+    var nomeEQ = nome + "=";
+    var partesCookie = cookie.split(';');
+    
+    for (var i = 0; i < partesCookie.length; i++) {
+      var parte = partesCookie[i].trim();
+      if (parte.indexOf(nomeEQ) === 0) {
+        var jsonItens = parte.substring(nomeEQ.length, parte.length);
+        return JSON.parse(jsonItens);
+      }
+    }
+    
+    return null; // Retorna null se o cookie não for encontrado
+  }
+
 
 
 // Função para desserializar uma string JSON para um objeto
@@ -120,6 +137,17 @@ function deserializeJSONToObject(jsonStr) {
       } else {
         console.log("Nenhum objeto 'quantidade' encontrado no cookie.");
       }
+
+// Exemplo de leitura da array de itens do cookie
+var itensNoCarrinho = lerCookieComoArray("itens_no_carrinho");
+
+if (itensNoCarrinho !== null) {
+  console.log("Itens no carrinho:");
+  console.log(itensNoCarrinho);
+} else {
+  console.log("O cookie 'itens_no_carrinho' não foi encontrado.");
+}
+
   
 
     let produtosName = ''
@@ -130,7 +158,7 @@ function deserializeJSONToObject(jsonStr) {
       console.log("Produtos armazenados no cookie:", produtosArmazenados);
 
       
-
+      let indiceImg = 0
       let conte = 1
       for ( let item of produtosArmazenados){
         let novaDiv = document.createElement("div");
@@ -139,7 +167,7 @@ function deserializeJSONToObject(jsonStr) {
         novaDiv.innerHTML =`
                               <p class="p1">Envio ${conte}</p>
                               <h4>Chegará no seu endereço em até 24 horas </h4>
-                              <p class="imagem"><i class="fa-solid fa-image"></i> </p>
+                              <p class="imagem"><img src="${itensNoCarrinho[indiceImg]}" alt="" class="img-item"></p>
                               <p class="produtoNome">${item}, quantidade: ${quantidadeArmazenada[item]}</p>
                             `
 
@@ -151,6 +179,7 @@ function deserializeJSONToObject(jsonStr) {
         conte ++
 
         produtosName += `${item} Quantidade (${quantidadeArmazenada[item]})\n`
+        indiceImg ++
       }
 
     } else {
@@ -230,9 +259,7 @@ var myCookieValue = getCookie("myCookie");
 
 if (myCookieValue !== null) {
       console.log("Valor do cookie:", myCookieValue);
-
       valorProduts.textContent = `R$ ${myCookieValue},00`
-      valorPix.textContent = `R$ ${myCookieValue},00`
       valorTotal.textContent = `R$ ${Number(myCookieValue) + fretevalor},00`
 
 } else {

@@ -100,6 +100,10 @@ color: var(--primary-color);
     
 }
 
+#busca{
+    font-size: 20px;
+}
+
 .input-busca > input:focus{
     border: 0;
     outline: none;

@@ -168,11 +168,10 @@ color: var(--primary-color);
                   margin-bottom: 10px;
             }
 
-            .imagem i{
-                  
-                  margin-top: -45px;
+            .imagem {
+                  margin-top: -35px;
                   margin-bottom: 40px;
-                  margin-left: -65px;
+                  margin-left: 25px;
                   display: flex;
                   padding: 10px;
                   justify-content: center;
@@ -182,6 +181,15 @@ color: var(--primary-color);
                   color: #ffffff;
                   background-color: #a3a3a3;
                   border-radius: 50%;
+            }
+
+            .imagem img{
+                  width: 60px;
+                  border-radius: 15px;
+                 
+
+
+
             }
 
             .produtoNome{
@@ -210,12 +218,10 @@ color: var(--primary-color);
             }
 
             .pagamento h3{
-                  margin-left: -355px;
-                  margin-top: -45px;
-            }
-
-            .valor{
-                  margin-left: -205px; 
+                  display: flex;
+                  justify-content:  left;
+                  margin-left: 60px;
+                  margin-top: -35px;
             }
 
             .btn-comfirmar-compra{

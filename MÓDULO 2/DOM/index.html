@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Dom</title>
+</head>
+<body>
+      <div class="card">
+            <h1>Testando</h1>
+            <h2>teste 2</h2>
+            <button>test</button>
+      </div>
+
+      <script>
+            const h2 = document.querySelector('.card h2')
+            const button = document.querySelector('button')
+            let click = 0 
+            
+            button.addEventListener('click', function(){
+                  h2.textContent = 'mudou ' + click 
+                  click ++
+            })
+
+      </script>
+</body>
+</html>

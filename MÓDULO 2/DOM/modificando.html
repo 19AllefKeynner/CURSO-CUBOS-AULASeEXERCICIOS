@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Dom</title>
+      <style>
+            body{
+                  display: flex;
+                  justify-content: center;
+                  padding-top: 100px;
+            }
+            #botaoMudarCor{
+                  background-color: blue;
+                  color: white;
+                  border: 0;
+                  border-radius: 5px;
+                  width: 120px;
+                  font-size: 22px;
+                  font-family: Arial, Helvetica, sans-serif;
+                  padding: 10px;
+                  font-weight: bold;
+            }
+
+      </style>
+</head>
+<body>
+      <div class="card">
+            <button id="botaoMudarCor">test</button>
+      </div>
+
+      <script>
+            // Acesse o botão pelo ID
+            const botaoMudarCor = document.getElementById('botaoMudarCor');
+            const body = document.querySelector('body')
+
+            // Adicione um ouvinte de eventos para o clique no botão
+            botaoMudarCor.onclick = function () {
+                  // Gere uma cor aleatória usando uma função
+                  const corAleatoria = gerarCorAleatoria();
+
+                  // Aplique a cor de fundo ao botão
+                  body.style.backgroundColor = corAleatoria;
+            };
+
+            // Função para gerar uma cor aleatória em formato hexadecimal
+            function gerarCorAleatoria() {
+                  const letrasHexadecimais = '0123456789ABCDEF';
+                  let cor = '#';
+
+                  // Gere 6 caracteres hexadecimais aleatórios
+                  for (let i = 0; i < 6; i++) {
+                        cor += letrasHexadecimais[Math.floor(Math.random() * 16)];
+                  }
+
+                  return cor;
+            }
+      </script>
+</body>
+</html>

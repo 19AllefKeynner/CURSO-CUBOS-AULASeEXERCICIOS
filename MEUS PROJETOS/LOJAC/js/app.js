@@ -2,6 +2,43 @@ let totalEnviar = 0
 let arrayProdutos = []
 let preçoIndividual = [];
 let id = 0
+let caminhosDasImagens = [];
+
+
+// Função para criar um cookie com uma array de itens
+function criarCookieComArray(nome, arrayItens, dias) {
+    var data = new Date();
+    data.setTime(data.getTime() + (dias * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + data.toUTCString();
+    var jsonItens = JSON.stringify(arrayItens);
+    document.cookie = nome + "=" + jsonItens + ";" + expires + ";path=/";
+}
+    
+
+// Referência aos elementos de produto
+var produtos = document.querySelectorAll('.item');
+
+// Referência ao campo de busca
+var campoBusca = document.getElementById('busca');
+
+// Adicione um ouvinte de eventos ao campo de busca para ouvir mudanças de entrada
+campoBusca.addEventListener('input', function () {
+  var termoBusca = campoBusca.value.toLowerCase();
+
+  // Percorra todos os produtos
+  produtos.forEach(function (produto) {
+    var nomeProduto = produto.querySelector('.titulo-item').textContent.toLowerCase();
+
+    // Verifique se o nome do produto contém o termo de busca
+    if (nomeProduto.includes(termoBusca)) {
+      // Se corresponder, exiba o produto
+      produto.style.display = 'block'; // ou qualquer estilo que você desejar
+    } else {
+      // Caso contrário, oculte o produto
+      produto.style.display = 'none';
+    }
+  });
+});
 
 //Variable que mantiene el estado visible del carrito
 var carritoVisible = false;
@@ -49,6 +86,8 @@ function ready(){
 //Eliminamos todos los elementos del carrito y lo ocultamos
 function pagarClicked(){
     window.location.href = 'endereço.html'
+    getCaminhoDaImagemDoCarrinho()
+    console.log(caminhosDasImagens)
 
       // Função para definir um cookie
 
@@ -99,6 +138,11 @@ function pagarClicked(){
         criarCookie("quantidade_cookie", quantidade, 7); // O cookie irá expirar em 7 dias
         
 
+
+  
+    // Criando um cookie com a array de itens
+    criarCookieComArray("itens_no_carrinho", caminhosDasImagens, 7); // O cookie irá expirar em 7 dias
+  
     }
 //Funciòn que controla el boton clickeado de agregar al carrito
 function agregarAlCarritoClicked(event){
@@ -349,3 +393,18 @@ if (valorDoCookie === 'croppeds'){
     mostrarElementosPorClasse('vestidos-femininos');
 }
 
+function getCaminhoDaImagemDoCarrinho() {
+    // Selecione todos os elementos de imagem dentro do carrinho
+    var imagensDoCarrinho = document.querySelectorAll('.carrito-item img');
+  
+    // Percorra as imagens do carrinho e obtenha o caminho de cada uma
+    imagensDoCarrinho.forEach(function (imagem) {
+      var caminho = imagem.getAttribute('src');
+      let index = caminho.indexOf('i')
+      caminho = caminho.slice(index)
+      caminhosDasImagens.push(caminho);
+    });
+  
+    return caminhosDasImagens;
+  }
+  
