@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Documento</title>
+      <style>
+            .btn{
+                  border: 0;
+                  border-radius: 10px;
+                  width: 200px;
+                  font-size: 22px;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-weight: bold;
+                  background-color: blueviolet;
+                  color: white;
+                  padding: 10px;
+                  cursor: pointer;
+            }
+
+            .btn:hover{
+                  background-color: rgb(91, 23, 155);
+            }
+
+
+            .btnUp{
+                  border: 0;
+                  border-radius: 10px;
+                  width: 300px;
+                  font-size: 22px;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-weight: bold;
+                  background-color: rgb(92, 43, 226);
+                  color: white;
+                  padding: 15px;
+                  cursor: pointer;
+            }
+
+            body{
+                  display: flex;
+                  justify-content: center;
+                  padding-top: 300px;
+            }
+      </style>
+</head>
+<body>
+      <button class="btn" onclick="clicou()">upp</button>
+
+      <script>
+            const btn = document.querySelector('button')
+   
+            function clicou(){
+                  btn.classList.toggle('btnUp')
+            }
+
+      </script>
+</body>
+</html>
