@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Documento</title>
+      <style>
+            body{
+                  display: flex;
+                  justify-content: center;
+                  padding-top: 180px;
+            }
+            .modal{
+                  width: 300px;
+                  height: 120px;
+                  background-color: rgb(78, 75, 82);
+                  border-radius: 15px;
+                  text-align: center;
+                  padding-top: 40px;
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+                  
+            }
+
+            .btn-inscreva-se{
+                  margin-top: 20px;
+                  width: 300px;
+                  padding: 5px;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-size: 22px;
+                  color: white;
+                  background-color: rgb(255, 24, 24);
+            }
+
+            .escondido{
+                  display: none;
+            }
+
+            .inscrito{
+                  background-color: #2c2c2c;
+            }
+
+      </style>
+</head>
+<body>
+      <div class="container">
+            <div class="modal escondido">
+                  <p>Tem certeza dessa ação?</p>
+                  <button class="cancela">Não</button>
+                  <button class="confirma">Sim</button>
+            </div>
+            <button class="btn-inscreva-se">Inscrever-se</button>
+      </div>
+      <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Documento</title>
+      <script src="script.js" defer></script>
+      <style>
+
+            *{
+                  font-family: Arial, Helvetica, sans-serif;
+            }
+            body{
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+            }
+
+            .alerta{
+                  margin-top: 150px;
+                  width: 200px;
+                  height: 200px;
+                  background-color: rgb(63, 63, 63);
+                  margin-bottom: 50px;
+                  color: white;
+                  display: flex;
+                  justify-content: center;
+                  text-align: center;
+                  align-items: center;
+                  font-size: 28px;
+                  border-radius: 10px;
+            }
+
+            b{
+                  background-color: rgb(59, 111, 255);
+                  padding: 5px;
+                  border-radius: 5px;
+                  display: flex;
+                  margin-top: -140px;
+                  margin-right: -125px;
+                  margin-left: 100px;
+                  cursor: pointer;
+                  border: 1px solid rgb(7, 12, 51);
+            }
+
+            button{
+                  border-radius: 5px;
+                  width: 200px;
+                  padding: 8px;
+                  color: rgb(0, 0, 0);
+                  background-color: rgb(255, 255, 255);
+                  cursor: pointer;
+                  font-size: 22px;
+                  border: 2px solid black;
+                  transition: 1s;
+                  margin-top: 400px;
+            }
+
+            button:hover{
+                  background-color: rgba(0, 0, 0, 0.452)
+            }
+
+            .escondida{
+                  display: none;
+            }
+           
+      </style>
+</head>
+<body>
+      <div class="container">
+            <div class="alerta escondida" id="div" >
+                  <b onclick="xis()">X</b>
+                  Alerta
+            </div>
+            <button onclick="clicou()">Mostrar alerta</button>
+      </div>
+
+      
+</body>
+</html>
