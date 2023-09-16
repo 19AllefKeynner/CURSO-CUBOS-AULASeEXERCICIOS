@@ -1,0 +1,33 @@
+body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      min-height: 80vh;
+}
+
+.container{
+      display: flex;
+      background-color: coral;
+      padding: 15px;
+}
+
+.card-item{
+      width: 100px;
+      height: 70px;
+      border-radius: 10px;
+      border: 2px solid black;
+      margin: 0 10px;
+}
+
+.blue{
+      background-color: rgb(70, 70, 255);
+}
+
+.pink{
+      background-color: deeppink;
+
+      position: relative;
+
+      top: 50px;
+}

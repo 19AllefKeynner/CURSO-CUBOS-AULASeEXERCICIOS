@@ -1,0 +1,30 @@
+body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      min-height: 80vh;
+}
+
+.container{
+      text-align: center;
+      background-color: rgb(15, 39, 39);
+      padding: 50px;
+
+      color: white;
+
+}
+
+img{
+      width: 300px;
+}
+
+.img1{
+      position: relative;
+      left: 50px;
+}
+
+.img2{
+      position: relative;
+      bottom: 50px;
+}
