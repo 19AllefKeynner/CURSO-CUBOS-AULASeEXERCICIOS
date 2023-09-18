@@ -26,6 +26,11 @@ const ordenador = document.getElementById('ordenador')
 const h2Custo = document.getElementById('data-custo')
 const dataInfo = document.getElementById('data-info') 
 
+document.addEventListener("DOMContentLoaded", function() {
+  // Impedir a rolagem horizontal
+  document.body.style.overflowX = "hidden";
+});
+
  // Para ler o cookie:
  function lerCookie(nome) {
   const cookies = document.cookie.split(';');
@@ -302,6 +307,42 @@ ordenador.addEventListener('change', function(event){
       info.id = 'escondido'
     })
 
+    function verificar(element){
+      if (element.target.value != '' && element.key === 'Enter'){
+        return true
+      }
+    }
+    
+    function filtrar( element){
+      produtos.forEach(produto => {
+        const nome = produto.children[0].parentElement.innerText.slice(0, produto.children[0].parentElement.innerText.indexOf('\n')).toLowerCase()
+        if (!nome.includes(element)){
+          console.log('teste')
+          produto.classList.add('escondido')
+        } else {
+          produto.classList.remove('escondido')
+        }
+      })
+    }
+
+    const elementoOriginal = document.getElementById('busca'); 
+    const cloneDoElemento = elementoOriginal.cloneNode(true); 
+
+    // Substitua o elemento original pelo clone
+    elementoOriginal.parentNode.replaceChild(cloneDoElemento, elementoOriginal);
+
+    cloneDoElemento.addEventListener('keydown', function(event){
+      if (verificar(event)){
+        filtrar(event.target.value.toLowerCase())
+        event.target.value = ''
+      } else {
+        produtos.forEach(produto => {
+          produto.classList.remove('escondido')
+          
+        })
+      }
+    })
+
   }else if (event.target.value === 'nao'){
     const inputBusca = document.getElementById('busca')
 
@@ -427,9 +468,41 @@ ordenador.addEventListener('change', function(event){
       info.id = 'escondido'
     })
 
+    function verificar(element){
+      if (element.target.value != '' && element.key === 'Enter'){
+        return true
+      }
+    }
     
+    function filtrar( element){
+      produtos.forEach(produto => {
+        const nome = produto.children[0].parentElement.innerText.slice(0, produto.children[0].parentElement.innerText.indexOf('\n')).toLowerCase()
+        if (!nome.includes(element)){
+          console.log('teste')
+          produto.classList.add('escondido')
+        } else {
+          produto.classList.remove('escondido')
+        }
+      })
+    }
 
-  
+    const elementoOriginal = document.getElementById('busca'); 
+    const cloneDoElemento = elementoOriginal.cloneNode(true); 
+
+    elementoOriginal.parentNode.replaceChild(cloneDoElemento, elementoOriginal);
+
+    cloneDoElemento.addEventListener('keydown', function(event){
+      if (verificar(event)){
+        filtrar(event.target.value.toLowerCase())
+        event.target.value = ''
+      } else {
+        produtos.forEach(produto => {
+          produto.classList.remove('escondido')
+          
+        })
+      }
+    })
+
   }else if (event.target.value === 'entradas'){
       const dadosCookie = lerCookie('meuCookie');
 
@@ -454,9 +527,7 @@ ordenador.addEventListener('change', function(event){
           }
         }
       
-        
       }
-
 
       addproduto(html)
 
@@ -510,8 +581,6 @@ ordenador.addEventListener('change', function(event){
             h2Custo.textContent = `R$ 0.00`
           }
           
-          
-          
         });
       
       })
@@ -519,6 +588,43 @@ ordenador.addEventListener('change', function(event){
       fechar.addEventListener('click', function(){
         info.id = 'escondido'
       })
+
+      function verificar(element){
+        if (element.target.value != '' && element.key === 'Enter'){
+          return true
+        }
+      }
+      
+      function filtrar( element){
+        produtos.forEach(produto => {
+          const nome = produto.children[0].parentElement.innerText.slice(0, produto.children[0].parentElement.innerText.indexOf('\n')).toLowerCase()
+          if (!nome.includes(element)){
+            console.log('teste')
+            produto.classList.add('escondido')
+          } else {
+            produto.classList.remove('escondido')
+          }
+        })
+      }
+  
+      const elementoOriginal = document.getElementById('busca'); 
+      const cloneDoElemento = elementoOriginal.cloneNode(true); 
+  
+      // Substitua o elemento original pelo clone
+      elementoOriginal.parentNode.replaceChild(cloneDoElemento, elementoOriginal);
+  
+      cloneDoElemento.addEventListener('keydown', function(event){
+        if (verificar(event)){
+          filtrar(event.target.value.toLowerCase())
+          event.target.value = ''
+        } else {
+          produtos.forEach(produto => {
+            produto.classList.remove('escondido')
+            
+          })
+        }
+      })
+
 
     }else if (event.target.value === 'saidas'){
       const dadosCookie = lerCookie('meuCookie');
@@ -544,9 +650,7 @@ ordenador.addEventListener('change', function(event){
           }
         }
       
-        
       }
-
 
       addproduto(html)
 
@@ -611,16 +715,49 @@ ordenador.addEventListener('change', function(event){
         info.id = 'escondido'
       })
 
+      function verificar(element){
+        if (element.target.value != '' && element.key === 'Enter'){
+          return true
+        }
+      }
+      
+      function filtrar( element){
+        produtos.forEach(produto => {
+          const nome = produto.children[0].parentElement.innerText.slice(0, produto.children[0].parentElement.innerText.indexOf('\n')).toLowerCase()
+          if (!nome.includes(element)){
+            console.log('teste')
+            produto.classList.add('escondido')
+          } else {
+            produto.classList.remove('escondido')
+          }
+        })
+      }
+
+      const elementoOriginal = document.getElementById('busca'); 
+      const cloneDoElemento = elementoOriginal.cloneNode(true); 
+
+      // Substitua o elemento original pelo clone
+      elementoOriginal.parentNode.replaceChild(cloneDoElemento, elementoOriginal);
+
+      cloneDoElemento.addEventListener('keydown', function(event){
+        if (verificar(event)){
+          filtrar(event.target.value.toLowerCase())
+          event.target.value = ''
+        } else {
+          produtos.forEach(produto => {
+            produto.classList.remove('escondido')
+            
+          })
+        }
+      })
+        
+        
+      
+      
+
   }else if(event.target.value === 'recentes'){
     const dadosCookie = lerCookie('meuCookie');
 
-    // Ordene os dadosCookie em ordem crescente (mais antigo primeiro)
-    dadosCookie.sort((a, b) => {
-      // Use a propriedade de comparação desejada, por exemplo, 'descricao'
-      return a.descricao.localeCompare(b.descricao);
-    });
-    
-    // Inverta a ordem dos itens para obter a ordem decrescente (ao contrário)
     dadosCookie.reverse();
     
     let html = '';
@@ -712,7 +849,45 @@ ordenador.addEventListener('change', function(event){
     fechar.addEventListener('click', function(){
       info.id = 'escondido'
     })
+
+
+    function verificar(element){
+      if (element.target.value != '' && element.key === 'Enter'){
+        return true
+      }
+    }
     
+    function filtrar( element){
+      produtos.forEach(produto => {
+        const nome = produto.children[0].parentElement.innerText.slice(0, produto.children[0].parentElement.innerText.indexOf('\n')).toLowerCase()
+        if (!nome.includes(element)){
+          console.log('teste')
+          produto.classList.add('escondido')
+        } else {
+          produto.classList.remove('escondido')
+        }
+      })
+    }
+
+    const elementoOriginal = document.getElementById('busca'); 
+    const cloneDoElemento = elementoOriginal.cloneNode(true); 
+
+    // Substitua o elemento original pelo clone
+    elementoOriginal.parentNode.replaceChild(cloneDoElemento, elementoOriginal);
+
+    cloneDoElemento.addEventListener('keydown', function(event){
+      if (verificar(event)){
+        filtrar(event.target.value.toLowerCase())
+        event.target.value = ''
+      } else {
+        produtos.forEach(produto => {
+          produto.classList.remove('escondido')
+          
+        })
+      }
+    })
+
+
    
 }
 
@@ -838,8 +1013,6 @@ function contEvent(event){
     })
   }
   
-
-
 }
 
 fechar.addEventListener('click', function(){
@@ -851,11 +1024,6 @@ const inputsBusca = document.querySelectorAll('#busca')
 inputsBusca.forEach(inputbusca => {
   inputbusca.addEventListener('keydown', contEvent)
 })
-
-
-
-
-
 
 btnAddDentro.addEventListener('click', function(){
   modal.classList.add('escondido')
@@ -1067,8 +1235,9 @@ btnAddDentro.addEventListener('click', function(){
     fechar.addEventListener('click', function(){
       info.id = 'escondido'
     })
-    
-  
-})
- 
 
+    ordenador.value = 'nao'
+    location.reload();
+
+ 
+})

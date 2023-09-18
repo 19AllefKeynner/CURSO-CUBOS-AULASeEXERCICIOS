@@ -10,6 +10,7 @@
       --cor-saidas: #F23C50;
       --cor-lucro: #2AFF63;
       --cor-caixas: #cccccc;
+      --cor-principal: #2F3D40;
 }
 
 body{
@@ -51,7 +52,7 @@ header{
       right: 0;
       left: 0;
       color: rgb(255, 255, 255);
-      background-color: #2F3D40;
+      background-color: var(--cor-principal);
 
 }
 
@@ -61,16 +62,16 @@ header{
       color: rgb(3, 3, 3);
 }
 #h1-lucro{
-      background-color: #2F3D40;
+      background-color:var(--cor-principal);
 }
 
 #h1-saidas{
-      background-color: #2F3D40;
+      background-color: var(--cor-principal);
 }
 
 #h1-estoque{
       border-radius: 10px 10px 0 50%;
-      background-color: #2F3D40;
+      background-color: var(--cor-principal);
 }
 
 .card p{
@@ -104,30 +105,45 @@ header{
       height: 57px;
       border: 0;
       border-radius: 25px 0 0 25px;  
-      background-color: rgb(61, 129, 255);
+      background-color: var(--cor-principal);
       color: white;
       font-size: 22px ;
 }
 
 #ordenador:hover{
-      background-color: rgb(37, 111, 248);
+      background-color:#212a2c;
 }
 
-#section-add button:hover{
-      background-color: rgb(37, 111, 248);
+#adicionar:hover{
+      background-color: #212a2c;
 }
 
 
 
-#section-add button{
+#adicionar{
       height: 57px;
       width: 120px;
       font-size: 22px;
-      background-color: rgb(61, 129, 255);
+      background-color: var(--cor-principal);
       color: white;
-      border-radius: 0 25px 25px 0;  
+      border-radius: 25px ;  
       cursor: pointer; 
+      margin-left: 100px;
 }
+
+#enter{
+      border-radius: 0 25px 25px 0;
+      height: 57px;
+      width: 120px;
+      font-size: 22px;
+      background-color: var(--cor-principal);
+      color: white;
+}
+
+#enter i {
+      transform: rotate(90deg);
+}
+
 
 #listagem{
       background-color: var(--cor-caixas);
@@ -156,22 +172,27 @@ header{
 }
 
 .valores p{
+      background-color: #149bcc00;
       width: 30%;
-      display: flex;
       justify-content: center;
+      display: flex;
       position: relative;
 }
 
-.valores .descricao{
-      left: -5px;
+.valores{
+      padding-left: 170px ;
+
 }
 
+
 .valores .valor{
-      left: 42px;
+      position: absolute;
+      left: 532px;
 }
 
 .valores .tipo{
-      left: 45px;
+      left: 975px;
+      position: absolute;
 }
 
 .saida-icon{
@@ -362,7 +383,13 @@ label{
       border-radius: 3px;
       transition: 0.1s;
 }
-
+/* Estilizando as opções de hover */
+#ordenador > option:hover {
+      background-color: #ff00ff; /* Cor de fundo em hover */
+      color: #fff; /* Cor do texto em hover */
+      cursor: pointer; /* Alterar o cursor em hover */
+  }
+  
 #fechar{
       background-color: #cf0d27;
 }
@@ -455,3 +482,39 @@ label{
       color: rgba(255, 255, 255, 0);
 }
 
+.Conferir:hover{
+      text-decoration: underline;
+}
+
+.Conferir {
+      width: 120px;
+      margin-left: 40px;
+      font-weight: bold;
+      position: relative;
+      text-decoration: none;
+      color: #2F3D40;
+  }
+  
+  .Conferir::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px; 
+      background-color: #2F3D40;
+      transition: width 0.3s ease; 
+      transform-origin: bottom left; 
+      transform: scaleX(0); 
+      pointer-events: none; 
+  }
+  
+  .Conferir:hover {
+      text-decoration: none; 
+  }
+  
+  .Conferir:hover::before {
+      width: 100%; 
+      transform: scaleX(1); 
+  }
+  
