@@ -19,12 +19,14 @@ img{
       width: 300px;
 }
 
-.img1{
-      position: relative;
-      left: 50px;
-}
-
 .img2{
       position: relative;
       bottom: 50px;
 }
+
+.img1{
+      z-index: 1;
+      position: relative;
+      left: 50px;
+}
+

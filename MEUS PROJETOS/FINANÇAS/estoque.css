@@ -28,7 +28,7 @@ header{
       text-align: center;
       justify-content: center;
       background-color: rgb(255, 255, 255);
-      width: 200px;
+      width: 300px;
       height: 150px;
       border-radius: 15px;
       margin:  0 10px ;
@@ -47,15 +47,17 @@ header{
       background-color: var(--cor-principal);
 
 }
-.Conferir{
-      font-size: 26px;
-      text-decoration: none;
-      color: rgb(3, 3, 3);
-}
+
 .card p{
       color: rgb(3, 3, 3);
       font-size: 24px;
       margin-top: 0;
+}
+#card-investimento{
+      color: #149BCC;
+}
+#card-lucro{
+      color: #1ae250;
 }
 #section-add{
       background-color: var(--cor-caixas);
@@ -126,7 +128,6 @@ header{
       color: rgb(3, 3, 3);
       background-color: rgb(224, 224, 224);
       padding: 10px 30px 10px 30px;
-      padding-left: 170px ;
       margin-bottom: 5px;
       cursor: pointer;
 }
@@ -140,19 +141,17 @@ header{
       display: flex;
       position: relative;
 }
+.valores .nome{
+      position: relative;
+      left: 45px;
+}
 .valores .valor{
-      position: absolute;
-      left: 532px;
+      position: relative;
+      left: 45px;
 }
-.valores .tipo{
-      left: 975px;
-      position: absolute;
-}
-.saida-icon{
-      color: var(--cor-saidas);
-}
-.entrada-icon{
-      color:  var(--cor-lucro);
+.valores .custo{
+      position: relative;
+      left: 40px;
 }
 .header-listagem{
       display: flex;
@@ -251,42 +250,7 @@ label{
       margin-bottom: 40px;
       color: #2F3D40;
 }
-.container-info{
-      background-color: rgb(255, 255, 255);
-      padding: 30px;
-      width: 230px;
-      text-align: center;
-      border-radius: 8px;
-}
-.container-info i{
-      font-size: 49px;
-      margin-bottom: 40px;
-      color: #149BCC;
-}
-#excluir{
-      margin-top: 40px;
-      background-color:#149BCC ;
-      color: white;
-      padding: 10px 14px;
-      margin-right: 5px;
-      cursor: pointer;
-      border-radius: 3px;
-      transition: 0.1s;
-}
-.informacoes{
-      background-color: rgba(0, 0, 0, 0.342);
-      display: flex;
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      justify-content: center;
-      align-items: center;
-}
-#custo-tipo{
-      margin-top: 20px;
-}
+
 #cancelar-excluir{
       background-color: #E51734;
       color: white;
@@ -298,26 +262,16 @@ label{
 }
 #cancelar-excluir:hover{
       background-color: #cf0d27;
-}
-#fechar{
-      margin-top: 40px;
-      background-color: #E51734;
+}#excluir{
+      margin-top: 30px;
+      background-color: #149BCC;
       color: white;
-      padding: 10px 90px;
+      padding: 10px;
       margin-right: 5px;
       cursor: pointer;
       border-radius: 3px;
       transition: 0.1s;
-}
-#ordenador > option:hover {
-      background-color: #ff00ff; 
-      color: #fff; 
-      cursor: pointer; 
-} 
-#fechar{
-      background-color: #cf0d27;
-}
-#excluir:hover{
+}#excluir:hover{
       background-color:#0f8ebd ;
 }
 #escondido{
@@ -326,16 +280,6 @@ label{
 .value{
       display: flex;
       justify-content: center;
-}
-#olhinho{
-      position: relative;
-      cursor: pointer;
-      margin-left: 10px;
-      color: rgb(51, 51, 51);
-      transition: 0.5s;
-}
-#olhinho:hover{
-      transform: translateY(-8px)
 }
 #olhinho1{
       position: relative;
@@ -357,20 +301,11 @@ label{
 #olhinho2:hover{
       transform: translateY(-8px)
 }
-.escondeu{
-      display: flex;
-      position: absolute;
-      left: 30px;
-      top: 90px;
-}
-.escondeu i{
-      color: rgb(51, 51, 51);
-      font-size: 40px;
-}
+
 .escondeu1{
       display: flex;
       position: absolute;
-      left: 28px;
+      left: 68px;
       top: 90px;
 }
 .escondeu1 i{
@@ -380,7 +315,7 @@ label{
 .escondeu2{
       display: flex;
       position: absolute;
-      left: 30px;
+      left: 68px;
       top: 90px;
 }
 .escondeu2 i{
@@ -390,34 +325,3 @@ label{
 #escondido2{
       color: rgba(255, 255, 255, 0);
 }
-.Conferir:hover{
-      text-decoration: underline;
-}
-.Conferir {
-      width: 120px;
-      margin-left: 40px;
-      font-weight: bold;
-      position: relative;
-      text-decoration: none;
-      color: #2F3D40;
-}
-.Conferir::before {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 3px; 
-      background-color: #2F3D40;
-      transition: width 0.3s ease; 
-      transform-origin: bottom left; 
-      transform: scaleX(0); 
-      pointer-events: none; 
-}
-.Conferir:hover {
-      text-decoration: none; 
-}
-.Conferir:hover::before {
-      width: 100%; 
-      transform: scaleX(1); 
-}  

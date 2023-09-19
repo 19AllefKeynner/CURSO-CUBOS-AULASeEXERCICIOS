@@ -25,13 +25,266 @@ const fechar = document.getElementById('fechar')
 const ordenador = document.getElementById('ordenador')
 const h2Custo = document.getElementById('data-custo')
 const dataInfo = document.getElementById('data-info') 
+const noEstoque = document.querySelector('#noEstoque')
+const filtro = document.querySelector('#filtro') 
+
+if (filtro.value === 'nao'){
+  noEstoque.value = 'nao'
+  noEstoque.disabled = true
+}
+
+filtro.addEventListener('change', function(){
+  if (filtro.value === 'nao'){
+    noEstoque.value = 'nao'
+    noEstoque.disabled = true
+  }else{
+    noEstoque.value = 'sim'
+    noEstoque.disabled = true
+  }
+})
 
 document.addEventListener("DOMContentLoaded", function() {
-  // Impedir a rolagem horizontal
   document.body.style.overflowX = "hidden";
 });
 
- // Para ler o cookie:
+function verificar(element){
+  if (element.target.value != '' && element.key === 'Enter'){
+    return true
+  }
+}
+
+function filtrar( element){
+  produtos.forEach(produto => {
+    const nome = produto.children[0].parentElement.innerText.slice(0, produto.children[0].parentElement.innerText.indexOf('\n')).toLowerCase()
+    if (!nome.includes(element)){
+      console.log('teste')
+      produto.classList.add('escondido')
+    } else {
+      produto.classList.remove('escondido')
+    }
+  })
+}
+
+function contEvent(event){
+  if (verificar(event)){
+    filtrar(event.target.value.toLowerCase())
+    event.target.value = ''
+  } else {
+    produtos.forEach(produto => {
+      produto.classList.remove('escondido')
+    })
+  } 
+}
+
+function produtosEvento(produtos){
+  produtos.forEach(produto => {
+    produto.addEventListener('click', function(){
+      excluirModal.id = ''
+  
+      cancelarExcluir.addEventListener('click', function(){
+        excluirModal.id = 'escondido'
+      })
+      
+      excluir.addEventListener('click', function(){
+        if (produto.dataset.tipo === 'saida'){
+          const id = produto.dataset.id
+          const valor = (produto.children[1].textContent).slice(2,produto.children[1].textContent.indexOf(','))
+          atualizarCoockieMenos('saidas', Number(valor))
+          atualizarCoockie('lucro', Number(valor))
+  
+          const cookieName = "meuCookie";
+          const cookieValue = lerCookie(cookieName);
+          let dadosDoCookie = [];
+      
+          for(let item of cookieValue){
+            if(Number(item.id) != Number(id)){
+              dadosDoCookie.push(item)
+            }
+          }
+          if (cookieValue) {
+            try {
+              dadosDoCookie = JSON.parse(cookieValue);
+            } catch (error) {
+              console.error();
+            }
+          }
+          const novoValor = JSON.stringify(dadosDoCookie);
+          document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+              
+          window.location.reload()
+  
+        }else if(produto.dataset.tipo === 'entrada'){
+          if(produto.dataset.filtro === 'false'){
+            const id = produto.dataset.id
+            const valor = (produto.children[1].textContent).slice(2,produto.children[1].textContent.indexOf(','))
+            atualizarCoockieMenos('entradas', Number(valor))
+            atualizarCoockieMenos('lucro', Number(valor))
+  
+            const cookieName = "meuCookie";
+            const cookieValue = lerCookie(cookieName);
+            let dadosDoCookie = [];
+        
+            for(let item of cookieValue){
+              if(Number(item.id) != Number(id)){
+                dadosDoCookie.push(item)
+              }
+            }
+            if (cookieValue) {
+              try {
+                dadosDoCookie = JSON.parse(cookieValue);
+              } catch (error) {
+                console.error();
+              }
+            }
+            const novoValor = JSON.stringify(dadosDoCookie);
+            document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+                
+            window.location.reload()
+          }else{
+            console.log(produto.dataset.filtro)
+          
+            const id = produto.dataset.id
+            const custo = produto.dataset.custo
+            const valor = (produto.children[1].textContent).slice(2,produto.children[1].textContent.indexOf(','))
+            atualizarCoockieMenos('entradas', Number(valor))
+            atualizarCoockieMenos('lucro', Number(valor) - Number(custo))
+  
+            let itemGuardado = '' 
+  
+            const cookieName = "meuCookie";
+            const cookieValue = lerCookie(cookieName);
+            let dadosDoCookie = [];
+        
+            for(let item of cookieValue){
+              if(Number(item.id) != Number(id)){
+                dadosDoCookie.push(item)
+              }else{
+                itemGuardado = item
+              }
+            }
+            if (cookieValue) {
+              try {
+                dadosDoCookie = JSON.parse(cookieValue);
+              } catch (error) {
+                console.error();
+              }
+            }
+            const novoValor = JSON.stringify(dadosDoCookie);
+            document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+                
+            
+            const retiradoDoEstoque = itemGuardado.removido
+            console.log(retiradoDoEstoque)
+  
+            if(Number(retiradoDoEstoque.quantidade) === 1){
+              atualizarCoockie('lucroEstoque', Number(retiradoDoEstoque.valor) - Number(retiradoDoEstoque.custo))
+              atualizarCoockie('investimento', Number(retiradoDoEstoque.custo))
+              atualizarCoockie('quantidade', Number(retiradoDoEstoque.quantidade))
+              const cookieName = "meuCookieEstoque";
+              const cookieValue = lerCookie(cookieName);
+              let dadosDoCookie = [];
+  
+              for(let item of cookieValue){
+                if(Number(item.id) != Number(id)){
+                  dadosDoCookie.push(item)
+                }
+              }
+  
+              if (cookieValue) {
+                try {
+                  dadosDoCookie = JSON.parse(cookieValue);
+                } catch (error) {
+                  console.error();
+                }
+              }
+              dadosDoCookie.push(retiradoDoEstoque)
+              const novoValor = JSON.stringify(dadosDoCookie);
+              document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+                  
+  
+            }else{
+              const id = produto.dataset.id
+              const cookieName = "meuCookie";
+              const cookieValue = lerCookie(cookieName);
+              let dadosDoCookie = [];
+          
+              for(let item of cookieValue){
+                if(Number(item.id) != Number(id)){
+                  dadosDoCookie.push(item)
+                }
+              }
+              if (cookieValue) {
+                try {
+                  dadosDoCookie = JSON.parse(cookieValue);
+                } catch (error) {
+                  console.error();
+                }
+              }
+              const novoValor = JSON.stringify(dadosDoCookie);
+              document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+                  
+              {
+                atualizarCoockie('lucroEstoque', Number(retiradoDoEstoque.valor) - Number(retiradoDoEstoque.custo))
+                atualizarCoockie('investimento', Number(retiradoDoEstoque.custo))
+                atualizarCoockie('quantidade', Number(retiradoDoEstoque.quantidade) -1)
+  
+                const id = retiradoDoEstoque.id
+                const cookieName = "meuCookieEstoque";
+                const cookieValue1 = lerCookie('meuCookieEstoque');
+                let dadosDoCookie1 = [];
+                const dadoAtual = { id: retiradoDoEstoque.id,  nome: retiradoDoEstoque.nome, valor: retiradoDoEstoque.valor, custo: retiradoDoEstoque.custo, categoria: retiradoDoEstoque.categoria, quantidade: Number(retiradoDoEstoque.quantidade)}
+  
+                for(let item of cookieValue1){
+                  if(Number(item.id) != Number(id)){
+                    dadosDoCookie1.push(item)
+                  }
+                }
+  
+                if (cookieValue1) {
+                  try {
+                    dadosDoCookie1 = JSON.parse(cookieValue1);
+                  } catch (error) {
+                    console.error();
+                  }
+                }
+  
+                dadosDoCookie1.push(dadoAtual)
+                const novoValor1 = JSON.stringify(dadosDoCookie1);
+                document.cookie = `${cookieName}=${encodeURIComponent(novoValor1)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+              }
+            }
+  
+            window.location.reload()
+          }
+        }
+        excluirModal.id = 'escondido'
+      })
+    })
+  
+    produto.addEventListener('contextmenu', function(event) {
+      event.preventDefault(); 
+      info.id = ''
+      dataInfo.textContent = `${(produto.dataset.datasalva).slice(0,10)}`
+      console.log(produto.dataset.custo)
+      if (produto.dataset.tipo === 'saida'){
+        custoTipo.textContent = 'Tipo:'
+        h2Custo.textContent = 'Saída'
+  
+      }else if (produto.dataset.tipo === 'entrada' && produto.dataset.custo != '' && produto.dataset.custo != undefined){
+        custoTipo.textContent = 'Custo do produto:'
+        h2Custo.textContent = `R$ ${produto.dataset.custo}.00`
+      }else{
+        custoTipo.textContent = 'Custo do produto:'
+        h2Custo.textContent = `R$ 0.00`
+      }
+    });
+  })
+  
+  fechar.addEventListener('click', function(){
+    info.id = 'escondido'
+  })
+}
+
  function lerCookie(nome) {
   const cookies = document.cookie.split(';');
   for (let i = 0; i < cookies.length; i++) {
@@ -49,11 +302,9 @@ function cookieExiste(nome) {
   for (let i = 0; i < cookies.length; i++) {
     const cookie = cookies[i].trim();
     if (cookie.startsWith(nome + '=')) {
-      // O cookie com o nome desejado foi encontrado
       return true;
     }
   }
-  // O cookie com o nome desejado não foi encontrado
   return false;
 }
 
@@ -111,6 +362,11 @@ function obterDataHoraAtual() {
 
   return dataHoraFormatada;
 }
+
+function dataAtributoExiste(elemento, nomeDoAtributo) {
+  return elemento.hasAttribute(`data-${nomeDoAtributo}`);
+}
+
 
 let contt = 1
 olho.addEventListener('click', function(){
@@ -174,7 +430,7 @@ cardSaidas.style.color = 'red'
 
 if (!cookieExiste('meuCookie')){
   const dados = []
-  const cookieName = "meuCookie"; // Nome do seu cookie
+  const cookieName = "meuCookie"; 
   const cookieValue = JSON.stringify(dados);
   document.cookie = `${cookieName}=${cookieValue}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
 }
@@ -205,8 +461,10 @@ selectFiltro.addEventListener('change', function(event){
 tipo.addEventListener('change', function(event){
   if (event.target.value === 'saida'){
     selectFiltro.disabled = true
+    noEstoque.disabled = true
   }else{
     selectFiltro.disabled = false
+    noEstoque.disabled = false
   }
 })
 
@@ -229,13 +487,13 @@ ordenador.addEventListener('change', function(event){
       }
     
       if (item.filtro !== '') {
-        html += `<div class="valores" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
+        html += `<div class="valores" data-id="${item.id}" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                     <p class="descricao">${item.descricao}</p>
                     <p class="valor">R$ ${item.valor},00</p>
                     <p class="tipo ${item.tipo}-icon">${tipo}</p>
                   </div>`;
       } else {
-        html += `<div class="valores" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
+        html += `<div class="valores" data-id="${item.id}" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                     <p class="descricao">${item.descricao}</p>
                     <p class="valor">R$ ${item.valor},00</p>
                     <p class="tipo ${item.tipo}-icon">${tipo}</p>
@@ -264,48 +522,7 @@ ordenador.addEventListener('change', function(event){
     }
 
     const produtos = document.querySelectorAll('.valores')
-
-    produtos.forEach(produto => {
-      produto.addEventListener('click', function(){
-        excluirModal.id = ''
-    
-        cancelarExcluir.addEventListener('click', function(){
-          excluirModal.id = 'escondido'
-        })
-        
-        excluir.addEventListener('click', function(){
-          produto.remove()
-          excluirModal.id = 'escondido'
-          
-        })
-      })
-    
-      produto.addEventListener('contextmenu', function(event) {
-        event.preventDefault(); // 
-        info.id = ''
-        dataInfo.textContent = `${(produto.dataset.datasalva).slice(0,10)}`
-        console.log(produto.dataset.custo)
-        if (produto.dataset.tipo === 'saida'){
-          custoTipo.textContent = 'Tipo:'
-          h2Custo.textContent = 'Saída'
-    
-        }else if (produto.dataset.tipo === 'entrada' && produto.dataset.custo != '' && produto.dataset.custo != undefined){
-          custoTipo.textContent = 'Custo do produto:'
-          h2Custo.textContent = `R$ ${produto.dataset.custo}.00`
-        }else{
-          custoTipo.textContent = 'Custo do produto:'
-          h2Custo.textContent = `R$ 0.00`
-        }
-        
-        
-        
-      });
-    
-    })
-    
-    fechar.addEventListener('click', function(){
-      info.id = 'escondido'
-    })
+    produtosEvento(produtos)
 
     function verificar(element){
       if (element.target.value != '' && element.key === 'Enter'){
@@ -328,7 +545,6 @@ ordenador.addEventListener('change', function(event){
     const elementoOriginal = document.getElementById('busca'); 
     const cloneDoElemento = elementoOriginal.cloneNode(true); 
 
-    // Substitua o elemento original pelo clone
     elementoOriginal.parentNode.replaceChild(cloneDoElemento, elementoOriginal);
 
     cloneDoElemento.addEventListener('keydown', function(event){
@@ -344,37 +560,6 @@ ordenador.addEventListener('change', function(event){
     })
 
   }else if (event.target.value === 'nao'){
-    const inputBusca = document.getElementById('busca')
-
-    inputBusca.addEventListener('keydown', function(event){
-      if (verificar(event)){
-        filtrar(event.target.value.toLowerCase())
-        event.target.value = ''
-      } else {
-        produtos.forEach(produto => {
-          produto.classList.remove('escondido')
-          
-        })
-      }
-    })
-
-    function verificar(element){
-      if (element.target.value != '' && element.key === 'Enter'){
-        return true
-      }
-    }
-
-    function filtrar( element){
-      produtos.forEach(produto => {
-        const nome = produto.children[0].parentElement.innerText.slice(0, produto.children[0].parentElement.innerText.indexOf('\n')).toLowerCase()
-        if (!nome.includes(element)){
-          console.log('teste')
-          produto.classList.add('escondido')
-        } else {
-          produto.classList.remove('escondido')
-        }
-      })
-}
     const dadosCookie = lerCookie('meuCookie');
 
     let html = '';
@@ -388,22 +573,19 @@ ordenador.addEventListener('change', function(event){
       }
     
       if (item.filtro !== '') {
-        html += `<div class="valores" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
+        html += `<div class="valores" data-id="${item.id}" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                     <p class="descricao">${item.descricao}</p>
                     <p class="valor">R$ ${item.valor},00</p>
                     <p class="tipo ${item.tipo}-icon">${tipo}</p>
                   </div>`;
       } else {
-        html += `<div class="valores" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
+        html += `<div class="valores" data-id="${item.id}" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                     <p class="descricao">${item.descricao}</p>
                     <p class="valor">R$ ${item.valor},00</p>
                     <p class="tipo ${item.tipo}-icon">${tipo}</p>
                   </div>`;
       }
     }
-
-
-
 
     addproduto(html)
 
@@ -425,48 +607,7 @@ ordenador.addEventListener('change', function(event){
     }
 
     const produtos = document.querySelectorAll('.valores')
-
-    produtos.forEach(produto => {
-      produto.addEventListener('click', function(){
-        excluirModal.id = ''
-    
-        cancelarExcluir.addEventListener('click', function(){
-          excluirModal.id = 'escondido'
-        })
-        
-        excluir.addEventListener('click', function(){
-          produto.remove()
-          excluirModal.id = 'escondido'
-          
-        })
-      })
-    
-      produto.addEventListener('contextmenu', function(event) {
-        event.preventDefault(); // 
-        info.id = ''
-        dataInfo.textContent = `${(produto.dataset.datasalva).slice(0,10)}`
-        console.log(produto.dataset.custo)
-        if (produto.dataset.tipo === 'saida'){
-          custoTipo.textContent = 'Tipo:'
-          h2Custo.textContent = 'Saída'
-    
-        }else if (produto.dataset.tipo === 'entrada' && produto.dataset.custo != '' && produto.dataset.custo != undefined){
-          custoTipo.textContent = 'Custo do produto:'
-          h2Custo.textContent = `R$ ${produto.dataset.custo}.00`
-        }else{
-          custoTipo.textContent = 'Custo do produto:'
-          h2Custo.textContent = `R$ 0.00`
-        }
-        
-        
-        
-      });
-    
-    })
-    
-    fechar.addEventListener('click', function(){
-      info.id = 'escondido'
-    })
+    produtosEvento(produtos)
 
     function verificar(element){
       if (element.target.value != '' && element.key === 'Enter'){
@@ -513,13 +654,13 @@ ordenador.addEventListener('change', function(event){
         if (item.tipo === 'entrada') {
           tipo = '<i class="fa-solid fa-arrow-trend-up"></i>';
           if (item.filtro !== '') {
-            html += `<div class="valores" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
+            html += `<div class="valores" data-id="${item.id}" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                         <p class="descricao">${item.descricao}</p>
                         <p class="valor">R$ ${item.valor},00</p>
                         <p class="tipo ${item.tipo}-icon">${tipo}</p>
                       </div>`;
           } else {
-            html += `<div class="valores" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
+            html += `<div class="valores" data-id="${item.id}" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                         <p class="descricao">${item.descricao}</p>
                         <p class="valor">R$ ${item.valor},00</p>
                         <p class="tipo ${item.tipo}-icon">${tipo}</p>
@@ -549,45 +690,7 @@ ordenador.addEventListener('change', function(event){
       }
 
       const produtos = document.querySelectorAll('.valores')
-
-      produtos.forEach(produto => {
-        produto.addEventListener('click', function(){
-          excluirModal.id = ''
-      
-          cancelarExcluir.addEventListener('click', function(){
-            excluirModal.id = 'escondido'
-          })
-          
-          excluir.addEventListener('click', function(){
-            produto.remove()
-            excluirModal.id = 'escondido'
-            
-          })
-        })
-      
-        produto.addEventListener('contextmenu', function(event) {
-          event.preventDefault(); // 
-          info.id = ''
-          dataInfo.textContent = `${(produto.dataset.datasalva).slice(0,10)}`
-          if (produto.dataset.tipo === 'saida'){
-            custoTipo.textContent = 'Tipo:'
-            h2Custo.textContent = 'Saída'
-      
-          }else if (produto.dataset.tipo === 'entrada' && produto.dataset.custo != '' && produto.dataset.custo != undefined){
-            custoTipo.textContent = 'Custo do produto:'
-            h2Custo.textContent = `R$ ${produto.dataset.custo}.00`
-          }else{
-            custoTipo.textContent = 'Custo do produto:'
-            h2Custo.textContent = `R$ 0.00`
-          }
-          
-        });
-      
-      })
-      
-      fechar.addEventListener('click', function(){
-        info.id = 'escondido'
-      })
+      produtosEvento(produtos)
 
       function verificar(element){
         if (element.target.value != '' && element.key === 'Enter'){
@@ -606,11 +709,10 @@ ordenador.addEventListener('change', function(event){
           }
         })
       }
-  
+
       const elementoOriginal = document.getElementById('busca'); 
       const cloneDoElemento = elementoOriginal.cloneNode(true); 
-  
-      // Substitua o elemento original pelo clone
+
       elementoOriginal.parentNode.replaceChild(cloneDoElemento, elementoOriginal);
   
       cloneDoElemento.addEventListener('keydown', function(event){
@@ -636,13 +738,13 @@ ordenador.addEventListener('change', function(event){
         if (item.tipo === 'saida') {
           tipo = '<i class="fa-solid fa-arrow-trend-down"></i>';
           if (item.filtro !== '') {
-            html += `<div class="valores" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
+            html += `<div class="valores" data-id="${item.id}" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                         <p class="descricao">${item.descricao}</p>
                         <p class="valor">R$ ${item.valor},00</p>
                         <p class="tipo ${item.tipo}-icon">${tipo}</p>
                       </div>`;
           } else {
-            html += `<div class="valores" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
+            html += `<div class="valores" data-id="${item.id}" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                         <p class="descricao">${item.descricao}</p>
                         <p class="valor">R$ ${item.valor},00</p>
                         <p class="tipo ${item.tipo}-icon">${tipo}</p>
@@ -672,48 +774,7 @@ ordenador.addEventListener('change', function(event){
       }
 
       const produtos = document.querySelectorAll('.valores')
-
-      produtos.forEach(produto => {
-        produto.addEventListener('click', function(){
-          excluirModal.id = ''
-      
-          cancelarExcluir.addEventListener('click', function(){
-            excluirModal.id = 'escondido'
-          })
-          
-          excluir.addEventListener('click', function(){
-            produto.remove()
-            excluirModal.id = 'escondido'
-            
-          })
-        })
-      
-        produto.addEventListener('contextmenu', function(event) {
-          event.preventDefault(); // 
-          info.id = ''
-          dataInfo.textContent = `${(produto.dataset.datasalva).slice(0,10)}`
-          console.log(produto.dataset.custo)
-          if (produto.dataset.tipo === 'saida'){
-            custoTipo.textContent = 'Tipo:'
-            h2Custo.textContent = 'Saída'
-      
-          }else if (produto.dataset.tipo === 'entrada' && produto.dataset.custo != '' && produto.dataset.custo != undefined){
-            custoTipo.textContent = 'Custo do produto:'
-            h2Custo.textContent = `R$ ${produto.dataset.custo}.00`
-          }else{
-            custoTipo.textContent = 'Custo do produto:'
-            h2Custo.textContent = `R$ 0.00`
-          }
-          
-          
-          
-        });
-      
-      })
-      
-      fechar.addEventListener('click', function(){
-        info.id = 'escondido'
-      })
+      produtosEvento(produtos)
 
       function verificar(element){
         if (element.target.value != '' && element.key === 'Enter'){
@@ -736,7 +797,6 @@ ordenador.addEventListener('change', function(event){
       const elementoOriginal = document.getElementById('busca'); 
       const cloneDoElemento = elementoOriginal.cloneNode(true); 
 
-      // Substitua o elemento original pelo clone
       elementoOriginal.parentNode.replaceChild(cloneDoElemento, elementoOriginal);
 
       cloneDoElemento.addEventListener('keydown', function(event){
@@ -750,11 +810,6 @@ ordenador.addEventListener('change', function(event){
           })
         }
       })
-        
-        
-      
-      
-
   }else if(event.target.value === 'recentes'){
     const dadosCookie = lerCookie('meuCookie');
 
@@ -771,21 +826,19 @@ ordenador.addEventListener('change', function(event){
       }
     
       if (item.filtro !== '') {
-        html += `<div class="valores" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
+        html += `<div class="valores" data-id="${item.id}" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                     <p class="descricao">${item.descricao}</p>
                     <p class="valor">R$ ${item.valor},00</p>
                     <p class="tipo ${item.tipo}-icon">${tipo}</p>
                   </div>`;
       } else {
-        html += `<div class="valores" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
+        html += `<div class="valores" data-id="${item.id}" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                     <p class="descricao">${item.descricao}</p>
                     <p class="valor">R$ ${item.valor},00</p>
                     <p class="tipo ${item.tipo}-icon">${tipo}</p>
                   </div>`;
       }
     }
-    
-    // Agora, 'html' contém os itens ordenados ao contrário sem considerar a data
     
     addproduto(html)
 
@@ -807,49 +860,7 @@ ordenador.addEventListener('change', function(event){
     }
 
     const produtos = document.querySelectorAll('.valores')
-
-    produtos.forEach(produto => {
-      produto.addEventListener('click', function(){
-        excluirModal.id = ''
-    
-        cancelarExcluir.addEventListener('click', function(){
-          excluirModal.id = 'escondido'
-        })
-        
-        excluir.addEventListener('click', function(){
-          produto.remove()
-          excluirModal.id = 'escondido'
-          
-        })
-      })
-    
-      produto.addEventListener('contextmenu', function(event) {
-        event.preventDefault(); // 
-        info.id = ''
-        dataInfo.textContent = `${(produto.dataset.datasalva).slice(0,10)}`
-        console.log(produto.dataset.custo)
-        if (produto.dataset.tipo === 'saida'){
-          custoTipo.textContent = 'Tipo:'
-          h2Custo.textContent = 'Saída'
-    
-        }else if (produto.dataset.tipo === 'entrada' && produto.dataset.custo != '' && produto.dataset.custo != undefined){
-          custoTipo.textContent = 'Custo do produto:'
-          h2Custo.textContent = `R$ ${produto.dataset.custo}.00`
-        }else{
-          custoTipo.textContent = 'Custo do produto:'
-          h2Custo.textContent = `R$ 0.00`
-        }
-        
-        
-        
-      });
-    
-    })
-    
-    fechar.addEventListener('click', function(){
-      info.id = 'escondido'
-    })
-
+    produtosEvento(produtos)
 
     function verificar(element){
       if (element.target.value != '' && element.key === 'Enter'){
@@ -872,7 +883,6 @@ ordenador.addEventListener('change', function(event){
     const elementoOriginal = document.getElementById('busca'); 
     const cloneDoElemento = elementoOriginal.cloneNode(true); 
 
-    // Substitua o elemento original pelo clone
     elementoOriginal.parentNode.replaceChild(cloneDoElemento, elementoOriginal);
 
     cloneDoElemento.addEventListener('keydown', function(event){
@@ -886,20 +896,14 @@ ordenador.addEventListener('change', function(event){
         })
       }
     })
-
-
-   
 }
-
 })
-
 
 const dadosCookie = lerCookie('meuCookie');
 
 let html = '';
 for (let item of dadosCookie) {
   let tipo = '';
-  
 
   if (item.tipo === 'entrada') {
     tipo = '<i class="fa-solid fa-arrow-trend-up"></i>';
@@ -908,22 +912,19 @@ for (let item of dadosCookie) {
   }
 
   if (item.filtro != '') {
-    html += `<div class="valores" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
+    html += `<div class="valores" data-id="${item.id}" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                 <p class="descricao">${item.descricao}</p>
                 <p class="valor">R$ ${item.valor},00</p>
                 <p class="tipo ${item.tipo}-icon">${tipo}</p>
               </div>`;
   } else {
-    html += `<div class="valores" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
+    html += `<div class="valores" data-id="${item.id}" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                 <p class="descricao">${item.descricao}</p>
                 <p class="valor">R$ ${item.valor},00</p>
                 <p class="tipo ${item.tipo}-icon">${tipo}</p>
               </div>`;
   }
 }
-
-
-
 
 addproduto(html)
 
@@ -944,10 +945,6 @@ if(typeof(Number(lerCookie('entradas'))) === 'number' && lerCookie('entradas') !
 
 const produtos = document.querySelectorAll('.valores')
 
-function dataAtributoExiste(elemento, nomeDoAtributo) {
-  return elemento.hasAttribute(`data-${nomeDoAtributo}`);
-}
-
 produtos.forEach(produto => {
   produto.addEventListener('click', function(){
     excluirModal.id = ''
@@ -957,9 +954,178 @@ produtos.forEach(produto => {
     })
     
     excluir.addEventListener('click', function(){
-      produto.remove()
-      excluirModal.id = 'escondido'
+      if (produto.dataset.tipo === 'saida'){
+        const id = produto.dataset.id
+        const valor = (produto.children[1].textContent).slice(2,produto.children[1].textContent.indexOf(','))
+        atualizarCoockieMenos('saidas', Number(valor))
+        atualizarCoockie('lucro', Number(valor))
+
+        const cookieName = "meuCookie";
+        const cookieValue = lerCookie(cookieName);
+        let dadosDoCookie = [];
+    
+        for(let item of cookieValue){
+          if(Number(item.id) != Number(id)){
+            dadosDoCookie.push(item)
+          }
+        }
+        if (cookieValue) {
+          try {
+            dadosDoCookie = JSON.parse(cookieValue);
+          } catch (error) {
+            console.error();
+          }
+        }
+        const novoValor = JSON.stringify(dadosDoCookie);
+        document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+            
+        window.location.reload()
+
+      }else if(produto.dataset.tipo === 'entrada'){
+        if(produto.dataset.filtro === 'false'){
+          const id = produto.dataset.id
+          const valor = (produto.children[1].textContent).slice(2,produto.children[1].textContent.indexOf(','))
+          atualizarCoockieMenos('entradas', Number(valor))
+          atualizarCoockieMenos('lucro', Number(valor))
+
+          const cookieName = "meuCookie";
+          const cookieValue = lerCookie(cookieName);
+          let dadosDoCookie = [];
       
+          for(let item of cookieValue){
+            if(Number(item.id) != Number(id)){
+              dadosDoCookie.push(item)
+            }
+          }
+          if (cookieValue) {
+            try {
+              dadosDoCookie = JSON.parse(cookieValue);
+            } catch (error) {
+              console.error();
+            }
+          }
+          const novoValor = JSON.stringify(dadosDoCookie);
+          document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+              
+          window.location.reload()
+        }else{
+          console.log(produto.dataset.filtro)
+        
+          const id = produto.dataset.id
+          const custo = produto.dataset.custo
+          const valor = (produto.children[1].textContent).slice(2,produto.children[1].textContent.indexOf(','))
+          atualizarCoockieMenos('entradas', Number(valor))
+          atualizarCoockieMenos('lucro', Number(valor) - Number(custo))
+
+          let itemGuardado = '' 
+
+          const cookieName = "meuCookie";
+          const cookieValue = lerCookie(cookieName);
+          let dadosDoCookie = [];
+      
+          for(let item of cookieValue){
+            if(Number(item.id) != Number(id)){
+              dadosDoCookie.push(item)
+            }else{
+              itemGuardado = item
+            }
+          }
+          if (cookieValue) {
+            try {
+              dadosDoCookie = JSON.parse(cookieValue);
+            } catch (error) {
+              console.error();
+            }
+          }
+          const novoValor = JSON.stringify(dadosDoCookie);
+          document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+              
+          
+          const retiradoDoEstoque = itemGuardado.removido
+          console.log(retiradoDoEstoque)
+
+          if(Number(retiradoDoEstoque.quantidade) === 1){
+            atualizarCoockie('lucroEstoque', Number(retiradoDoEstoque.valor) - Number(retiradoDoEstoque.custo))
+            atualizarCoockie('investimento', Number(retiradoDoEstoque.custo))
+            atualizarCoockie('quantidade', Number(retiradoDoEstoque.quantidade))
+            const cookieName = "meuCookieEstoque";
+            const cookieValue = lerCookie(cookieName);
+            let dadosDoCookie = [];
+
+            for(let item of cookieValue){
+              if(Number(item.id) != Number(id)){
+                dadosDoCookie.push(item)
+              }
+            }
+
+            if (cookieValue) {
+              try {
+                dadosDoCookie = JSON.parse(cookieValue);
+              } catch (error) {
+                console.error();
+              }
+            }
+            dadosDoCookie.push(retiradoDoEstoque)
+            const novoValor = JSON.stringify(dadosDoCookie);
+            document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+                
+
+          }else{
+            const id = produto.dataset.id
+            const cookieName = "meuCookie";
+            const cookieValue = lerCookie(cookieName);
+            let dadosDoCookie = [];
+        
+            for(let item of cookieValue){
+              if(Number(item.id) != Number(id)){
+                dadosDoCookie.push(item)
+              }
+            }
+            if (cookieValue) {
+              try {
+                dadosDoCookie = JSON.parse(cookieValue);
+              } catch (error) {
+                console.error();
+              }
+            }
+            const novoValor = JSON.stringify(dadosDoCookie);
+            document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+                
+            {
+              atualizarCoockie('lucroEstoque', Number(retiradoDoEstoque.valor) - Number(retiradoDoEstoque.custo))
+              atualizarCoockie('investimento', Number(retiradoDoEstoque.custo))
+              atualizarCoockie('quantidade', Number(retiradoDoEstoque.quantidade) -1)
+
+              const id = retiradoDoEstoque.id
+              const cookieName = "meuCookieEstoque";
+              const cookieValue1 = lerCookie('meuCookieEstoque');
+              let dadosDoCookie1 = [];
+              const dadoAtual = { id: retiradoDoEstoque.id,  nome: retiradoDoEstoque.nome, valor: retiradoDoEstoque.valor, custo: retiradoDoEstoque.custo, categoria: retiradoDoEstoque.categoria, quantidade: Number(retiradoDoEstoque.quantidade)}
+
+              for(let item of cookieValue1){
+                if(Number(item.id) != Number(id)){
+                  dadosDoCookie1.push(item)
+                }
+              }
+
+              if (cookieValue1) {
+                try {
+                  dadosDoCookie1 = JSON.parse(cookieValue1);
+                } catch (error) {
+                  console.error();
+                }
+              }
+
+              dadosDoCookie1.push(dadoAtual)
+              const novoValor1 = JSON.stringify(dadosDoCookie1);
+              document.cookie = `${cookieName}=${encodeURIComponent(novoValor1)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+            }
+          }
+
+          window.location.reload()
+        }
+      }
+      excluirModal.id = 'escondido'
     })
   })
 
@@ -978,42 +1144,8 @@ produtos.forEach(produto => {
       custoTipo.textContent = 'Custo do produto:'
       h2Custo.textContent = `R$ 0.00`
     }
-    
-    
   });
-
 })
-
-function verificar(element){
-  if (element.target.value != '' && element.key === 'Enter'){
-    return true
-  }
-}
-
-function filtrar( element){
-  produtos.forEach(produto => {
-    const nome = produto.children[0].parentElement.innerText.slice(0, produto.children[0].parentElement.innerText.indexOf('\n')).toLowerCase()
-    if (!nome.includes(element)){
-      console.log('teste')
-      produto.classList.add('escondido')
-    } else {
-      produto.classList.remove('escondido')
-    }
-  })
-}
-
-function contEvent(event){
-  if (verificar(event)){
-    filtrar(event.target.value.toLowerCase())
-    event.target.value = ''
-  } else {
-    produtos.forEach(produto => {
-      produto.classList.remove('escondido')
-      
-    })
-  }
-  
-}
 
 fechar.addEventListener('click', function(){
   info.id = 'escondido'
@@ -1025,28 +1157,150 @@ inputsBusca.forEach(inputbusca => {
   inputbusca.addEventListener('keydown', contEvent)
 })
 
+// Função para remover um objeto de uma array de objetos em um cookie
+function removerObjetoDoCookie(nomeCookie, objetoParaRemover) {
+  // Recupere o valor do cookie
+  const cookieValue = document.cookie
+    .split('; ')
+    .find(row => row.startsWith(nomeCookie + '='))
+    .split('=')[1];
+
+  // Verifique se o cookie existe
+  if (cookieValue) {
+    // Converta o valor do cookie para uma array de objetos JavaScript
+    let objetosNoCookie = JSON.parse(cookieValue);
+
+    // Encontre o índice do objeto que deseja remover na array
+    const indiceParaRemover = objetosNoCookie.findIndex(objeto => objeto.nome === objetoParaRemover.nome);
+
+    // Verifique se o objeto foi encontrado
+    if (indiceParaRemover !== -1) {
+      // Remova o objeto da array
+      objetosNoCookie.splice(indiceParaRemover, 1);
+
+      // Atualize o cookie com a nova array de objetos
+      document.cookie = `${nomeCookie}=${JSON.stringify(objetosNoCookie)}; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+      document.cookie = `${nomeCookie}=${JSON.stringify(objetosNoCookie)}; path=/`;
+      
+      console.log('Objeto removido com sucesso.');
+    } else {
+      console.log('Objeto não encontrado no cookie.');
+    }
+  } else {
+    console.log('Cookie não encontrado.');
+  }
+}
+
 btnAddDentro.addEventListener('click', function(){
   modal.classList.add('escondido')
   const inputDescricao = document.getElementById('descricao')
   const inputValor = document.getElementById('valor')
   const selectTipo = document.getElementById('tipo')
 
+  let removido = ''
+
+  if(noEstoque.value === 'sim'){
+    console.log('teste')
+    const cookieName = "meuCookieEstoque";
+    const cookieValue = lerCookie(cookieName);
+
+    for (let item of cookieValue){
+      if (item.nome === inputDescricao.value.trim() && Number(item.quantidade) === 1){
+        removido = item
+        atualizarCoockieMenos('lucroEstoque', Number(item.valor) - Number(item.custo))
+        atualizarCoockieMenos('investimento', Number(item.custo))
+        atualizarCoockieMenos('quantidade', Number(item.quantidade))
+      
+        const cookieValue = lerCookie(cookieName);
+        let dadosDoCookie = [];
+
+        const dadossCookie = lerCookie(cookieName);
+        for(let item of dadossCookie){
+          if(item.nome != inputDescricao.value.trim()){
+            dadosDoCookie.push(item)
+          }
+        }
+        if (cookieValue) {
+          try {
+            dadosDoCookie = JSON.parse(cookieValue);
+          } catch (error) {
+            console.error();
+          }
+        }
+        const novoValor = JSON.stringify(dadosDoCookie);
+        document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+      }
+
+      if(item.nome === inputDescricao.value.trim() && Number(item.quantidade) > 1){
+        removido = item
+
+        atualizarCoockieMenos('lucroEstoque', Number(item.valor) - Number(item.custo))
+        atualizarCoockieMenos('investimento', Number(item.custo))
+        atualizarCoockieMenos('quantidade', Number(item.quantidade) - 1)
+
+        const cookieValue = lerCookie(cookieName);
+        let dadosDoCookie = [];
+
+        const dadossCookie = lerCookie(cookieName);
+        for(let item of dadossCookie){
+          if(item.nome != inputDescricao.value.trim()){
+            dadosDoCookie.push(item)
+          }else{
+            let itemAtualizado = { id: item.id,  nome: item.nome, valor: item.valor, custo: item.custo, categoria: item.categoria, quantidade: Number(item.quantidade)-1}
+            dadosDoCookie.push(itemAtualizado)
+          }
+        }
+        if (cookieValue) {
+          try {
+            dadosDoCookie = JSON.parse(cookieValue);
+          } catch (error) {
+            console.error();
+          }
+        }
+        const novoValor = JSON.stringify(dadosDoCookie);
+        document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+      }
+    }
+  }
+
+  const cookieNameId = "meuCookie";
+  
+  let dadosDoCookieId = [];
+  const idsGerados = [];
+
+  const dadossCookieId = lerCookie(cookieNameId);
+  for(let item of dadossCookieId){
+    dadosDoCookieId.push(item)
+    idsGerados.push(item.id)
+  }
+
+  function gerarNumeroAleatorio(min, max) {
+   return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function gerarIdUnico() {
+      let novoId;
+      do {
+      novoId = gerarNumeroAleatorio(1000, 9999); 
+      } while (idsGerados.includes(novoId));
+      return novoId;
+  }
+
 
   const dataHoraAtual = obterDataHoraAtual();
 
-  const dadosAtuais =  { descricao: inputDescricao.value, valor: inputValor.value, tipo: selectTipo.value, filtro: inputLucro.value, data: dataHoraAtual}
+  const dadosAtuais =  { id: gerarIdUnico(), descricao: inputDescricao.value, valor: inputValor.value, tipo: selectTipo.value, filtro: inputLucro.value, data: dataHoraAtual, removido: removido}
 
   const cookieName = "meuCookie";
   const cookieValue = lerCookie(cookieName);
   
   let dadosDoCookie = [];
-  
-    // Para acessar os dados do cookie:
-    const dadossCookie = lerCookie(cookieName);
-    for(let item of dadossCookie){
-      dadosDoCookie.push(item)
-    }
-  
+
+  const dadossCookie = lerCookie(cookieName);
+  for(let item of dadossCookie){
+    dadosDoCookie.push(item)
+  }
+
   if (cookieValue) {
     try {
       dadosDoCookie = JSON.parse(cookieValue);
@@ -1058,41 +1312,6 @@ btnAddDentro.addEventListener('click', function(){
   dadosDoCookie.push(dadosAtuais);
   const novoValor = JSON.stringify(dadosDoCookie);
   document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
-  const dadosCookie = lerCookie(cookieName);
-
-
-  let html = ''
-  for(let item of dadosCookie){
-    
-    let tipo = ''
-
-    if (item.tipo === 'entrada'){
-      tipo = '<i class="fa-solid fa-arrow-trend-up"></i>'
-
-    }else{
-      tipo = '<i class="fa-solid fa-arrow-trend-down"></i>'
-    }
-
-
-    if(inputLucro.value != ''){
-      console.log(item.filtro)
-      html += `<div class="valores" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}">
-              <p class="descricao">${item.descricao}</p>
-              <p class="valor">R$ ${item.valor},00</p>
-              <p class="tipo ${item.tipo}-icon">${tipo}</p>
-            </div>`
-    }else{
-      html += `<div class="valores" data-filtro="false" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
-              <p class="descricao">${item.descricao}</p>
-              <p class="valor">R$ ${item.valor},00</p>
-              <p class="tipo ${item.tipo}-icon">${tipo}</p>
-            </div>`
-    }
-    
-
-  }
-
-  addproduto(html)
 
   if(selectTipo.value === 'entrada'){
     if(!cookieExiste('entradas')){
@@ -1173,71 +1392,9 @@ btnAddDentro.addEventListener('click', function(){
       }
     }
 
-    if(typeof(Number(lerCookie('lucro'))) === 'number'  && lerCookie('lucro') != null){
-      cardLucro.textContent = `R$ ${Number(lerCookie('lucro')).toFixed(2)}`;
-      if(Number(lerCookie('lucro')) >= 0 ){
-        cardLucro.style.color = 'green'
-      }else{
-        cardLucro.style.color = 'red'
-      }
-    }
-    if (typeof(Number(lerCookie('saidas'))) === 'number'  && lerCookie('saidas') != null){
-      cardSaidas.textContent = `R$ ${lerCookie('saidas').toFixed(2)}`;
-    }
-    if(typeof(Number(lerCookie('entradas'))) === 'number' && lerCookie('entradas') != null ){
-      cardEntradas.textContent = `R$ ${lerCookie('entradas').toFixed(2)}`;
-    }
-
-
     inputDescricao.value = ''
     inputValor.value = ''
     inputLucro.classList.add('escondido')
 
-    const produtos = document.querySelectorAll('.valores')
-
-    produtos.forEach(produto => {
-      produto.addEventListener('click', function(){
-        excluirModal.id = ''
-    
-        cancelarExcluir.addEventListener('click', function(){
-          excluirModal.id = 'escondido'
-        })
-        
-        excluir.addEventListener('click', function(){
-          produto.remove()
-          excluirModal.id = 'escondido'
-          
-        })
-      })
-    
-      produto.addEventListener('contextmenu', function(event) {
-        event.preventDefault(); // 
-        info.id = ''
-        dataInfo.textContent = `${(produto.dataset.datasalva).slice(0,10)}`
-        console.log(produto.dataset.custo)
-        if (produto.dataset.tipo === 'saida'){
-          custoTipo.textContent = 'Tipo:'
-          h2Custo.textContent = 'Saída'
-    
-        }else if (produto.dataset.tipo === 'entrada' && produto.dataset.custo != '' && produto.dataset.custo != undefined){
-          custoTipo.textContent = 'Custo do produto:'
-          h2Custo.textContent = `R$ ${produto.dataset.custo}.00`
-        }else{
-          custoTipo.textContent = 'Custo do produto:'
-          h2Custo.textContent = `R$ 0.00`
-        }
-        
-        
-      });
-    
-    })
-    
-    fechar.addEventListener('click', function(){
-      info.id = 'escondido'
-    })
-
-    ordenador.value = 'nao'
     location.reload();
-
- 
 })

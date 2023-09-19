@@ -7,9 +7,15 @@ imagens.forEach(image => {
       image.addEventListener('click', function(){
             modal.style.display = 'flex'
             img.src = image.src
+
       })
 })
 
 modal.addEventListener('click', function(){
       modal.style.display = 'none'
+})
+
+img.addEventListener('click', function(event){
+      event.stopPropagation()
+      window.open(img.src, "_blank");
 })

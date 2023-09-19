@@ -29,3 +29,9 @@ body{
       width: 600px;
       height: 600px;
 }
+
+.modal a{
+      cursor: pointer;
+      width: 600px;
+      height: 600px;
+}

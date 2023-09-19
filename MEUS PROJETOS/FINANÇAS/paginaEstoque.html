@@ -4,30 +4,29 @@
       <meta charset="UTF-8">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>finanças</title>
-      <link rel="stylesheet" href="style.css">
-      <script defer src="index.js"></script>
+      <title>estoque</title>
+      <link rel="stylesheet" href="estoque.css">
+      <script defer src="estoque.js"></script>
 </head>
 <body>
       <header>
-            <div class="card entradas">
-                  <h1>Entradas</h1>
+            <div class="card quantidade">
+                  <h1>Quantidade Total</h1>
                   <div class="value">
-                        <p id="card-entradas">R$ 0,00</p>
-                        <p id="olhinho"><i class="fa-solid fa-eye-slash"></i></p>
+                        <p id="card-quantidade">0 Peças</p>
                         <p class="escondeu" id="escondido"><i class="fa-solid fa-ellipsis"></i><i class="fa-solid fa-ellipsis"></i><i class="fa-solid fa-ellipsis"></i></p>
                   </div>
             </div>
-            <div class="card saidas"> 
-                  <h1 id="h1-saidas">Saídas</h1>
+            <div class="card investimento"> 
+                  <h1 id="h1-investimento">Investimento</h1>
                   <div class="value">
-                        <p id="card-saidas">R$ 0,00</p>
+                        <p id="card-investimento">R$ 0,00</p>
                         <p id="olhinho1"><i class="fa-solid fa-eye-slash"></i></p>
                         <p class="escondeu1" id="escondido"><i class="fa-solid fa-ellipsis"></i><i class="fa-solid fa-ellipsis"></i><i class="fa-solid fa-ellipsis"></i></p>
                   </div>
             </div>
             <div class="card lucro">
-                  <h1 id="h1-lucro">Lucro total</h1>
+                  <h1 id="h1-lucro">Lucro esperado</h1>
                   <div class="value">
                         <p  id="card-lucro">R$ 0,00</p>
                         <p id="olhinho2"><i class="fa-solid fa-eye-slash"></i></p>
@@ -35,18 +34,16 @@
                   </div>
                   
             </div>
-            <div class="card lista-produtos">
-                  <h1 id="h1-estoque">Estoque</Label></h1>
-                  <a class="Conferir" href="paginaEstoque.html">Conferir</a>
-            </div>
       </header>
       <section id="section-add">
             <select id="ordenador" name="ordenador" >
                   <option value="nao">Não filtrar</option>
                   <option value="alfabetica">Ordem alfabética</option>
-                  <option value="recentes">Mais recentes</option>
-                  <option value="entradas">Só entradas</option>
-                  <option value="saidas">Só saídas</option>
+                  <option value="vestidos">Só vestidos</option>
+                  <option value="croppeds">Só croppeds</option>
+                  <option value="saias">Só saias</option>
+                  <option value="outros">Outros</option>
+                  
             </select>
 
             <div class="pesquisa">
@@ -60,42 +57,43 @@
 
       <section id="listagem">
             <div class="header-listagem">
-                  <h1>Descrição</h1>
+                  <h1>Quantidade</h1>
+                  <h1>Nome</h1>
                   <h1>Valor</h1>
-                  <h1>Tipo</h1>
+                  <h1>Custo</h1>
             </div>
             <hr class="linha">
+            <div class="valores" >
+                  <p class="quantidade">0</p>
+                  <p class="nome">teste</p>
+                  <p class="valor">R$ 0.00</p>
+                  <p class="custo">R$ 0.00</p>
+            </div>
       </section>
 
       <div class="modal escondido">
             <form class="container-box" id="formulario">
 
-                  <label id="label-descricao" for="descricao">Descrição</label>
-                  <input id="descricao" type="text" placeholder="Digite a descrição do produto:" required>
+                  <label id="label-nome" for="nome">Nome</label>
+                  <input id="nome" type="text" placeholder="Digite o nome do produto:" required>
                   
                   <label for="valor">Valor</label>
                   <input id="valor" type="number" placeholder="Digite o valor do produto:" required>
+
+                  <label for="Custo">Custo</label>
+                  <input id="custo" type="number" placeholder="Digite o custo do produto:" required>
                   
-                  <label for="entrada-saida">Tipo</label>
-                  <select id="tipo" name="entrada-saida" required>
-                        <option value="entrada">Entrada</option>
-                        <option value="saida">Saída</option>
+                  <label for="Quantidade">Quantidade</label>
+                  <input id="quantidade" type="number" placeholder="Digite quantidade disponível do produto:" required>
+
+                  <label for="Categoria">Categoria</label>
+                  <select id="categoria" name="categoria" >
+                        <option value="vestidos">Vestidos</option>
+                        <option value="croppeds">Croppeds</option>
+                        <option value="saias">Saias</option>
+                        <option value="outros">Outros</option>
                   </select>
 
-                  <label for="filtro">Filtro</label>
-                  <select id="filtro" name="entrada-saida" required>
-                        <option value="nao">Não filtrar</option>
-                        <option value="sim">Filtrar</option>
-                  </select>
-
-                  <label id="labe-custo" for="valor-custo" class="escondido">Custo </label>
-                  <input id="valor-custo" class="escondido" type="number" placeholder="Digite o custo do produto:" >
-
-                  <label for="noEstoque">Está no estoque?</label>
-                  <select id="noEstoque" name="noEstoque" required>
-                        <option value="nao">Não</option>
-                        <option value="sim">Sim</option>
-                  </select>
 
                   <button id="add" type="submit">Adicionar</button>
                   <button id="cancelar">Cancelar</button>
@@ -109,17 +107,6 @@
                   <P>Tem certeza dessa ação?</P>
                   <button id="excluir" type="submit">Deletar</button>
                   <button id="cancelar-excluir">Cancelar</button>
-            </div>    
-      </div>
-
-      <div class="informacoes" id="escondido">
-            <div class="container-info ">
-                  <i class="fa-solid fa-circle-info"></i>
-                  <h2>Data de criação:</h2>
-                  <P id="data-info">exemplo</P>
-                  <h2 id="custo-tipo">Custo do produto:</h2>
-                  <P id="data-custo">exemplo</P>
-                  <button id="fechar">Fechar</button>
             </div>    
       </div>
 
