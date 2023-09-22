@@ -1,0 +1,271 @@
+*{
+      font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+     background-image: linear-gradient(45deg, #396E9C 10%, #030710); 
+     background-attachment: fixed;
+}
+
+.container div{
+      width: 40%;
+      height: 800px;
+      
+}
+
+.container{
+      padding-top: 50px;
+      display: flex;
+      justify-content: space-around;
+}
+
+.image img{
+      width: 600px;
+      display: flex;
+      margin-top: 150px;
+}
+
+.formulario{
+      background-color: #2F2E41;
+      border-radius: 10px;
+}
+
+.formulario h1{
+      font-size: 38px;
+      color: white;
+      text-align: center;
+}
+
+form{
+      display: flex;
+      flex-direction: column;
+      color: white;
+}
+
+form label{
+      margin-left: 5%;
+      font-size: 22px;
+}
+
+input{
+      font-size: 20px;
+      width: 90%;
+      margin-left: 5%;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      outline: none;
+      border: 0;
+      background-color: #03071000;
+      color: white;
+      border-bottom: 2px solid #24E35A;
+      
+     
+}
+
+button{
+      display: flex;
+      margin-top: 380px;
+      width: 90%;
+      margin-left: 5%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 0;
+      color: white;
+      justify-content: center;
+      background-color: #24E35A;
+      font-size: 20px;
+      cursor: pointer;
+
+}
+
+button:hover{
+      background-color: #12b841;
+}
+
+.produto{
+      position: absolute;
+      background-color: rgba(240, 248, 255, 0.178);
+      display: flex;
+      margin-top: -450px;
+      height: 300px;
+      width: 300px;
+      border-radius: 10px ;
+      margin-left: 800px ;
+}
+
+.produto h1{
+      text-align: center;
+      color: white;
+}
+
+.produto label{
+      color: white;
+      margin-left: 5%;
+}
+
+.produto button{
+      margin-top: 25px;
+}
+
+#produtoTitulo{
+      font-size: 22px;
+}
+
+.escondido{
+      display: none;
+}
+
+.loading{
+      display: flex;
+      display: inline-block;
+      width: 70px;
+      border-radius: 5px;
+      padding: 5px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: rgba(255, 255, 255, 0);
+}
+
+.loading span{
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #fdfffe;
+      margin: 5px;
+}
+
+.loading span{
+      animation: bounce .6s cubic-bezier(0.6,0.1,1,0.4);
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+}
+
+.loading span:nth-child(1){
+      animation-delay: .1s;
+}
+
+.loading span:nth-child(2){
+      animation-delay: .2s;
+}
+
+.loading span:nth-child(3){
+      animation-delay: .3s;
+}
+
+@keyframes bounce {
+      to{
+            transform: translateY(50px);
+      }
+}
+
+#escondido{
+ display: none;
+}
+
+
+.sucess{
+      position: relative;
+      z-index: 1;
+      margin-top: -845px;
+      background-color: white;
+      display: flex;
+      width: 135px;
+      margin-left: -150px;
+      border-radius: 10px;
+      transition: 1s ease;
+}
+
+.sucess p{
+      font-size: 20px;
+      margin-right: 10px;
+      margin-left: 10px;
+}
+
+.sucess i{
+      color: #24E35A;
+}
+
+.modal{
+      display: flex;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.397);
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      justify-content: center;
+      align-items: center;
+}
+
+.containerModal{
+      position: absolute;
+      height: 700px;
+      background-color: #3d68cc;
+      width: 600px;
+      border-radius: 20px;
+
+}
+
+.titulo{
+      display: flex;
+      justify-content: space-around;
+      color: white;
+      font-size: 20px;
+}
+
+.produtoModal{
+      display: flex;
+      color: white;
+      font-size: 20px;
+      background-color: rgba(255, 255, 255, 0.137);
+}
+
+.produtoModal:hover{
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.24);
+}
+
+.x p{
+      position: absolute;
+      color: rgba(206, 0, 41, 0.774);
+      display: flex;
+      font-size: 26px;
+      right: 5px;
+      top: -15px;
+      width: 30px;
+      background-color: rgba(255, 255, 255, 0.397);
+      height: 30px;
+      padding: 0;
+      cursor: pointer;
+      text-align: center;
+      justify-content: center;
+}
+
+.produtoNome{
+      display: flex;
+      margin-left: 10px;
+      width: 180px;
+}
+
+.custoFinal{
+      margin-left: 45px;
+}
+
+.valorSugerido{
+      margin-left: 120px;
+}
+
+@keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(5px); }
+  }
+
+.tremer {
+      display: inline-block;
+      animation: shake 0.5s normal;
+}

@@ -11,7 +11,6 @@
       --cor-caixas: #cccccc;
       --cor-principal: #2F3D40;
 }
-
 body{
       background-color: var(--cor-caixas);
 }
@@ -47,7 +46,6 @@ header{
       background-color: var(--cor-principal);
 
 }
-
 .card p{
       color: rgb(3, 3, 3);
       font-size: 24px;
@@ -301,7 +299,6 @@ label{
 #olhinho2:hover{
       transform: translateY(-8px)
 }
-
 .escondeu1{
       display: flex;
       position: absolute;

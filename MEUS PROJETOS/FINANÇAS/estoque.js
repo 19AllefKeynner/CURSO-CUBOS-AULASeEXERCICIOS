@@ -1103,7 +1103,6 @@ const dadosCookie = lerCookie('meuCookieEstoque');
 let html = '';
 
 for (let item of dadosCookie) {
-  console.log(item.id)
   html += `<div class="valores" data-categoria="${item.categoria}" data-id="${item.id}">
                   <p class="quantidade">${item.quantidade}</p>
                   <p class="nome">${item.nome}</p>

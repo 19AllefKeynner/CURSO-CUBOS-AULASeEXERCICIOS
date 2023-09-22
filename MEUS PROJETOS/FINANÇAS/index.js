@@ -27,6 +27,39 @@ const h2Custo = document.getElementById('data-custo')
 const dataInfo = document.getElementById('data-info') 
 const noEstoque = document.querySelector('#noEstoque')
 const filtro = document.querySelector('#filtro') 
+const caixa = document.querySelector('#card-caixa')
+const cardCaixa = document.querySelector('.caixa')
+const modalUsar = document.querySelector('.usar')
+const cancelUsar = document.querySelector('#cancelar-excluirU')
+const continuarUsar = document.querySelector('#excluirU')
+const modalUsar2 = document.querySelector('.modal2')
+const cancelarU = document.querySelector('#cancelarU')
+const addU = document.querySelector('#addU')
+const saques = document.querySelector('.saques')
+const modalClicks = document.querySelector('.modalClicks')
+const btnSairSaques = document.querySelector('#sairSaque')
+
+function addprodutoSaques(html){
+  saques.innerHTML = html
+
+}
+
+cardCaixa.addEventListener('click', function(){
+  modalUsar.id = ''
+})
+
+continuarUsar.addEventListener('click', function(){
+  modalUsar.id = 'escondido'
+  modalUsar2.classList.remove('escondido')
+})
+
+cancelUsar.addEventListener('click', function(){
+  modalUsar.id = 'escondido'
+})
+
+cancelarU.addEventListener('click', function(){
+  modalUsar2.classList.add('escondido')
+})
 
 if (filtro.value === 'nao'){
   noEstoque.value = 'nao'
@@ -431,6 +464,13 @@ cardSaidas.style.color = 'red'
 if (!cookieExiste('meuCookie')){
   const dados = []
   const cookieName = "meuCookie"; 
+  const cookieValue = JSON.stringify(dados);
+  document.cookie = `${cookieName}=${cookieValue}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+}
+
+if (!cookieExiste('meuCookieSaques')){
+  const dados = []
+  const cookieName = "meuCookieSaques"; 
   const cookieValue = JSON.stringify(dados);
   document.cookie = `${cookieName}=${cookieValue}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
 }
@@ -910,7 +950,6 @@ for (let item of dadosCookie) {
   } else {
     tipo = '<i class="fa-solid fa-arrow-trend-down"></i>';
   }
-
   if (item.filtro != '') {
     html += `<div class="valores" data-id="${item.id}" data-filtro="true" data-custo="${item.filtro}" data-tipo="${item.tipo}" data-dataSalva="${item.data}>
                 <p class="descricao">${item.descricao}</p>
@@ -924,6 +963,8 @@ for (let item of dadosCookie) {
                 <p class="tipo ${item.tipo}-icon">${tipo}</p>
               </div>`;
   }
+
+
 }
 
 addproduto(html)
@@ -941,6 +982,10 @@ if (typeof(Number(lerCookie('saidas'))) === 'number'  && lerCookie('saidas') != 
 }
 if(typeof(Number(lerCookie('entradas'))) === 'number' && lerCookie('entradas') != null ){
   cardEntradas.textContent = `R$ ${lerCookie('entradas').toFixed(2)}`;
+}
+
+if( typeof(Number(lerCookie('lucro'))) === 'number' && lerCookie('lucro') != null && typeof(Number(lerCookie('entradas'))) === 'number' && lerCookie('entradas') != null){
+  caixa.textContent = `R$ ${ Number(Number(lerCookie('caixa')) + (Number(lerCookie('entradas')) - Number(lerCookie('lucro')))).toFixed(2)}`;
 }
 
 const produtos = document.querySelectorAll('.valores')
@@ -1190,6 +1235,94 @@ function removerObjetoDoCookie(nomeCookie, objetoParaRemover) {
     console.log('Cookie não encontrado.');
   }
 }
+
+
+
+
+
+
+
+
+
+
+addU.addEventListener('click', function(){
+  const saldo = Number(caixa.textContent.slice(2,caixa.textContent.indexOf('.')))
+  const inputNome = document.getElementById('descricaoU')
+  const inputValor = document.getElementById('valorU')
+
+  console.log(saldo)
+  if(saldo >= inputValor.value){
+    console.log('saque feito')
+    const cookieName = "meuCookieSaques";
+    const cookieValue = lerCookie(cookieName);
+    
+    let dadosDoCookie = [];
+    const idsGerados = [];
+
+    const dadossCookie = lerCookie(cookieName);
+    for(let item of dadossCookie){
+      dadosDoCookie.push(item)
+      idsGerados.push(item.id)
+    }
+
+    function gerarNumeroAleatorio(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function gerarIdUnico() {
+        let novoId;
+        do {
+        novoId = gerarNumeroAleatorio(1000, 9999); 
+        } while (idsGerados.includes(novoId));
+        return novoId;
+    }
+
+    const dadosAtuais =  { id: gerarIdUnico(),  nome: inputNome.value.trim().toLowerCase(), valor: inputValor.value}
+
+    if (cookieValue) {
+      try {
+        dadosDoCookie = JSON.parse(cookieValue);
+      } catch (error) {
+        console.error();
+      }
+    }
+
+    dadosDoCookie.push(dadosAtuais);
+    const novoValor = JSON.stringify(dadosDoCookie);
+    document.cookie = `${cookieName}=${encodeURIComponent(novoValor)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+
+    
+    atualizarCoockie('caixa', (Number(inputValor.value) - (Number(inputValor.value)) * 2))
+
+  }else{
+    alert('Saldo induficiente para saque!')
+  }
+
+})
+
+cardCaixa.addEventListener('contextmenu', function(event) {
+  event.preventDefault();
+  modalClicks.id = ''
+
+  const dadosCookie = lerCookie('meuCookieSaques');
+
+  let html = '';
+
+  for (let item of dadosCookie) {
+    html += `<div class="saque">
+                <p class="idSaques">${item.id}</p>
+                <p class="descricaoSaques">${item.nome}</p>
+                <p class="valorSaques">${item.valor}</p>
+            </div>`
+  }
+
+  addprodutoSaques(html)
+
+});
+
+btnSairSaques.addEventListener('click', function(){
+  modalClicks.id = 'escondido'
+})
 
 btnAddDentro.addEventListener('click', function(){
   modal.classList.add('escondido')

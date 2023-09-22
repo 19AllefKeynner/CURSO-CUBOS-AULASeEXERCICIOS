@@ -178,6 +178,21 @@ header{
       left: 0;
       top: 0;
 }
+
+.usarU{
+      color: #149BCC;
+}
+.modal2{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      width: 100%;
+      background-color: #3232338e;
+      position: fixed;
+      left: 0;
+      top: 0;
+}
 .container-box{
       border-radius: 10px;
       padding: 20px;
@@ -225,10 +240,46 @@ label{
 #add:hover{
       background-color:#0f8ebd ;
 }
+#cancelarU{
+      font-size: 22px;
+      padding: 5px;
+      border-radius: 5px;
+      background-color: #E51734;
+      margin-top: 10px;
+      color: white;
+      cursor: pointer;
+}
+#addU{
+      font-size: 22px;
+      padding: 5px;
+      border-radius: 5px;
+      background-color: #149BCC;
+      margin-top: 10px;
+      color: white;
+      cursor: pointer;
+}
+#cancelarU:hover{
+      background-color: #cf0d27;
+}
+
+#addU:hover{
+      background-color:#0f8ebd ;
+}
 .escondido{
       display: none;
 }
 .Excluir{
+      background-color: rgba(0, 0, 0, 0.342);
+      display: flex;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      justify-content: center;
+      align-items: center;
+}
+.usar{
       background-color: rgba(0, 0, 0, 0.342);
       display: flex;
       position: fixed;
@@ -246,7 +297,19 @@ label{
       text-align: center;
       border-radius: 8px;
 }
+.container-usar{
+      background-color: rgb(255, 255, 255);
+      padding: 30px;
+      width: 230px;
+      text-align: center;
+      border-radius: 8px;
+}
 .container-excluir i{
+      font-size: 49px;
+      margin-bottom: 40px;
+      color: #2F3D40;
+}
+.container-usar i{
       font-size: 49px;
       margin-bottom: 40px;
       color: #2F3D40;
@@ -272,6 +335,32 @@ label{
       cursor: pointer;
       border-radius: 3px;
       transition: 0.1s;
+}
+
+#excluirU{
+      margin-top: 40px;
+      background-color:#149BCC ;
+      color: white;
+      padding: 10px 14px;
+      margin-right: 5px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: 0.1s;
+}
+#excluirU:hover{
+      background-color:#0f8ebd ;
+}
+#cancelar-excluirU{
+      background-color: #E51734;
+      color: white;
+      padding: 10px;
+      margin-right: 5px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: 0.1s;
+}
+#cancelar-excluirU:hover{
+      background-color: #cf0d27;
 }
 .informacoes{
       background-color: rgba(0, 0, 0, 0.342);
@@ -309,11 +398,6 @@ label{
       border-radius: 3px;
       transition: 0.1s;
 }
-#ordenador > option:hover {
-      background-color: #ff00ff; 
-      color: #fff; 
-      cursor: pointer; 
-} 
 #fechar{
       background-color: #cf0d27;
 }
@@ -421,3 +505,78 @@ label{
       width: 100%; 
       transform: scaleX(1); 
 }  
+.caixa{
+      transition: 0.5s;
+      cursor: pointer;
+}
+.caixa:hover{
+      padding: 10px 0;
+}
+.modalClicks{
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      background-color: #3232338e;
+      padding-top: 50px;
+      padding-bottom: 50px;
+}
+.modalClicks p{
+      font-size: 22px;
+}
+.containerClicks{
+      background-color: white;
+      height: auto;
+      width: 500px;
+      min-height: 500px;
+      border-radius: 10px;
+}
+.containerClicks h1{
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 30px;
+}
+.containerClicks hr{
+      background-color: black;
+      height: 1px;
+      margin-top: 10px;      
+}
+.titulo{
+      display: flex;
+      justify-content: space-around;
+}
+.saque{
+      padding: 5px;
+      background-color: #212a2c1e;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 10px;
+}
+.saque:hover{
+      background-color: #212a2c46;
+}
+#sairSaque{
+      position: fixed;
+      margin-top: 40px;
+      margin-bottom: 60px;
+      background-color:#149BCC ;
+      color: white;
+      padding: 10px 14px;
+      margin-right: 5px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: 0.1s;
+      font-size: 22px;
+      bottom: 0;
+      width: 200px;
+      margin-left: 150px;
+      
+}
+#sairSaque:hover{
+      background-color:#0f8ebd ;
+
+}

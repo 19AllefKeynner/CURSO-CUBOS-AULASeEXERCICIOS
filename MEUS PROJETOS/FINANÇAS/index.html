@@ -18,10 +18,16 @@
                         <p class="escondeu" id="escondido"><i class="fa-solid fa-ellipsis"></i><i class="fa-solid fa-ellipsis"></i><i class="fa-solid fa-ellipsis"></i></p>
                   </div>
             </div>
+            <div class="card caixa"> 
+                  <h1 id="h1-caixa">Caixa</h1>
+                  <div class="value">
+                        <p id="card-caixa">R$ 0,00</p>
+                  </div>
+            </div>
             <div class="card saidas"> 
                   <h1 id="h1-saidas">Saídas</h1>
                   <div class="value">
-                        <p id="card-saidas">R$ 0,00</p>
+                        <p id="card-saidas">R$ 0.00</p>
                         <p id="olhinho1"><i class="fa-solid fa-eye-slash"></i></p>
                         <p class="escondeu1" id="escondido"><i class="fa-solid fa-ellipsis"></i><i class="fa-solid fa-ellipsis"></i><i class="fa-solid fa-ellipsis"></i></p>
                   </div>
@@ -112,6 +118,15 @@
             </div>    
       </div>
 
+      <div class="usar" id="escondido">
+            <div class="container-usar">
+                  <i class="fa-solid fa-money-bill-1-wave"></i>
+                  <P>Usar valor em caixa?</P>
+                  <button id="excluirU" type="submit">continuar</button>
+                  <button id="cancelar-excluirU" >Cancelar</button>
+            </div>    
+      </div>
+
       <div class="informacoes" id="escondido">
             <div class="container-info ">
                   <i class="fa-solid fa-circle-info"></i>
@@ -121,6 +136,41 @@
                   <P id="data-custo">exemplo</P>
                   <button id="fechar">Fechar</button>
             </div>    
+      </div>
+
+      <div class="modal2 escondido">
+            <form class="container-box" id="formulario">
+
+                  <label id="label-descricao" for="descricao">Descrição</label>
+                  <input id="descricaoU" type="text" placeholder="Digite uma descrição:" required>
+                  
+                  <label for="valor">Valor</label>
+                  <input id="valorU" type="number" placeholder="Digite o valor a retirar:" required>
+
+                  <button id="addU" >Adicionar</button>
+                  <button id="cancelarU">Cancelar</button>
+
+            </form>
+      </div>
+
+      <div class="modalClicks" id="escondido">
+            <div class="containerClicks">
+                  <h1>Saques de caixa</h1>
+                  <div class="titulo">
+                        <p>Id:</p>
+                        <p>Descrição:</p>
+                        <p>Valor:</p>
+                  </div>
+                  <hr>
+                  <div class="saques">
+                        <div class="saque">
+                              <p class="idSaques">1</p>
+                              <p class="descricaoSaques">teste</p>
+                              <p class="valorSaques">R$ 10,00</p>
+                        </div>
+                  </div>
+                  <button id="sairSaque">Ok</button>
+            </div>
       </div>
 
 </body>
