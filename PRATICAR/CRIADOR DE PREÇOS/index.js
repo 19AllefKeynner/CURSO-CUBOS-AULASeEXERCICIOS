@@ -137,7 +137,7 @@ document.querySelector('#enviar').addEventListener('click', function(event){
 
 
       
-      if(quantidade.value != '' && frete.value != '' && nome.value != '' && valor.value != '' ) {
+      if(quantidade.value != '' && frete.value != '') {
             const freteParcial = Number(frete.value) / Number(quantidade.value)
             for(let item of listaProdutos){
                   listaResposta.push({
