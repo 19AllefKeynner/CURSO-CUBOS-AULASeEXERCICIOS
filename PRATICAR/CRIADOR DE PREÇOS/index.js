@@ -142,7 +142,7 @@ document.querySelector('#enviar').addEventListener('click', function(event){
             for(let item of listaProdutos){
                   listaResposta.push({
                         nome: item.nome,
-                        custo: Number(item.valor) + freteParcial,
+                        custo: Number(item.valor) + Number(freteParcial),
                         precoSugerido: precoSugerido(Number(item.valor) + freteParcial)
                   })
             }
@@ -157,7 +157,7 @@ document.querySelector('#enviar').addEventListener('click', function(event){
                   for( let item of listaResposta){
                         html += `<div class="produtoModal">
                                           <p class="produtoNome">${item.nome}</p>
-                                          <p class="custoFinal">R$ ${item.custo}.00</p>
+                                          <p class="custoFinal">R$ ${Number(item.custo).toFixed(2)}</p>
                                           <p class="valorSugerido">R$ ${item.precoSugerido}.00</p>
                                     </div>`
       
