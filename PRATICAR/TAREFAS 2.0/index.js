@@ -9,6 +9,10 @@ const excluirTarefa = document.querySelector('.excluir')
 const certeza = document.querySelector('.certeza')
 const simApagar = document.querySelector('.simExcluir')
 const naoApagar = document.querySelector('.naoExcluir')
+const editar = document.querySelector('.editar')
+const modalEditar = document.querySelector('.modalEditar')
+const confirmarEdite = document.querySelector('#confirmarEdite')
+const pesquisar = document.querySelector('#pesquisar')
 
 let contaTarefas = 0
 
@@ -115,6 +119,26 @@ function obterArrayDoCookie(nomeDoCookie) {
       return []; // Retorna uma array vazia se o cookie não for encontrado
 }
 
+function searchByName() {
+      // Captura o valor digitado no input de pesquisa
+      var searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+      var itemList = document.getElementById('itemList');
+      var items = itemList.getElementsByTagName('li');
+
+      for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          var itemName = item.textContent.toLowerCase();
+
+          // Verifica se o nome do item contém o termo de pesquisa
+          if (itemName.includes(searchTerm)) {
+              item.style.display = 'block'; // Exibe o item
+          } else {
+              item.style.display = 'none'; // Oculta o item
+          }
+      }
+  }
+
 fecharModal.addEventListener('click', function () {
       modal.id = 'escondido'
 })
@@ -147,27 +171,130 @@ if (!cookieExiste('cookieTarefas')) {
 
 
 var minhaArrayDeObjetos = obterArrayDoCookie('cookieTarefas');
+let html = ''
 
 for (let item of minhaArrayDeObjetos) {
-      let html = `<div class="tarefa" data-id="${item.id}">
+      console.log('teste')
+
+      html += `<div class="tarefa" data-id="${item.id}">
                         <p class="nome">${item.nome}</p>
                         <p class="descricao">${item.descricao}</p>
                         <p class="status">${item.status}</p>
                   </div>
                   `
-      tarefas.innerHTML = html
+
 
       contaTarefas += 1
 }
+
+
+
+pesquisar.addEventListener('input', function(){
+      let digitado = pesquisar.value
+      console.log(digitado)
+
+      const tarefa = document.querySelectorAll('.tarefa')
+
+      tarefa.forEach(taref => {
+            let nomeTarefa = taref.children[0].textContent
+            
+            if(nomeTarefa.includes(digitado) === true && nomeTarefa.indexOf(digitado) === 0){
+                  taref.id = ''
+            }else{
+                  taref.id = 'escondeTarefa'
+            
+            }
+      })
+
+})
+
+tarefas.innerHTML = html
 
 const tarefa = document.querySelectorAll('.tarefa')
 
 tarefa.forEach(taref =>
       taref.addEventListener('click', function () {
             modal.id = ''
+            let id = taref.dataset.id
+
+            document.querySelector('.statusModal').addEventListener('click', function () {
+                  modal.id = ''
+
+                  let nome = ''
+                  let descricao = ''
+                  let statusAtual = ''
+                  for (let item of minhaArrayDeObjetos) {
+                        if (item.id === id) {
+                              nome = item.nome
+                              descricao = item.descricao
+                              break
+                        }
+
+
+                  }
+
+                  let iconAtual = taref.children[2].children[0].outerHTML
+
+                  excluirObjetoPorId('cookieTarefas', id)
+
+                  if ( iconAtual === '<i class="fa-solid fa-bookmark"></i>') {
+                        statusAtual = '<i class="fa-regular fa-bookmark"></i>'
+                  } else if (iconAtual === '<i class="fa-regular fa-bookmark"></i>') {
+                        statusAtual = '<i class="fa-solid fa-right-left"></i>'
+                  } else {
+                        statusAtual = '<i class="fa-solid fa-bookmark"></i>'
+                  }
+
+                  let objetoParaArmazenar = { nome: nome, descricao: descricao, status: statusAtual, id: id };
+
+                  adicionarObjetoAoCookie('cookieTarefas', objetoParaArmazenar)
+
+                  window.location.reload()
+             
+            })
+
             simApagar.addEventListener('click', function () {
                   let id = taref.dataset.id
                   excluirObjetoPorId('cookieTarefas', id)
+                  window.location.reload()
+            })
+
+            editar.addEventListener('click', function () {
+                  modalEditar.id = ''
+                  let nome = ''
+                  let descricao = ''
+                  let status = ''
+                  for (let item of minhaArrayDeObjetos) {
+                        if (item.id === id) {
+                              nome = item.nome
+                              descricao = item.descricao
+                              status = item.status
+                              break
+                        }
+                  }
+
+                  document.querySelector('#inputNomeEdite').value = nome
+                  document.querySelector('#inputDescricaoEdite').value = descricao
+                  document.querySelector('#selectStatusEdite').options.status = true;
+
+            })
+
+            confirmarEdite.addEventListener('click', function () {
+                  excluirObjetoPorId('cookieTarefas', id)
+
+                  let statusAtual = ''
+                  if (document.querySelector('#selectStatusEdite').value === 'feito') {
+                        statusAtual = '<i class="fa-solid fa-bookmark"></i>'
+                  } else if (document.querySelector('#selectStatusEdite').value === 'á fazer') {
+                        statusAtual = '<i class="fa-regular fa-bookmark"></i>'
+                  } else {
+                        statusAtual = '<i class="fa-solid fa-right-left"></i>'
+                  }
+
+                  let objetoParaArmazenar = { nome: document.querySelector('#inputNomeEdite').value, descricao: document.querySelector('#inputDescricaoEdite').value, status: statusAtual, id: id };
+
+                  adicionarObjetoAoCookie('cookieTarefas', objetoParaArmazenar)
+
                   window.location.reload()
             })
       })
@@ -187,15 +314,28 @@ naoApagar.addEventListener('click', function () {
       certeza.id = 'escondido'
 })
 
+document.querySelector('#fecharAddEdite').addEventListener('click', function () {
+      modalEditar.id = 'escondido'
+      modal.id = 'escondido'
+})
 
 confirmar.addEventListener('click', function () {
       modalAdd.id = 'esconder'
 
+      let statusAtual = ''
+      if (document.querySelector('#selectStatus').value === 'feito') {
+            statusAtual = '<i class="fa-solid fa-bookmark"></i>'
+      } else if (document.querySelector('#selectStatus').value === 'á fazer') {
+            statusAtual = '<i class="fa-regular fa-bookmark"></i>'
+      } else {
+            statusAtual = '<i class="fa-solid fa-right-left"></i>'
+      }
       const idgerado = gerarIdAleatorio()
       // Objeto que você deseja armazenar no cookie
-      let objetoParaArmazenar = { nome: document.querySelector('#inputNome').value, descricao: document.querySelector('#inputDescricao').value, status: document.querySelector('#selectStatus').value, id: idgerado };
+      let objetoParaArmazenar = { nome: document.querySelector('#inputNome').value, descricao: document.querySelector('#inputDescricao').value, status: statusAtual, id: idgerado };
 
       adicionarObjetoAoCookie('cookieTarefas', objetoParaArmazenar)
 
       window.location.reload()
 })
+

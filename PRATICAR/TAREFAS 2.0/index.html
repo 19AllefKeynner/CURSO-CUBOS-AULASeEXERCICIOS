@@ -146,7 +146,7 @@
                   width: 200px;
             }
 
-            .modal, .addModal, .certeza{
+            .modal, .addModal, .certeza, .modalEditar{
                   display: flex;
                   position: fixed;
                   background-color: rgba(0, 0, 0, 0.473);
@@ -188,7 +188,7 @@
                   background-color: rgba(139, 139, 139, 0.5);
             }
 
-            #fecharModal, #fecharAdd, #fecharCerteza{
+            #fecharModal, #fecharAdd, #fecharCerteza, #fecharAddEdite{
                   padding: 4px 6px;
                   transition: 0.5s;
                   color: red;
@@ -200,7 +200,7 @@
                   cursor: pointer;
             }
 
-            #fecharAdd:hover{
+            #fecharAdd:hover, .fecharAddEdite:hover{
                   border-radius: 3px;
                   background-color: rgba(139, 139, 139, 0.5);
             }
@@ -223,7 +223,7 @@
                   display: none;
             }
 
-            .addBox{
+            .addBox, .editBox{
                   background-color: white;
                   display: flex;
                   justify-content: center;
@@ -232,12 +232,12 @@
                   border-radius: 10px;
             }
 
-            .addBox label{
+            .addBox label, .editBox label{
                   margin-bottom: 5px;
 
             }
 
-            .addBox input{
+            .addBox input, .editBox input{
                   margin-bottom: 10px;
                   color: black;
                   padding: 5px 10px;
@@ -245,7 +245,7 @@
                   border: 1px solid var(--corPrincipal);
             }
 
-            #confirmar{
+            #confirmar, #confirmarEdite{
                   margin-top: 12px;
                   border: 0;
                   padding: 5px 10px;
@@ -256,7 +256,7 @@
                   cursor: pointer;
             }
 
-            #selectStatus{
+            #selectStatus, #selectStatusEdite{
                   padding: 5px 10px;
             }
 
@@ -301,6 +301,10 @@
                   color: rgb(0, 0, 0);
             }
 
+            #escondeTarefa{
+                  display: none;
+            }
+
 
 
       </style>
@@ -314,7 +318,7 @@
                         <option value="nao">Todas</option>
                         <option value="feitas">Feitas</option>
                         <option value="fazendo">Fazendo</option>
-                        <option value="fazer">A fazer</option>
+                        <option value="fazer">Á fazer</option>
                   </select>
             </div>
             <div class="pesquisaBox">
@@ -361,7 +365,7 @@
                   </div>
                   <button class="excluir"><i class="fa-solid fa-trash"></i></button>
                   <button class="editar"><i class="fa-solid fa-pen-to-square"></i></button>
-                  <button class="statusModal"><i class="fa-solid fa-retweet"></i></button>
+                  <button class="statusModal"><i class="fa-solid fa-arrow-rotate-left"></i></i></button>
             </div>
       </div>
       <div class="certeza" id="escondido">
@@ -372,6 +376,21 @@
                         <button class="simExcluir">Sim</button>
                         <button class="naoExcluir">Não</button>
                   </div>
+            </div>
+      </div>
+      <div class="modalEditar" id="esconder">
+            <div class="editBox">
+                  <button id="fecharAddEdite"><i class="fa-solid fa-square-xmark"></i></button>
+                  <label for="nome">Nome</label>
+                  <input id="inputNomeEdite" type="text" placeholder="Digite o nome da sua tarefa:">
+                  <label for="descricao">Descrição</label>
+                  <input id="inputDescricaoEdite" type="text" placeholder="Digite a descrição dessa tarefa:">
+                  <select name="status" id="selectStatusEdite">
+                        <option value="feito">feito</option>
+                        <option value="á fazer">á fazer</option>
+                        <option value="fazendo">fazendo</option>
+                  </select>
+                  <button id="confirmarEdite">Confirmar edição</button>
             </div>
       </div>
       <script src="index.js"></script>
