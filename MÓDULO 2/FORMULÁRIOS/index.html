@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Documento</title>
+      <style>
+            form{
+                 display: flex;
+                 flex-direction: column; 
+            }
+
+            input{
+                  width: 400px;
+                  margin-top: 5px;
+            }
+
+            label{
+                  margin-top: 20px;
+            }
+
+            button{
+                  width: 400px;
+                  margin-top: 20px;
+                  border: 0;
+                  background-color: rgb(17, 72, 255);
+                  padding: 10px;
+                  border-radius: 10px;
+                  color: white;
+            }
+
+
+      </style>
+
+</head>
+<body>
+      <form action="index.html">
+            <h1>Formulário</h1>
+            <label for="email">Email</label>
+            <input type="text" type="email" required id="email" placeholder="Digite seu emal:">
+
+            <label for="senha">Senha</label>
+            <input type="text" type="password" required minlength="8" id="senha" placeholder="Digite sua senha:">
+            <button type="submit">Enviar</button>
+      </form>
+      
+</body>
+</html>
