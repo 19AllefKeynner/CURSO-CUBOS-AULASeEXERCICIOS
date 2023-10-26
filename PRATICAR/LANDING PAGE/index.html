@@ -11,7 +11,9 @@
 
       <style>
             body {
-                  background-color: rgb(71, 71, 71);
+                  background-color: rgb(92, 92, 92);
+                  display: flex;
+                  justify-content: center;
             }
 
             .container {
@@ -57,15 +59,18 @@
                   margin-bottom: 20px;
             }
 
-            nav {
+            .nav {
                   background-color: black;
-                  height: 10px;
+                  height: 50px;
+                  padding-top: 20px;
+                  padding-bottom: 18px;
                   display: flex;
-                  padding-top: 25px;
                   justify-content: center;
+                  
+                  
             }
 
-            nav a{
+            .nav a {
                   text-decoration: none;
                   color: white;
                   font-size: 18px;
@@ -74,17 +79,18 @@
 
             }
 
-            nav a i{
+            .nav a i {
                   font-size: 22px;
             }
-            .propaganda i{
+
+            .propaganda i {
                   color: white;
                   font-size: 34px;
                   margin-right: 5px;
-                  
+
             }
 
-            .propaganda{
+            .propaganda {
                   display: flex;
                   color: white;
                   font-family: Arial, Helvetica, sans-serif;
@@ -96,18 +102,164 @@
                   margin-right: 50px;
             }
 
-           
+            #logo {
+                  font-family: Arial, Helvetica, sans-serif;
+                  color: #474747;
+
+            }
+
+            .centro{
+                  background-color: #ffffff;
+                  height: 230px;
+            }
+
+            .desconto{
+                  background-color: rgb(255, 255, 255);
+                  width: 260px;
+                  padding-left: 30px;
+            }
+
+            .desconto button{
+                  border: 0;
+                  padding: 8px;
+                  background-color: black;
+                  color: white;
+                  border-radius: 3px;
+                  font-family: Arial, Helvetica;
+                  cursor: pointer;
+            }
+
+            .centro{
+                  display: flex;
+                  align-items: center;
+                  margin-top: 20px;
+                  justify-content: center;
+            }
+
+            .centro .img-descontos{
+                  width: 280px;
+                  border-radius: 5px;
+
+            }
+
+            .link{
+                  width: 200px;
+                  
+            }
+
+            .link a{
+                  text-decoration: none;
+            }
+
+            .info{
+                  background-color: #5c3d2b;
+                  height: 100px;
+                  margin-top: 20px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+            }
+
+            .card{
+                  background-color: #5c3d2b;
+                  width: 200px;
+                  margin-left: 10px;
+                  height: 80px;
+                  display: flex;
+            }
+
+            .icone{
+                  display: flex;
+                  background-color: white;
+                  width: 130px;
+                  height: 80px;
+                  justify-content: center;
+                  align-items: center;
+                  
+            }
+
+            .icone i{
+                  font-size: 34px;
+                  color: #5c3d2b;
+            }
+
+            .texto{
+                  margin-top: -10px;
+                  margin-left: 5px;
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .paragrafo{
+                  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+
+            .header-cards{
+                  background-color: #a3a3a3;
+                  height: 130px;
+            }
+
+            .header-titulo{
+                  display: flex;
+            }
+
+            .header-titulo hr{
+                  display: flex;
+                  height:200px ;
+                  background-color: black;
+                  width: 1px;
+                  border: none;
+                  transform: rotate(90deg);
+                  margin-top: -74px;
+            }
+
+            .itens{
+                  display: flex;
+                  margin-top: -70px;
+                  justify-content: space-around;
+            }
+
+            .sapato i{
+                  font-size: 44px;
+            }
+
+            .sapato{
+                  justify-content: center;
+                  align-items: center;
+                  display: flex;
+                  margin-top: -35px;
+            }
+
+            .sapato p {
+                  margin-left: 20px;
+                  width: 80px;
+                  font-size: 22px;
+            }
+
+            .butao{
+                  width: 120px;
+                  height: 50px;
+                  border: 0;
+                  border-radius: 5px;
+                  background-color: black;
+                  color: white;
+                  font-size: 20px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  cursor: pointer;
+            }
       </style>
       <script src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
 
 </head>
-
 <body>
       <div class="container">
             <header>
                   <lord-icon src="https://cdn.lordicon.com/odavpkmb.json" trigger="hover"
                         colors="primary:#121331,secondary:#794628" style="width:60px;height:60px">
                   </lord-icon>
+                  <h1 id="logo">SHOP</h1>
                   <i class="fa-solid fa-bars"></i>
             </header>
             <div class="topo">
@@ -119,7 +271,7 @@
                   <i class="fa-solid fa-greater-than"></i>
                   <a href="#">Wireframes</a>
             </div>
-            <nav>
+            <div class="nav">
                   <div class="propaganda">
                         <i class="fa-solid fa-box-open"></i>
                         <p>
@@ -130,17 +282,67 @@
                   <a href="#"><i class="fa-solid fa-caret-down"></i> Contato</a>
                   <a href="#"><i class="fa-solid fa-caret-down"></i> Acessorios</a>
                   <a href="#"><i class="fa-solid fa-caret-down"></i> Login</a>
-            </nav>
-            <section>
-
-            </section>
+            </div>
+            <div class="centro">
+                  <div class="desconto">
+                        <h1>40% OFF</h1>
+                        <h2>EM ROUPAS MASCULINAS</h2>
+                        <button>Compre Agora</button>
+                        <p class="link">Para uma melhor experiencia entre em <a href="#">contato</a>!</p>
+                  </div>
+                  <div>
+                        <img class="img-descontos" src="img/traveler-2203666_1920.jpg" alt="imagem">
+                  </div>
+            </div>
             <div class="info">
+                  <div class="card">
+                        <div class="icone">
+                              <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <div class="texto">
+                              <P class="titulo">FRETE GRÁTIS</P>
+                              <p class="paragrafo">Frete grátis para todo o Brasil.</p>
+                        </div>
+                  </div>
+                  <div class="card">
+                        <div class="icone">
+                              <i class="fa-solid fa-tags"></i>
+                        </div>
+                        <div class="texto">
+                              <P class="titulo">ORIGINAL</P>
+                              <p class="paragrafo">Apenas produtos de qualidade.</p>
+                        </div>
+                  </div>
+                  <div class="card">
+                        <div class="icone">
+                              <i class="fa-solid fa-shop"></i>
+                        </div>
+                        <div class="texto">
+                              <P class="titulo">LOJA FÍSICA</P>
+                              <p class="paragrafo">Temos nossa loja física.</p>
+                        </div>
+                  </div>
 
             </div>
             <section class="header-cards">
-
+                  <div class="header-titulo">
+                        <hr>
+                        <p>TITÚLO</p>
+                        <hr>
+                  </div>
+                  <div class="itens">
+                        <div class="sapato">
+                              <i class="fa-solid fa-shoe-prints"></i>
+                              <p>Sapatos masculinos</p>
+                        </div>
+                        <button class="butao"><p>Click aqui</p></button>
+                        <div class="sapato">
+                              <i class="fa-solid fa-shirt"></i>
+                              <p>Camisas masculinas</p>
+                        </div>
+                  </div>
             </section>
-            <nav class="cards">
+            <nav class="">
 
             </nav>
             <footer>
