@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Documento</title>
+</head>
+<body>
+      <div class="container">
+            <h1>Pesquisar</h1>
+            <form action="https://www.google.com/search" target="_blank" method="GET">
+                  <input type="text" name="q">
+                  <button type="submit">Enviar</button>
+            </form>
+            
+      </div>
+      
+      <script>
+            const formulario = document.querySelector('form')
+            const input = document.querySelector('input')
+
+            formulario.addEventListener('submit', function(event){
+                  if(!input.value){
+                        event.preventDefault()
+                        alert('Você está tentando fazer uma pesquisa vazia!!!')
+                  }
+            })
+      </script>
+</body>
+</html>

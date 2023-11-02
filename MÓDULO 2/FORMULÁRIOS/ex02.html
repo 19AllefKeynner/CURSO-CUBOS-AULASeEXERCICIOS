@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+            body {
+                  display: flex;
+                  justify-content: center;
+            }
+
+            form {
+                  background-color: darkgray;
+                  padding: 20px;
+                  width: 400px;
+                  display: flex;
+                  flex-direction: column;
+                  border-radius: 10px;
+
+            }
+
+            label {
+                  margin-top: 30px;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-size: 20px;
+            }
+
+            input {
+                  margin-top: 5px;
+                  padding: 5px;
+                  border: 0;
+                  outline: none;
+                  border-bottom: 1px solid blueviolet;
+            }
+
+            h1 {
+                  text-align: center;
+                  font-size: 42px;
+            }
+
+            button {
+                  margin-top: 30px;
+                  padding: 5px;
+                  border: 0;
+                  font-size: 22px;
+                  font-family: Arial, Helvetica, sans-serif;
+                  border-bottom: 1px solid blueviolet;
+                  cursor: pointer;
+            }
+
+            input[type="radio"] {
+                  width: 15px;
+                  height: 15px;
+            }
+      </style>
+</head>
+
+
+<body>
+
+      <form action="">
+            <h1>Cadastro</h1>
+
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" required placeholder="Digite seu nome completo" minlength="10">
+
+            <label for="email">Email</label>
+            <input type="email" name="email" required placeholder="joão@gmail.com">
+
+            <label for="radio">Já é cliente?
+
+                  Sim
+                  <input type="radio" name="radio">
+                  Não
+                  <input class="checked" type="radio" name="radio" required checked>
+            </label>
+
+            <label for="senha">Senha</label>
+            <input id="senha" type="password" name="senha" placeholder="Digite sua senha:" required minlength="8">
+
+            <label for="senha2">Repita sua senha</label>
+            <input id="senhaRepetida" type="password" name="senha2" placeholder="Repita sua senha:" required minlength="8">
+
+            <button type="submit">Cadastrar</button>
+      </form>
+
+      <script>
+            const formulario = document.querySelector('form')
+            const checked = document.querySelector('.checked')
+            const senhaRepetida = document.querySelector('#senhaRepetida')
+            const senha = document.querySelector('#senha')
+
+            formulario.addEventListener('submit', function (event) {
+                  if (!checked.checked) {
+                        alert("Você já é cliente não pode se cadastrar!")
+                        event.preventDefault()
+                  }
+
+                  if(senha.value != senhaRepetida.value){
+                        console.log(senhaRepetida)
+                        console.log(senha)
+                        alert("As senhas são diferentes!")
+                        event.preventDefault()
+                  }
+
+                  
+            })
+      </script>
+</body>
+
+</html>
