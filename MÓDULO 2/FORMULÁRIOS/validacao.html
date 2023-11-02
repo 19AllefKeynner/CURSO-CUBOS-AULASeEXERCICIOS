@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+            .container {
+                  background-color: rgb(91, 100, 117);
+                  height: 400px;
+                  width: 400px;
+                  padding: 20px;
+                  display: flex;
+                  flex-direction: column;
+                  border-radius: 10px;
+                  color: white;
+            }
+
+            h1 {
+                  margin-top: 80px;
+                  text-align: center;
+                  font-family: Arial, Helvetica, sans-serif;
+            }
+
+            label {
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-size: 18px;
+                  margin-top: 20px;
+            }
+
+            button {
+                  margin-top: 30px;
+                  padding: 5px;
+                  border: 0;
+                  color: white;
+                  background-color: rgb(54, 124, 255);
+                  cursor: pointer;
+                  transition: 0.5s;
+            }
+
+            button:hover {
+                  background-color: rgb(42, 115, 250);
+            }
+      </style>
+</head>
+
+<body>
+      <div class="container">
+            <h1>Validação não nativa</h1>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="Joao@gmail.com">
+            <label for="senha">Senha</label>
+            <input id="senha" type="password" name="senha" placeholder="Digite uma senha">
+
+            <button>Enviar</button>
+      </div>
+
+      <script>
+            const inputSenha = document.querySelector('#senha');
+            const inputEmail = document.querySelector('#email');
+
+            const listaLetras = 'abcdefghijklmnopqrstuvwxyz';
+            const listaNumeros = '0123456789';
+
+            inputSenha.addEventListener('change', function () {
+                  let senha = inputSenha.value;
+                  let temLetras = false;
+                  let temNumeros = false;
+                  let tamanho = false;
+
+                  for (let item of senha) {
+                        if (listaLetras.includes(item)) {
+                              temLetras = true;
+                        } else if (listaNumeros.includes(item)) {
+                              temNumeros = true;
+                        }
+                  }
+
+                  if (senha.length >= 8) {
+                        tamanho = true;
+                  }
+
+                  if (temLetras && temNumeros && tamanho) {
+                        inputSenha.style.border = '2px solid green';
+                  } else {
+                        if(!temNumeros === true ){
+                              inputSenha.style.border = '2px solid red';
+                              alert('Sua senha deve conter números!')
+                        }else if(!temLetras === true ){
+                              inputSenha.style.border = '2px solid red';
+                              alert('Sua senha deve conter letras!')
+                        }else if(!tamanho === true ){
+                              alert('Sua senha deve conter 8 dígitos pelo menos!')
+                              inputSenha.style.border = '2px solid red';
+                        }
+                  }
+            });
+
+      </script>
+</body>
+
+</html>

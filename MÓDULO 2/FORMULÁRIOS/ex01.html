@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Documento</title>
+      <style>
+            body{
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  background-color: cadetblue;
+                  height: 100vh;
+            }
+
+            form{
+                  background-color: rgb(228, 228, 228);
+                  width: 500px;
+                  height: 400px;
+                  border-radius: 10px;
+                  box-shadow: 5px 10px 50px black;
+                  display: flex;
+                  flex-direction: column;
+            }
+
+            h1{
+                  text-align: center;
+            }
+
+            input{
+                  margin-left: 20px;
+                  margin-right: 5px;
+                  border: 0;
+                  overflow: hidden;
+                  height: 30px;
+                  border-bottom: 1px solid black;
+                  margin-bottom: 5px;
+                  outline: none;
+            }
+
+            label{
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-size: 22px;
+                  margin-left: 10px;
+            }
+
+            button{
+                  padding: 10px 20px;
+                  width: 40%;
+                  margin-left: 30%;
+                  margin-top: 20px;
+                  background-color: rgb(0, 140, 255);
+                  color: white;
+                  font-size: 22px;
+                  border-radius: 5px;
+                  border: 0;
+                  cursor: pointer;
+
+            }
+
+
+      </style>
+</head>
+<body>
+      <form action="ex01.html">
+            <h1>Calculo de IMC</h1>
+            <label for="peso">Peso</label>
+            <input type="number" name="peso" id="peso" required>
+            <label for="altura">Altura</label>
+            <input type="number" name="altura" id="altura" required>
+            <button type="submit">CALCULAR</button>
+      </form>
+      
+</body>
+</html>
