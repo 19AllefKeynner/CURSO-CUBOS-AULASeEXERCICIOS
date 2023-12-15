@@ -9,6 +9,7 @@ app.use((req, res, next) => {
       console.log('O corpo da mensagem é: '+ req.body)
       next()
 })
+
 app.use(roteador)
 
 app.listen(9000)

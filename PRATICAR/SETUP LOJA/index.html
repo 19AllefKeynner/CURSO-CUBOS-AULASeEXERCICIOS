@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>documento</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+            integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+      * {
+            margin: 0;
+      }
+
+      :root {
+            --cor-destaque: #6207d9;
+      }
+
+      body {
+            background-color: rgba(0, 0, 0, 0.199);
+            overflow: hidden;
+      }
+
+      header {
+            height: 150px;
+            background-color: rgba(51, 51, 51, 0);
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            padding-top: 20px;
+      }
+
+      .container {
+            display: flex;
+            background-color: rgba(0, 0, 0, 0);
+            height: 700px;
+            width: 100%;
+            padding-top: 50px;
+      }
+
+      .menu {
+            background-color: rgba(0, 0, 255, 0);
+            height: 600px;
+            width: 300px;
+            display: flex;
+            align-items: center;
+      }
+
+      .menu-conteudo {
+            background-color: var(--cor-destaque);
+            margin-right: 1px;
+            width: 300px;
+            height: 600px;
+            border-radius: 0 20px 20px 0;
+            position: relative;
+            transition: margin-left 0.5s ease-in-out;
+            /* Transição da margem */
+      }
+
+      .menu-barra {
+            display: flex;
+            background-color: var(--cor-destaque);
+            color: white;
+            height: 100px;
+            align-items: center;
+            padding-left: 10px;
+            width: 20px;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
+
+      }
+
+      .coluna-historico,
+      .coluna-estoque {
+            position: relative;
+            height: 700px;
+            width: 400px;
+            background-color: var(--cor-destaque);
+            margin-left: 100px;
+            border-radius: 10px;
+      }
+
+      .coluna-historico h1 {
+            display: flex;
+            background-color: white;
+            width: 100%;
+            height: 40px;
+            border-radius: 10px 10px 0 0;
+            justify-content: center;
+            color: #4e3653;
+      }
+
+      .coluna-estoque h1 {
+            display: flex;
+            background-color: white;
+            width: 100%;
+            height: 40px;
+            border-radius: 10px 10px 0 0;
+            justify-content: center;
+            color: #4e3653;
+      }
+
+      .card {
+            width: 200px;
+            height: 130px;
+            background-color: var(--cor-destaque);
+            border-radius: 10px;
+            transition: 0.5s;
+      }
+
+      .card h1 {
+            display: flex;
+            background-color: white;
+            width: 100%;
+            height: 40px;
+            border-radius: 10px 10px 0 0;
+            justify-content: center;
+            color: #4e3653;
+
+      }
+
+      .card h3 {
+            display: flex;
+            background-color: rgba(100, 99, 99, 0.384);
+            width: 100%;
+            height: 90px;
+            border-radius: 0 0 10px 10px;
+            justify-content: center;
+            color: #ffffff;
+            align-items: center;
+            font-size: 22px;
+      }
+
+      .card h1 i {
+            margin-left: 10px;
+            margin-top: 3px;
+      }
+
+      .card:hover {
+            transform: translateY(-10px);
+      }
+
+      .menu-conteudo h2 {
+            padding-top: 10px;
+            display: flex;
+            background-color: white;
+            width: 100%;
+            height: 40px;
+            border-radius: 0 10px 0 0;
+            justify-content: center;
+            color: #4e3653;
+            font-size: 30px;
+      }
+
+      .menu-conteudo h2 i {
+            margin-left: 10px;
+            margin-top: 3px;
+      }
+
+      .titulos-hitorico {
+            color: #432b47;
+            display: flex;
+            font-size: 22px;
+            justify-content: center;
+            margin-top: 20px;
+      }
+
+      .titulos-hitorico hr {
+            margin-right: 20px;
+            margin-left: 20px;
+      }
+
+      .titulos-estoque {
+            color: #432b47;
+            display: flex;
+            font-size: 22px;
+            justify-content: center;
+            margin-top: 20px;
+      }
+
+      .titulos-estoque hr {
+            margin-right: 20px;
+            margin-left: 20px;
+      }
+
+      .botoes-menu {
+            display: flex;
+            flex-direction: column;
+            margin-top: 100px;
+      }
+
+      .botoes-menu button {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+            font-size: 22px;
+            width: 80%;
+            border: 0;
+            border-radius: 10px;
+            margin-left: 10%;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.5s;
+
+      }
+
+      .botoes-menu button:hover {
+            transform: translateX(10px);
+            background-color: rgba(255, 255, 255, 0.781);
+      }
+
+      .botoes-menu button i {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            width: 50px;
+            background-color: #68498d;
+            border-radius: 0 10px 10px 0;
+            color: #000000;
+      }
+
+      .botoes-estoque button {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+            font-size: 22px;
+            width: 50%;
+            border: 0;
+            border-radius: 10px;
+            margin-left: 25%;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: 0.5s;
+
+      }
+
+      .botoes-estoque button:hover {
+            transform: translateX(10px);
+            background-color: rgba(255, 255, 255, 0.781);
+      }
+
+      .botoes-estoque button i {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            width: 50px;
+            background-color: #68498d;
+            border-radius: 0 10px 10px 0;
+            color: #000000;
+      }
+
+      .infoMenu {
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.397);
+            margin-top: 5px;
+      }
+
+      .infoMenu:hover {
+            background-color: rgba(255, 255, 255, 0.24);
+      }
+
+      .infoMenu p {
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .infoEstoque {
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.397);
+            margin-top: 5px;
+      }
+
+      .infoEstoque:hover {
+            background-color: rgba(255, 255, 255, 0.24);
+      }
+
+      .infoEstoque p {
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+      }
+
+
+      .descricao {
+            padding: 5px 0;
+            background-color: rgba(175, 175, 175, 0.322);
+            width: 33%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+      }
+
+      .custo {
+            margin-left: 2px;
+            background-color: rgba(175, 175, 175, 0.322);
+            width: 22%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+      }
+
+      .lucro-info {
+            margin-left: 2px;
+            background-color: rgba(175, 175, 175, 0.322);
+            width: 24%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+      }
+
+      .tipo {
+            margin-left: 2px;
+            background-color: rgba(175, 175, 175, 0.322);
+            width: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+      }
+
+      .lista-menu {
+            overflow-y: auto;
+            max-height: 500px;
+            scrollbar-color: transparent transparent;
+            scrollbar-width: thin;
+      }
+
+      .lista-menu::-webkit-scrollbar {
+            width: 0px;
+      }
+
+      .lista-menu::-webkit-scrollbar-thumb {
+            background-color: transparent;
+      }
+
+      input[type="radio"] {
+            margin-right: 5px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            outline: none;
+            cursor: pointer;
+      }
+
+      input[type="radio"]:checked {
+            background-color: #432b47;
+      }
+
+      .container-filtro {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            background-color: #ffffff4f;
+      }
+
+      .container-filtro label {
+            color: #432b47;
+            font-size: 22px;
+            background-color: rgba(240, 248, 255, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+      }
+
+      .container-filtro-estoque {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            background-color: #ffffff4f;
+      }
+
+      .container-filtro-estoque label {
+            color: #432b47;
+            font-size: 22px;
+            background-color: rgba(240, 248, 255, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+      }
+
+      .lista-estoque {
+            overflow-y: auto;
+            max-height: 600px;
+            scrollbar-color: transparent transparent;
+            scrollbar-width: thin;
+      }
+
+      .lista-estoque::-webkit-scrollbar {
+            width: 0px;
+      }
+
+      .lista-estoque::-webkit-scrollbar-thumb {
+            background-color: transparent;
+      }
+
+      .nome {
+            padding: 5px 0;
+            background-color: rgba(175, 175, 175, 0.322);
+            width: 33%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+      }
+
+      .custo-produto {
+            margin-left: 2px;
+            background-color: rgba(175, 175, 175, 0.322);
+            width: 22%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+      }
+
+      .preco-estoque {
+            margin-left: 2px;
+            background-color: rgba(175, 175, 175, 0.322);
+            width: 24%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+      }
+
+      .tipo-estoque {
+            margin-left: 2px;
+            background-color: rgba(175, 175, 175, 0.322);
+            width: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+      }
+
+      #modal-add {
+            position: fixed;
+            background-color: #00000056;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+            display: none;
+      }
+
+      .container-modal-add {
+            width: 300px;
+            height: 200px;
+            background-color: #ffffff;
+            border-radius: 20px;
+      }
+
+      .container-modal-add h2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+      }
+
+      #excluir-add {
+            display: flex;
+            position: relative;
+            top: 10px;
+            left: 260px;
+            background-color: rgb(255, 255, 255);
+            border: 0;
+            padding: 5px;
+            color: #c21717;
+            font-size: 22px;
+            border-radius: 5px;
+            transition: 0.5s;
+            cursor: pointer;
+
+      }
+
+      #excluir-add:hover {
+            background-color: rgba(97, 96, 96, 0.575);
+      }
+
+      .botoes-add {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+      }
+
+      .botoes-add button {
+            margin-right: 10px;
+            width: 100px;
+            height: 50px;
+            cursor: pointer;
+            border: 0;
+            border-radius: 10px;
+            background-color: #3C7EFF;
+            color: #ffffff;
+            transition: 0.5s;
+      }
+
+      .botoes-add button:hover {
+            background-color: #2969e7;
+      }
+
+      #modal-info-produto {
+            position: fixed;
+            background-color: #00000056;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+            display: none;
+      }
+
+      .container-modal-info-produto {
+            width: 400px;
+            background-color: #ffffff;
+            height: 250px;
+            border-radius: 10px;
+      }
+
+      .container-modal-info-produto h1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+      }
+
+      .container-modal-info-produto label {
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-left: 20px;
+
+      }
+
+      .container-modal-info-produto input {
+            width: 300px;
+            margin-bottom: 10px;
+            border: 0;
+            border-bottom: 1px solid #4e3653;
+            outline: none;
+            color: #432b47;
+      }
+
+      #excluir-add2 {
+            display: flex;
+            position: relative;
+            top: 10px;
+            left: 360px;
+            background-color: rgb(255, 255, 255);
+            border: 0;
+            padding: 5px;
+            color: #c21717;
+            font-size: 22px;
+            border-radius: 5px;
+            transition: 0.5s;
+            cursor: pointer;
+
+      }
+
+      #excluir-add2:hover {
+            background-color: rgba(97, 96, 96, 0.575);
+      }
+
+      #add-estoque2 {
+            width: 40%;
+            height: 30px;
+            margin-top: 20px;
+            margin-left: 30%;
+            cursor: pointer;
+            border: 0;
+            border-radius: 10px;
+            background-color: #3C7EFF;
+            color: #ffffff;
+            transition: 0.5s;
+      }
+
+      #add-estoque2:hover {
+            background-color: #2969e7;
+      }
+
+      #add-historico {
+            width: 40%;
+            height: 30px;
+            margin-top: 20px;
+            margin-left: 30%;
+            cursor: pointer;
+            border: 0;
+            border-radius: 10px;
+            background-color: #3C7EFF;
+            color: #ffffff;
+            transition: 0.5s;
+      }
+
+      #add-historico:hover {
+            background-color: #2969e7;
+      }
+
+      #modal-info-hitorico {
+            position: fixed;
+            background-color: #00000056;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+            display: none;
+      }
+
+      .id-nao-encontrado {
+            position: fixed;
+            background-color: #00000056;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            transition: opacity 0.5s;
+      }
+
+      .resumo-nao-encontrado {
+            position: fixed;
+            background-color: #00000056;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            transition: opacity 0.5s;
+      }
+
+      .resgate-caixa {
+            position: fixed;
+            background-color: #00000056;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            transition: opacity 0.5s;
+      }
+
+      .resgate-lucro {
+            position: fixed;
+            background-color: #00000056;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            transition: opacity 0.5s;
+      }
+
+      .container-modal-info-hitorico {
+            width: 400px;
+            background-color: #ffffff;
+            height: 320px;
+            border-radius: 10px;
+      }
+
+      .container-modal-info-hitorico h1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+      }
+
+      .container-modal-info-hitorico label {
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-left: 30px;
+
+      }
+
+      .container-modal-info-hitorico input {
+            width: 260px;
+            margin-bottom: 10px;
+            border: 0;
+            border-bottom: 1px solid #4e3653;
+            outline: none;
+            color: #432b47;
+      }
+
+      #excluir-historico {
+            display: flex;
+            position: relative;
+            top: 10px;
+            left: 360px;
+            background-color: rgb(255, 255, 255);
+            border: 0;
+            padding: 5px;
+            color: #c21717;
+            font-size: 22px;
+            border-radius: 5px;
+            transition: 0.5s;
+            cursor: pointer;
+
+      }
+
+      #excluir-historico:hover {
+            background-color: rgba(97, 96, 96, 0.575);
+      }
+
+      .range-container {
+            text-align: center;
+      }
+
+      input[type="range"] {
+            width: 100px;
+            margin-top: 10px;
+            margin-left: 20px;
+      }
+
+      #output {
+            display: block;
+      }
+
+      .range-container {
+            display: flex;
+
+            align-items: center;
+      }
+
+      #cor-entradas {
+            color: #21FF46;
+      }
+
+      #cor-saidas {
+            color: #FF332B;
+      }
+
+      #cor-transacoes {
+            color: #3356FF;
+      }
+
+      #input-id {
+            width: 150px;
+      }
+
+      #adicionar-id {
+            background-color: #302b47;
+            border-radius: 5px;
+            color: white;
+            border: 0;
+            height: 30px;
+            width: 50px;
+            cursor: pointer;
+            transition: 0.5s;
+      }
+
+      #adicionar-id:hover {
+            background-color: #302b47dc;
+      }
+
+      .container-id-nao-encontrado {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            font-size: 22px;
+            border-radius: 5px;
+      }
+
+      .container-id-nao-encontrado i {
+            color: #FF332B;
+            font-size: 28px;
+            margin-bottom: 10px;
+      }
+
+      .container-nao-encontrado {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            font-size: 22px;
+            border-radius: 5px;
+      }
+
+      .container-resgate-lucro {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            width: 350px;
+            font-size: 22px;
+            border-radius: 5px;
+      }
+
+      .container-resgate-caixa {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 350px;
+            padding: 30px;
+            font-size: 22px;
+            border-radius: 5px;
+      }
+
+      .container-resgate-lucro i {
+            color: #FF332B;
+            font-size: 28px;
+            margin-bottom: 10px;
+      }
+
+      .container-resgate-lucro button {
+            background-color: #3C7EFF;
+            font-size: 22px;
+            margin-top: 10px;
+            border-radius: 3px;
+            border: 0;
+            color: white;
+            width: 120px;
+            height: 40px;
+            cursor: pointer;
+      }
+
+      .container-resgate-caixa button {
+            background-color: #3C7EFF;
+            font-size: 22px;
+            margin-top: 10px;
+            border-radius: 3px;
+            border: 0;
+            color: white;
+            width: 120px;
+            height: 40px;
+            cursor: pointer;
+      }
+
+      .container-resgate-caixa i {
+            color: #FF332B;
+            font-size: 28px;
+            margin-bottom: 10px;
+      }
+
+      .container-nao-encontrado i {
+            color: #FF332B;
+            font-size: 28px;
+            margin-bottom: 10px;
+      }
+
+      .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            justify-content: center;
+            align-items: center;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            height: 150px;
+            width: 300px;
+            border-radius: 10px;
+      }
+
+      .modal-content p {
+            margin-bottom: 5px;
+      }
+
+      .modal-content h1 {
+            margin-bottom: 15px;
+            text-align: center;
+      }
+
+
+      .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            transition: 0.5s;
+      }
+
+      .close:hover,
+      .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+      }
+
+      .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            height: 120px;
+            width: 200px;
+      }
+
+      .modal-content i {
+            font-size: 22px;
+            color: #FF332B;
+      }
+
+      .modal-content p {
+            font-size: 20px;
+            text-align: center;
+      }
+
+      .seu-modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            overflow: auto;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .seu-modal .modal-content {
+            margin-top: 260px;
+            background-color: #fefefe;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 30%;
+            text-align: center;
+      }
+
+      .seu-modal .fechars {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            transition: 0.5s;
+      }
+
+      .seu-modal .fechars:hover,
+      .seu-modal .fechars:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+      }
+
+      .seu-modal #valorInput {
+            margin: 10px 0;
+            padding: 8px;
+            width: 80%;
+      }
+
+      .seu-modal #btnConfirmar {
+            padding: 10px;
+            background-color: #4b6fe7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+      }
+
+      .modalExcluir {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .modalExcluir .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            text-align: center;
+      }
+
+      .modalExcluir .fechar {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+      }
+
+      .modalExcluir .fechar:hover,
+      .modalExcluir .fechar:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+      }
+
+      .modalExcluir #btnConfirmarExclusao,
+      .modalExcluir #btnCancelarExclusao {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+      }
+</style>
+
+<body>
+      <header>
+            <div class="card lucro">
+                  <h1>Caixa <i class="fa-solid fa-piggy-bank"></i></h1>
+                  <h3 id="caixatext">R$ 1,000</h3>
+            </div>
+            <div class="card caixa">
+                  <h1>Lucro <i class="fa-solid fa-coins"></i></h1>
+                  <h3 id="lucrotext">R$ 1,000</h3>
+            </div>
+            <div class="card saidas">
+                  <h1>Saídas <i class="fa-solid fa-arrow-trend-down"></i></h1>
+                  <h3 id="saidastext">R$ 1,000</h3>
+            </div>
+            <div class="card pecas">
+                  <h1>Peças <i class="fa-solid fa-chart-simple"></i></h1>
+                  <h3 id="quantPecas"></h3>
+            </div>
+      </header>
+      <div class="container">
+            <div class="menu">
+                  <div class="menu-conteudo" id="menu-conteudo">
+                        <h2>Menu <i class="fa-solid fa-bars"></i></h2>
+                        <div class="botoes-menu">
+                              <button id="adicionar">
+                                    <p>Adicionar</p> <i class="fa-solid fa-plus"></i>
+                              </button>
+                              <button id="resgateLucro">
+                                    <p>Resgatar lucro</p> <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                              </button>
+                              <button id="resgateCaixa">
+                                    <p>Resgatar caixa</p> <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                              </button>
+                              <button>
+                                    <p>Próximo pedido</p> <i class="fa-solid fa-cart-shopping"></i>
+                              </button>
+                              <button id="calculadora">
+                                    <p>Calcular preços</p> <i class="fa-solid fa-calculator"></i>
+                              </button>
+                              <button id="resumoMes">
+                                    <p>Resumo mês</p> <i class="fa-solid fa-mug-hot"></i>
+                              </button>
+                        </div>
+                  </div>
+                  <div class="menu-barra" id="barra">
+                        <i class="fa-solid fa-angle-left"></i>
+                  </div>
+            </div>
+            <div class="coluna-historico">
+                  <h1>Historíco</h1>
+                  <div class="titulos-hitorico">
+                        <p>Descrição</p>
+                        <hr>
+                        <p>Custo</p>
+                        <hr>
+                        <p>Lucro</p>
+                        <hr>
+                        <p>Tipo</p>
+
+                  </div>
+                  <hr>
+                  <div class="lista-menu">
+
+                  </div>
+                  <div class="container-filtro">
+                        <label>
+                              <input type="radio" name="opcao" value="opcao1">
+                              Vendas
+                        </label>
+                        <br>
+                        <label>
+                              <input type="radio" name="opcao" value="opcao2">
+                              Saídas
+                        </label>
+                        <br>
+                        <label>
+                              <input type="radio" name="opcao" value="opcao3">
+                              Transações
+                        </label>
+                        <label>
+                              <input type="radio" name="opcao" value="opcao4">
+                              Todas
+                        </label>
+                  </div>
+            </div>
+            <div class="coluna-estoque">
+                  <h1>Estoque</h1>
+                  <div class="titulos-estoque">
+                        <p>Produto</p>
+                        <hr>
+                        <p>Custo</p>
+                        <hr>
+                        <p>Preço</p>
+                        <hr>
+                        <p>ID</p>
+                  </div>
+                  <hr>
+                  <div class="lista-estoque">
+
+                  </div>
+                  <div class="container-filtro-estoque">
+                        <label>
+                              <input type="radio" name="opcao1" value="opcao1">
+                              Vestidos
+                        </label>
+                        <br>
+                        <label>
+                              <input type="radio" name="opcao1" value="opcao2">
+                              Saías
+                        </label>
+                        <br>
+                        <label>
+                              <input type="radio" name="opcao1" value="opcao3">
+                              Croppeds
+                        </label>
+                        <label>
+                              <input type="radio" name="opcao1" value="opcao4">
+                              Todos
+                        </label>
+                  </div>
+
+            </div>
+            <div id="modal-add">
+                  <div class="container-modal-add">
+                        <button id="excluir-add"><i class="fa-solid fa-rectangle-xmark"></i></button>
+                        <h2>Adicionar</h2>
+                        <div class="botoes-add">
+                              <button id="add-estoque">Produto</button>
+                              <button id="add-venda">Vendas ou saídas</button>
+                        </div>
+                  </div>
+            </div>
+            <div id="modal-info-produto">
+                  <div class="container-modal-info-produto">
+                        <button id="excluir-add2"><i class="fa-solid fa-rectangle-xmark"></i></button>
+                        <h1>Adicionar produto</h1>
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome-produto" placeholder="Digite o nome do produto:">
+                        <label for="custo">Custo</label>
+                        <input type="number" name="custo" id="custo-produto"
+                              placeholder="Informe o custo do seu produto:">
+                        <label for="preco">Preço</label>
+                        <input type="number" name="preco" id="preco-produto"
+                              placeholder="Informe o valor do seu produto:">
+                        <button id="add-estoque2">Adicionar</button>
+                  </div>
+            </div>
+            <div id="modal-info-hitorico">
+                  <div class="container-modal-info-hitorico">
+                        <button id="excluir-historico"><i class="fa-solid fa-rectangle-xmark"></i></button>
+                        <h1>Nova transação</h1>
+                        <label for="nome">Descrição</label>
+                        <input type="text" id="nome-historico" placeholder="Digite a descrição:">
+                        <label for="custo">Custo</label>
+                        <input type="number" name="custo" id="custo-historico" placeholder="Informe o custo::">
+                        <label for="preco">Lucro</label>
+                        <input type="number" name="preco" id="preco-historico"
+                              placeholder="Informe o lucro que teve: (caso tenha)">
+                        <div class="range-container">
+                              <label id="output">Entradas</label>
+                              <input type="range" id="myRange" min="0" max="100" value="50" step="1">
+
+                        </div>
+                        <div class="add-id">
+                              <label for="id">Add pelo id</label>
+                              <input id="input-id" type="text" placeholder="Informe o id do produto:">
+                              <button id="adicionar-id">Add</button>
+                        </div>
+                        <button id="add-historico">Adicionar</button>
+                  </div>
+            </div>
+            <div class="id-nao-encontrado">
+                  <div class="container-id-nao-encontrado">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <p>Produto não encontrado!</p>
+                  </div>
+            </div>
+            <div class="resumo-nao-encontrado">
+                  <div class="container-nao-encontrado">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <p>Ainda não há resumos!</p>
+                  </div>
+            </div>
+            <div id="myModal" class="modal">
+                  <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h1 id="monthName">Nome do Mês</h1>
+                        <p>Caixa do Mês: <span id="monthIncome">0</span></p>
+                        <p>Lucro: <span id="profit">0</span></p>
+                        <p>Saídas: <span id="expenses">0</span></p>
+                  </div>
+            </div>
+            <div class="resgate-lucro">
+                  <div class="container-resgate-lucro">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <p>quer mesmo resgatar o lucro? essa operação não pode ser revertida!</p>
+                        <button id="resgatarLucro">Resgatar</button>
+                  </div>
+            </div>
+            <div class="resgate-caixa">
+                  <div class="container-resgate-caixa">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <p>quer mesmo resgatar o caixa? essa operação não pode ser revertida!</p>
+                        <button id="resgatarCaixa">Resgatar</button>
+                  </div>
+            </div>
+
+            <div id="modal" class="modal">
+                  <div class="modal-content">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <h1>Atenção</h1>
+                        <p>Impossível resgatar. Saldo insuficiente.</p>
+                  </div>
+            </div>
+
+            <div id="modalValor" class="seu-modal">
+                  <div class="modal-content">
+                        <span class="fechars">&times;</span>
+                        <h1>Valor</h1>
+                        <input type="number" id="valorInput" placeholder="Digite o valor">
+                        <button id="btnConfirmar">Confirmar</button>
+                  </div>
+            </div>
+            <div id="modalExclusao" class="modalExcluir">
+                  <div class="modal-content">
+                        <h1>Tem certeza que deseja apagar este produto?</h1>
+                        <button id="btnConfirmarExclusao">Confirmar</button>
+                        <button id="btnCancelarExclusao">Cancelar</button>
+                  </div>
+            </div>
+
+      </div>
+
+      <script>
+            const naoEncontrado = document.querySelector('.resumo-nao-encontrado')
+            const resumoDoMes = document.querySelector('#resumoMes')
+            const infoMenu = document.querySelectorAll('.infoMenu')
+            const infoEstoque = document.querySelectorAll('.infoEstoque')
+            const barra = document.getElementById('barra')
+            const adicionar = document.querySelector('#adicionar')
+            const modalAdd = document.querySelector('#modal-add')
+            const excluirAdd2 = document.querySelector('#excluir-add2')
+            const excluirAdd = document.querySelector('#excluir-add')
+            const modalInfoProduto = document.querySelector('#modal-info-produto')
+            const addEstoque = document.querySelector('#add-estoque')
+            const modalHistorico = document.querySelector('#modal-info-hitorico')
+            const addEstoque2 = document.querySelector('#add-estoque2')
+            const nomeProduto = document.querySelector('#nome-produto')
+            const custoProduto = document.querySelector('#custo-produto')
+            const precoProduto = document.querySelector('#preco-produto')
+            const listaEstoque = document.querySelector('.lista-estoque')
+            const listaEstoqueAll = document.querySelectorAll('.lista-estoque')
+            const listaMenu = document.querySelector('.lista-menu')
+            const quantPecas = document.querySelector('#quantPecas')
+            const addVenda = document.querySelector('#add-venda')
+            const excluirHistorico = document.querySelector('#excluir-historico')
+            const custoHitorico = document.querySelector('#custo-hitorico')
+            const precoHitorico = document.querySelector('#preco-hitorico')
+            const rangeInput = document.getElementById('myRange');
+            const output = document.getElementById('output');
+            const addHistorico = document.querySelector("#add-historico")
+            const nomeHistorico = document.querySelector("#nome-historico")
+            const calculadora = document.querySelector('#calculadora')
+            const idNaoEncontrado = document.querySelector('.id-nao-encontrado')
+            const adicionarId = document.querySelector('#adicionar-id')
+            const saidasText = document.querySelector('#saidastext')
+            const lucroText = document.querySelector('#lucrotext')
+            const caixaText = document.querySelector('#caixatext')
+            const inputId = document.querySelector('#input-id')
+            const modal = document.getElementById('myModal');
+            const closeButton = document.getElementsByClassName('close')[0];
+            const resgateLucro = document.querySelector('#resgateLucro')
+            const resgateCaixa = document.querySelector('#resgateCaixa')
+            const modalResgateLucro = document.querySelector('.resgate-lucro')
+            const modalResgateCaixa = document.querySelector('.resgate-caixa')
+            const butonResgateLucro = document.querySelector('#resgatarLucro')
+            const butonResgateCaixa = document.querySelector('#resgatarCaixa')
+            const modalSaldoLucro = document.querySelector('#modal')
+            const confirmarCaixa = document.querySelector('#btnConfirmar')
+            const inputCaixa = document.querySelector('#valorInput')
+
+            // Adiciona um ouvinte de eventos ao botão de fechar
+            document.getElementsByClassName("fechars")[0].addEventListener("click", fecharModal);
+
+
+            function cookieExiste(nomeDoCookie) {
+                  const cookies = document.cookie;
+
+                  const regex = new RegExp('(^|;\\s*)' + nomeDoCookie + '=');
+
+                  return regex.test(cookies);
+            }
+
+            if (!cookieExiste('resgateLucro')) {
+                  document.cookie = "resgateLucro=0; expires=" + new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toUTCString() + "; path=/";
+
+            }
+
+            if (!cookieExiste('resgateCaixa')) {
+                  document.cookie = "resgateCaixa=0; expires=" + new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toUTCString() + "; path=/";
+
+            }
+
+            const valorDoCookie = document.cookie.replace(/(?:(?:^|.*;\s*)resgateLucro\s*=\s*([^;]*).*$)|^.*$/, "$1");
+            const valorNumerico = parseInt(valorDoCookie);
+
+            const valorDoCookieCaixa = document.cookie.replace(/(?:(?:^|.*;\s*)resgateCaixa\s*=\s*([^;]*).*$)|^.*$/, "$1");
+            const valorNumericoCaixa = parseInt(valorDoCookieCaixa);
+
+            rangeInput.addEventListener('input', updateLabel);
+
+            function updateLabel() {
+                  const value = rangeInput.value;
+
+                  if (value < 50) {
+                        output.textContent = 'Saídas';
+                  } else {
+                        output.textContent = 'Entradas';
+
+                  }
+            }
+
+            function moveElement() {
+                  var element = document.getElementById('menu-conteudo');
+                  var currentPosition = element.getBoundingClientRect().left;
+                  element.style.marginLeft = '0px'; // Move para a margem 0px
+            }
+
+            function moveElementContrario() {
+                  var element = document.getElementById('menu-conteudo');
+                  var currentPosition = element.getBoundingClientRect().left;
+                  element.style.marginLeft = '-300px'; // Move para a margem 0px
+            }
+
+            function criarCookie(nome, valor, dias) {
+                  var data = new Date();
+                  data.setTime(data.getTime() + (dias * 24 * 60 * 60 * 1000));
+                  var expires = "expires=" + data.toUTCString();
+                  document.cookie = nome + "=" + JSON.stringify(valor) + ";" + expires + ";path=/";
+            }
+
+            function excluirCookieNoPrimeiroDiaDoMes(cookieNome) {
+                  // Obtém a data atual
+                  const hoje = new Date();
+                  const numeroDoMes = hoje.getMonth();
+
+                  const nomesDosMeses = [
+                        'Janeiro', 'Fevereiro', 'Março', 'Abril',
+                        'Maio', 'Junho', 'Julho', 'Agosto',
+                        'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+                  ];
+
+                  const nomeDoMesAtual = nomesDosMeses[numeroDoMes];
+
+                  if (hoje.getDate() === 1) {
+                        const ultimoDiaMesAtual = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0);
+
+                        document.cookie = `${cookieNome}=; expires=${ultimoDiaMesAtual.toUTCString()}; path=/`;
+
+
+                        function criarCookieResumoDoMes() {
+                              const resumoDoMes = {
+                                    nomeDoMes: nomeDoMesAtual,
+                                    saidas: Number(saidasText.textContent.slice(2)),
+                                    lucro: Number(lucroText.textContent.slice(2)) + valorNumerico,
+                                    caixa: Number(caixaText.textContent.slice(2)) + valorDoCookieCaixa,
+                              };
+
+                              // Converte o objeto para uma string JSON
+                              const resumoStringificado = JSON.stringify(resumoDoMes);
+
+                              // Cria o cookie com o nome "resumoDoMes" e o valor do objeto stringificado
+                              document.cookie = `resumoDoMes=${resumoStringificado}; expires=${getProximoMesExpiracao()}; path=/`;
+
+                              console.log('Cookie "resumoDoMes" criado com sucesso.');
+                        }
+
+                        console.log(`Cookie ${cookieNome} excluído no primeiro dia do mês.`);
+                  } else {
+                        console.log(`Não é o primeiro dia do mês. Nenhum cookie foi excluído.`);
+                  }
+            }
+
+            function lerCookie(nome) {
+                  var nomeC = nome + "=";
+                  var decodedCookie = decodeURIComponent(document.cookie);
+                  var partes = decodedCookie.split(';');
+                  for (var i = 0; i < partes.length; i++) {
+                        var parte = partes[i];
+                        while (parte.charAt(0) == ' ') {
+                              parte = parte.substring(1);
+                        }
+                        if (parte.indexOf(nomeC) == 0) {
+                              return JSON.parse(parte.substring(nomeC.length, parte.length));
+                        }
+                  }
+                  return null;
+            }
+
+            function excluirItemPorId(cookieNome, idParaExcluir) {
+                  // Obtém o valor atual do cookie
+                  let cookieValor = document.cookie.replace(new RegExp("(?:(?:^|.*;\\s*)" + cookieNome + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1");
+
+                  // Verifica se o cookie existe
+                  if (cookieValor) {
+                        // Converte o valor do cookie de string para objeto
+                        let listaDeObjetos = JSON.parse(cookieValor);
+
+                        // Filtra a lista para excluir o item com o ID fornecido
+                        listaDeObjetos = listaDeObjetos.filter(item => item.id !== idParaExcluir);
+
+                        // Converte a lista de volta para string e atualiza o cookie
+                        document.cookie = `${cookieNome}=${JSON.stringify(listaDeObjetos)}; path=/`;
+
+                        console.log(`Item com ID ${idParaExcluir} excluído com sucesso.`);
+                  } else {
+                        console.log(`O cookie ${cookieNome} não foi encontrado.`);
+                  }
+            }
+
+            function gerarIdUnico() {
+                  return Math.floor(Math.random() * 100) + 1;
+            }
+
+            function cookieExiste(nomeDoCookie) {
+                  const cookies = document.cookie.split(';');
+
+                  for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+
+                        // Verifica se o cookie começa com o nome desejado
+                        if (cookie.indexOf(nomeDoCookie + '=') === 0) {
+                              return true;
+                        }
+                  }
+
+                  return false;
+            }
+
+            function getCookie(name) {
+                  const value = `; ${document.cookie}`;
+                  const parts = value.split(`; ${name}=`);
+                  if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            function mostrarModal() {
+                  const modal = document.getElementById("modalValor");
+                  modal.style.display = "block";
+            }
+
+            function fecharModal() {
+                  const modal = document.getElementById("modalValor");
+                  modal.style.display = "none";
+            }
+
+            function exibirModalConfirmarExclusao(idProduto) {
+                  const modalExclusao = document.getElementById("modalExclusao");
+                  modalExclusao.style.display = "block";
+
+                  document.getElementById("btnConfirmarExclusao").addEventListener("click", function () {
+                        const cookieNome = 'estoque';
+                        excluirItemPorId(cookieNome, Number(idProduto))
+                        fecharModalExclusao();
+                  });
+
+                  document.getElementById("btnCancelarExclusao").addEventListener("click", fecharModalExclusao);
+            }
+
+            function fecharModalExclusao() {
+                  const modalExclusao = document.getElementById("modalExclusao");
+                  modalExclusao.style.display = "none";
+            }
+
+
+            // Fecha o modal se o usuário clicar fora da área do modal
+            window.addEventListener("click", function (event) {
+                  const modal = document.getElementById("modal");
+                  if (event.target == modal) {
+                        fecharModal();
+                  }
+            });
+
+            let cont = 0
+            barra.addEventListener('click', function () {
+                  if (cont === 1) {
+                        moveElement()
+                        setTimeout(function () {
+                              var elemento = document.getElementById('barra');
+                              elemento.innerHTML = '<i class="fa-solid fa-angle-left"></i>';
+                        }, 300);
+
+                        cont = 0
+                  } else if (cont === 0) {
+                        moveElementContrario()
+                        setTimeout(function () {
+                              var elemento = document.getElementById('barra');
+                              elemento.innerHTML = '<i class="fa-solid fa-angle-right"></i>';
+                        }, 300);
+
+                        cont++
+                  }
+
+            })
+
+
+
+            adicionar.addEventListener('click', function () {
+                  modalAdd.style.display = 'flex'
+            })
+
+            excluirAdd.addEventListener('click', function () {
+                  modalAdd.style.display = 'none'
+            })
+
+            addEstoque.addEventListener('click', function () {
+                  modalInfoProduto.style.display = 'flex'
+                  modalAdd.style.display = 'none'
+            })
+
+            excluirHistorico.addEventListener('click', function () {
+                  modalHistorico.style.display = 'none'
+                  modalAdd.style.display = 'none'
+            })
+
+
+
+            excluirAdd2.addEventListener('click', function () {
+                  modalInfoProduto.style.display = 'none'
+            })
+
+            addVenda.addEventListener('click', function () {
+                  modalHistorico.style.display = 'flex'
+                  modalAdd.style.display = 'none'
+            })
+
+            calculadora.addEventListener('click', function () {
+                  window.location.href = 'index2.html'
+            })
+
+            addEstoque2.addEventListener('click', function () {
+                  modalInfoProduto.style.display = 'none'
+                  let nome = document.querySelector('#nome-produto')
+                  let produtoPreco = document.querySelector('#preco-produto')
+                  let custoProduto = document.querySelector('#custo-produto')
+
+                  if (nome && produtoPreco && custoProduto) {
+                        const custoValue = custoProduto.value
+                        const precoValue = produtoPreco.value
+                        const nomeValue = nome.value
+
+                        let estoqueExistente = lerCookie('estoque') || [];
+
+                        const novoProduto = {
+                              nome: nomeValue,
+                              custoEstoque: custoValue,
+                              precoEstoque: precoValue,
+                              id: gerarIdUnico(),
+                        };
+
+                        while (estoqueExistente.some(produto => produto.id === novoProduto.id)) {
+                              novoProduto.id = gerarIdUnico();
+                        }
+
+                        estoqueExistente.push(novoProduto);
+                        criarCookie('estoque', estoqueExistente, 30);
+                  } else {
+                        console.error("Um ou mais elementos não foram encontrados.");
+                  }
+            })
+
+            let estoqueAtualizado = lerCookie('estoque') || [];
+            let listaHTMLEstoque = '';
+            let contPecas = 0
+
+
+            for (let item of estoqueAtualizado) {
+                  listaHTMLEstoque +=
+                        `
+                        <div class="infoEstoque" data-custo="${Number(item.custoEstoque)}" data-lucro="${Number(item.precoEstoque) - Number(item.custoEstoque)}">
+                              <p class="nome">${item.nome}</p>
+                              <p class="custo-produto">R$ ${item.custoEstoque}</p>
+                              <p class="preco-estoque">R$ ${item.precoEstoque}</p>
+                              <p class="tipo-estoque">${item.id}</p>
+                        </div>
+                        `;
+                  contPecas++
+
+            }
+
+            quantPecas.textContent = `${contPecas} peças`
+            listaEstoque.innerHTML = listaHTMLEstoque;
+
+
+
+            addHistorico.addEventListener('click', function () {
+                  modalHistorico.style.display = 'none';
+
+                  const custoHistoricoInput = document.querySelector('#custo-historico');
+                  const precoHistoricoInput = document.querySelector('#preco-historico');
+                  const nomeHistoricoInput = document.querySelector("#nome-historico");
+
+                  // Verificar se os elementos foram encontrados antes de acessar suas propriedades
+                  if (custoHistoricoInput && precoHistoricoInput && nomeHistoricoInput) {
+                        const custoHistoricoValue = custoHistoricoInput.value;
+                        const precoHistoricoValue = precoHistoricoInput.value;
+                        const nomeHistoricoValue = nomeHistoricoInput.value;
+
+                        let historicoExistente = lerCookie('historico') || [];
+
+                        const novoProduto = {
+                              descricao: nomeHistoricoValue,
+                              custoHistorico: custoHistoricoValue,
+                              precoHistorico: precoHistoricoValue,
+                              tipo: output.textContent || '', // Certifique-se de que output está definido
+                        };
+
+                        historicoExistente.push(novoProduto);
+                        criarCookie('historico', historicoExistente, 30);
+                  } else {
+                        console.error("Um ou mais elementos não foram encontrados.");
+                  }
+
+            });
+
+
+            adicionarId.addEventListener('click', function () {
+                  let estoqueAtualizado = lerCookie('estoque') || [];
+
+                  let custoHistoricoInput;
+                  let precoHistoricoInput;
+                  let nomeHistoricoInput;
+                  let cont = 0;
+
+                  for (let item of estoqueAtualizado) {
+                        if (item.id === Number(inputId.value)) {
+                              custoHistoricoInput = item.custoEstoque;
+                              precoHistoricoInput = item.precoEstoque;
+                              nomeHistoricoInput = "Venda";
+                              cont += 1;
+                        }
+                  }
+
+                  if (cont >= 1) {
+                        modalHistorico.style.display = 'none';
+
+                        // Verificar se os elementos foram encontrados antes de acessar suas propriedades
+                        if (custoHistoricoInput !== undefined && precoHistoricoInput !== undefined && nomeHistoricoInput !== undefined) {
+                              // Remova o .value das seguintes linhas, pois custoHistoricoInput, precoHistoricoInput, e nomeHistoricoInput já são valores
+                              const custoHistoricoValue = custoHistoricoInput;
+                              const precoHistoricoValue = precoHistoricoInput;
+                              const nomeHistoricoValue = nomeHistoricoInput;
+
+                              let historicoExistente = lerCookie('historico') || [];
+
+                              const novoProduto = {
+                                    descricao: nomeHistoricoValue,
+                                    custoHistorico: custoHistoricoValue,
+                                    precoHistorico: precoHistoricoValue - custoHistoricoValue,
+                                    tipo: "Entradas",
+                              };
+
+                              historicoExistente.push(novoProduto);
+                              criarCookie('historico', historicoExistente, 30);
+                        } else {
+                              console.error("Um ou mais elementos não foram encontrados.");
+                        }
+
+                        const cookieNome = 'estoque';
+                        const idParaExcluir = Number(inputId.value);
+                        excluirItemPorId(cookieNome, idParaExcluir);
+                  } else {
+                        idNaoEncontrado.style.display = 'flex';
+                        setTimeout(() => {
+                              idNaoEncontrado.style.display = 'none';
+                        }, 3000);
+                  }
+
+            });
+
+            resgateLucro.addEventListener('click', function () {
+                  let lucroAtual = lucroText.textContent
+                  modalResgateLucro.style.display = 'flex'
+
+                  if (Number(lucroAtual.slice(2)) > 0) {
+                        butonResgateLucro.addEventListener('click', function () {
+                              const valorDoCookieAtual = document.cookie.replace(/(?:(?:^|.*;\s*)resgateLucro\s*=\s*([^;]*).*$)|^.*$/, "$1");
+                              const valorNumericoAtual = parseInt(valorDoCookieAtual);
+                              const novoValor = Number(lucroAtual.slice(2));
+                              document.cookie = "resgateLucro=" + novoValor + "; expires=" + new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toUTCString() + "; path=/";
+                              const valorDoCookieAtualizado = document.cookie.replace(/(?:(?:^|.*;\s*)resgateLucro\s*=\s*([^;]*).*$)|^.*$/, "$1");
+                              const valorNumericoAtualizado = parseInt(valorDoCookieAtualizado);
+
+                              const custoHistoricoValue = Number(lucroAtual.slice(2));
+                              const precoHistoricoValue = '';
+                              const nomeHistoricoValue = 'Res. Lucro';
+
+                              let historicoExistente = lerCookie('historico') || [];
+
+                              const novoProduto = {
+                                    descricao: nomeHistoricoValue,
+                                    custoHistorico: custoHistoricoValue,
+                                    precoHistorico: precoHistoricoValue,
+                                    tipo: '', // Certifique-se de que output está definido
+                              };
+
+                              historicoExistente.push(novoProduto);
+                              criarCookie('historico', historicoExistente, 30);
+
+                              modalResgateLucro.style.display = 'none'
+                        })
+                  } else {
+                        butonResgateLucro.addEventListener('click', function () {
+                              modalSaldoLucro.style.display = 'flex';
+                              setTimeout(() => {
+                                    modalSaldoLucro.style.display = 'none';
+                              }, 3000);
+                              modalResgateLucro.style.display = 'none'
+                        })
+
+                  }
+
+            })
+
+            resgateCaixa.addEventListener('click', function () {
+                  modalResgateCaixa.style.display = 'flex'
+
+                  if (Number((caixaText.textContent).slice(2)) > 0) {
+                        butonResgateCaixa.addEventListener('click', function () {
+                              mostrarModal()
+                              modalResgateCaixa.style.display = 'none'
+
+                              if (Number(inputCaixa.value) > 0) {
+                                    confirmarCaixa.addEventListener('click', function () {
+                                          const valorDoCookieAtual = document.cookie.replace(/(?:(?:^|.*;\s*)resgateCaixa\s*=\s*([^;]*).*$)|^.*$/, "$1");
+                                          const valorNumericoAtual = parseInt(valorDoCookieAtual);
+                                          const novoValor = Number(inputCaixa.value);
+                                          document.cookie = "resgateCaixa=" + novoValor + "; expires=" + new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toUTCString() + "; path=/";
+                                          const valorDoCookieAtualizado = document.cookie.replace(/(?:(?:^|.*;\s*)resgateCaixa\s*=\s*([^;]*).*$)|^.*$/, "$1");
+                                          const valorNumericoAtualizado = parseInt(valorDoCookieAtualizado);
+
+                                          const custoHistoricoValue = inputCaixa.value;
+                                          const precoHistoricoValue = '';
+                                          const nomeHistoricoValue = 'Res. Caixa';
+
+                                          let historicoExistente = lerCookie('historico') || [];
+
+                                          const novoProduto = {
+                                                descricao: nomeHistoricoValue,
+                                                custoHistorico: custoHistoricoValue,
+                                                precoHistorico: precoHistoricoValue,
+                                                tipo: '', // Certifique-se de que output está definido
+                                          };
+
+                                          historicoExistente.push(novoProduto);
+                                          criarCookie('historico', historicoExistente, 30);
+                                          fecharModal()
+                                          modalResgateCaixa.style.display = 'none'
+                                    })
+                              } else {
+                                    mostrarModal()
+                                    confirmarCaixa.addEventListener('click', function () {
+                                          fecharModal()
+                                          modalResgateCaixa.style.display = 'none'
+                                    })
+
+                              }
+
+                        })
+                  } else {
+                        butonResgateCaixa.addEventListener('click', function () {
+                              modalSaldoLucro.style.display = 'flex';
+                              setTimeout(() => {
+                                    modalSaldoLucro.style.display = 'none';
+                              }, 3000);
+                              modalResgateCaixa.style.display = 'none'
+
+                        })
+                  }
+
+            })
+
+            let historicoAtualizado = lerCookie('historico') || [];
+            let listaHTML = '';
+            let corIcon = ''
+
+            let saidasTexto = 0
+            let caixaTexto = 0
+            let lucroTexto = 0
+
+
+            for (let item of historicoAtualizado) {
+                  // Mapear os tipos para ícones
+                  if (item.tipo === 'Saídas') {
+                        item.precoHistorico = '--'
+                        item.tipo = '<i class="fa-solid fa-arrow-trend-down"></i>';
+                        corIcon = 'cor-saidas'
+                        saidasTexto += Number(item.custoHistorico)
+
+                  } else if (item.tipo === 'Entradas') {
+                        item.tipo = '<i class="fa-solid fa-arrow-trend-up"></i>';
+                        corIcon = 'cor-entradas'
+                        item.precoHistorico = `R$ ${item.precoHistorico}`
+                        caixaTexto += Number(item.custoHistorico)
+                        lucroTexto += Number((item.precoHistorico).slice(2))
+                  } else {
+                        item.tipo = '<i class="fa-solid fa-arrow-right-arrow-left"></i>';
+                        corIcon = 'cor-transacoes'
+                        item.precoHistorico = '--'
+                  }
+
+                  // Construir a string HTML para cada item
+                  listaHTML +=
+                        `
+                        <div class="infoMenu" id="${corIcon}">
+                              <p class="descricao">${item.descricao}</p>
+                              <p class="custo">R$ ${item.custoHistorico}</p>
+                              <p class="lucro-info">${item.precoHistorico}</p>
+                              <p class="tipo">${item.tipo}</p>
+                        </div>
+                        `;
+
+            }
+
+
+
+            saidasText.textContent = `R$ ${saidasTexto}`
+            lucroText.textContent = `R$ ${lucroTexto - valorNumerico} `
+            caixaText.textContent = `R$ ${(caixaTexto - saidasTexto) - valorDoCookieCaixa} `
+
+            listaMenu.innerHTML = listaHTML;
+
+            const cookieNome = 'historico';
+            excluirCookieNoPrimeiroDiaDoMes(cookieNome);
+
+            resumoDoMes.addEventListener('click', function () {
+                  const nomeDoCookie = 'resumoDoMes';
+                  if (cookieExiste(nomeDoCookie)) {
+                        console.log(`O cookie ${nomeDoCookie} existe.`);
+                        modal.style.display = 'flex';
+
+                        const resumoDoMesCookie = getCookie('resumoDoMes');
+                        const resumoDoMesObjeto = JSON.parse(resumoDoMesCookie);
+                        const nomeDoMes = resumoDoMesObjeto.nomeDoMes;
+                        const caixaDoMes = resumoDoMesObjeto.caixa;
+                        const lucro = resumoDoMesObjeto.lucro;
+                        const saidas = resumoDoMesObjeto.saidas;
+
+                        document.getElementById('monthName').innerText = "Resumo " + nomeDoMes;
+                        document.getElementById('monthIncome').innerText = caixaDoMes;
+                        document.getElementById('profit').innerText = lucro;
+                        document.getElementById('expenses').innerText = saidas;
+
+                  } else {
+                        naoEncontrado.style.display = 'flex';
+                        setTimeout(() => {
+                              naoEncontrado.style.display = 'none';
+                        }, 3000);
+                  }
+
+            })
+
+
+            listaEstoqueAll.forEach((event) => {
+                  event.addEventListener('click', function () {
+                       exibirModalConfirmarExclusao(idProdutoClicado)
+                  })
+            })
+
+            closeButton.onclick = function () {
+                  modal.style.display = 'none';
+            };
+
+            window.onclick = function (event) {
+                  if (event.target == modal) {
+                        modal.style.display = 'none';
+                  }
+            };
+      </script>
+</body>
+
+</html>
