@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compartilhar Produto</title>
+</head>
+<body>
+    <h1>Nome do Produto</h1>
+    <p>Descrição do Produto</p>
+    <img src="imagem_do_produto.jpg" alt="Imagem do Produto">
+
+    <!-- Botão de Compartilhamento -->
+    <button id="botaoCompartilhar">Compartilhar Produto</button>
+
+    <script>
+        const botaoCompartilhar = document.getElementById('botaoCompartilhar');
+
+        // Verifica se o navegador suporta a API Web Share
+        if (navigator.share) {
+            botaoCompartilhar.addEventListener('click', function () {
+                navigator.share({
+                    title: 'Nome do Produto',
+                    text: 'Descrição do Produto',
+                    url: window.location.href
+                })
+                .then(() => {
+                    console.log('Produto compartilhado com sucesso!');
+                })
+                .catch((error) => {
+                    console.error('Erro ao compartilhar o produto:', error);
+                });
+            });
+        } else {
+            // Se o navegador não suportar a API Web Share, oculte o botão de compartilhamento
+            botaoCompartilhar.style.display = 'none';
+            console.log('A API Web Share não é suportada neste navegador.');
+        }
+    </script>
+</body>
+</html>

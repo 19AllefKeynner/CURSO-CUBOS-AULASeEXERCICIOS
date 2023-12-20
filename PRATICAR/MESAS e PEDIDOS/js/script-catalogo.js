@@ -50,28 +50,39 @@ if (!cookieExiste(nomeDoCookie)) {
       criarCookie("nomesCookies", arrayDeCookies, 7)
 }
 
+let imagemAtual = ''
+
 botoesImagem.forEach(function (botao) {
       botao.addEventListener('click', function () {
-            var input = document.createElement('input')
-            input.type = 'file'
+            var input = document.createElement('input');
+            input.type = 'file';
 
             input.addEventListener('change', function () {
-                  var file = input.files[0]
+                  var file = input.files[0];
 
                   if (file) {
-                        var containerProduto = botao.closest('.produto-catalogo')
-                        var imagemPreview = containerProduto.querySelector('.imagem-preview-1')
-                        var addImagemText = containerProduto.querySelector('.add-imagem-text')
+                        var containerProduto = botao.closest('.produto-catalogo');
+                        var imagemPreview = containerProduto.querySelector('.imagem-preview-1');
+                        var addImagemText = containerProduto.querySelector('.add-imagem-text');
 
-                        imagemPreview.src = URL.createObjectURL(file)
-                        imagemPreview.style.display = 'inline-block' // Exibe a imagem
-                        addImagemText.style.display = 'none'
+                        // Criar um Blob a partir do arquivo selecionado
+                        var blob = new Blob([file], { type: file.type });
+
+                        // Criar uma URL do Blob
+                        var blobUrl = URL.createObjectURL(blob);
+                        imagemAtual = blobUrl
+
+                        imagemPreview.src = blobUrl;
+                        imagemPreview.style.display = 'inline-block'; // Exibe a imagem
+                        addImagemText.style.display = 'none';
                   }
             });
 
-            input.click()
-      })
+            input.click();
+      });
 });
+
+console.log(imagemAtual)
 
 var botoesAdicionar = document.querySelectorAll('.add-produto')
 
@@ -105,8 +116,7 @@ botoesAdicionar.forEach(function (botao) {
             var objeto = {
                   nome: nomeProduto,
                   valor: valorProduto,
-                  imagem: imagemPreview.src,
-
+                  imagem: imagemAtual,
             }
             criarCookie(nomeProduto, objeto, 7)
       });
@@ -119,7 +129,7 @@ botaoFinalizar.addEventListener('click', function () {
       if (!nome || !mesas) {
             alert('Preencha todos os campos antes de finalizar o cadastro!')
             return
-      }else{
+      } else {
             const novoObjeto = {
                   nomeEmpresa: nome,
                   quantMesas: mesas

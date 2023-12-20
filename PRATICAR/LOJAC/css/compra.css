@@ -1,0 +1,371 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+--primary-color: #A964CC;
+--primary-color-dark: #D37DFF;
+--primary-color-light: #f4e5ec;
+--text-dark: #0f172a;
+--text-light: #64748b;
+--extra-light: #f8fafc;
+--white: #ffffff;
+--max-width-1400: 1400px;
+--max-width-1200: 1200px;
+--max-width-900: 900px;
+--header-font: "Playfair Display", serif;
+}
+
+*{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Open Sans';
+      }
+
+a {
+text-decoration: none;
+}
+
+body {
+font-family: "Poppins", sans-serif;
+}
+
+nav {
+max-width: var(--max-width-1200);
+margin: auto;
+padding: 2rem 1rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.nav__links {
+flex: 1;
+list-style: none;
+display: flex;
+align-items: center;
+gap: 2rem;
+}
+
+.link a {
+font-weight: 500;
+color: var(--text-dark);
+}
+
+.link a:hover {
+color: var(--primary-color);
+}
+
+.nav__logo a {
+font-size: 2rem;
+font-weight: 800;
+font-family: var(--header-font);
+color: var(--text-dark);
+}
+
+.nav__logo a span {
+      font-family: var(--header-font);
+color: var(--primary-color);
+}
+
+.nav__icons {
+flex: 1;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+gap: 2rem;
+}
+
+.nav__icons span a {
+font-size: 1.25rem;
+color: var(--text-dark);
+}
+
+.nav__icons span a:hover {
+color: var(--primary-color);
+}
+
+
+            
+
+            .lateral{
+                  display: inline-block;
+                  padding-top: 30px;
+                  width: 60%;
+                  height: 970px;
+                  background-color: #f0f0f0;
+
+            }
+
+            .endereco{
+                  margin-top: 15px;
+                  margin-left: 15%;
+                  background-color: #63465a2d;
+                  height: 130px;
+                  width: 70%;
+                  border-radius: 10px;
+                  text-align: center;
+                  
+            }
+
+            .icon{     
+                  display: flex;
+                  font-size: 30px;
+                  color: var(--primary-color);
+                  background-color: #ffffff;
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                  justify-content: center;
+                  align-items: center;
+                  margin-left: -25px;
+                  text-align: center;
+            }
+
+             .endereco h3{
+                  margin-left: -130px;
+                  margin-top: -20px;
+            }
+
+           
+          
+
+            .lateral h2,p{
+                  margin-left: 15%;
+            }
+
+            .produto{
+                  padding-top: 10px;
+                  margin-top: 10px;
+                  margin-left: 15%;
+                  background-color: #63465a2d;
+                  height: 65px;
+                  width: 70%;
+                  border-radius: 10px 10px 0px 0px;
+                  text-align: center;
+                  padding-bottom: 5px;
+            }
+
+            .produto h3 {
+                  margin-top: -40px;
+                  margin-left: -130px;
+            }
+
+            .produtoMeio{
+                  padding-top: 10px;
+                  margin-top: 2px;
+                  margin-left: 15%;
+                  background-color: #63465a2d;
+                  height: 140px;
+                  width: 70%;
+                  text-align: center;
+                  padding-bottom: 5px;
+            }
+
+
+            .p1{
+                  margin-left: -310px;
+                  margin-bottom: 10px;
+            }
+
+            .imagem {
+                  margin-top: -35px;
+                  margin-bottom: 40px;
+                  margin-left: 25px;
+                  display: flex;
+                  padding: 10px;
+                  justify-content: center;
+                  align-items: center;
+                  width: 50px;
+                  height: 50px;
+                  color: #ffffff;
+                  background-color: #a3a3a3;
+                  border-radius: 50%;
+            }
+
+            .imagem img{
+                  width: 60px;
+                  border-radius: 15px;
+                 
+
+
+
+            }
+
+            .produtoNome{
+                  margin-left: 30px;
+                  margin-top: -20px;
+                  display: flex;
+                  margin-bottom: 5px;
+                  text-align: center;
+
+            }
+
+            .quantidade{
+                  margin-left: -265px;
+            }
+
+            .pagamento{
+                  padding-top: 10px;
+                  margin-top: 10px;
+                  margin-left: 15%;
+                  background-color: #63465a2d;
+                  height: 75px;
+                  width: 70%;
+                  border-radius:  0px 0px 10px 10px;
+                  text-align: center;
+                  padding-bottom: 5px;
+            }
+
+            .pagamento h3{
+                  display: flex;
+                  justify-content:  left;
+                  margin-left: 60px;
+                  margin-top: -35px;
+            }
+
+            .btn-comfirmar-compra{
+                  padding: 10px 30px;
+                  background-color: var(--primary-color);
+                  color: white;
+                  font-size: 18px;
+                  border-radius: 10px 0px;
+                  border: 0;
+                  margin-top: 20px;
+                  margin-left: 320px;
+            }
+
+            .btn-comfirmar-compra:hover{
+                  background-color: var(--primary-color);
+            }
+
+
+            .lateral-direita{
+                  margin: 70px;
+                  position: fixed;
+                  margin-top: -970px;
+                  margin-left: 900px ;
+                  height: 950px;
+                  width: 400px;
+                  background-color: #f0f0f0;
+            }
+
+            .lateral-direita h3{
+                  margin-left: 20px;
+                  margin-top: 20px;
+                  margin-bottom: 20px;
+
+            }
+
+            .produtos-quant, .produtos-valor, .frete, .valor-frete, .valor-pagar, .valor-pagarTotal {
+                  display: inline-block;
+            }
+
+            .produtos-quant{
+                  margin-top: 20px;
+                  margin-bottom: 50px;
+            }
+
+            .valor-frete{
+                  color: green;
+                  margin-bottom: 20px;
+                  margin-left:  125px;
+            }
+
+            .valor-pagar{
+                  margin-right: 50px;
+            }
+
+            .btn-comfirmar-compra2{
+                  padding: 10px 30px;
+                  background-color: var(--primary-color);
+                  color: white;
+                  font-size: 18px;
+                  border-radius: 10px 0px;
+                  border: 0;
+                  margin-top: 20px;
+                  margin-left: 98px;
+            }
+
+            .btn-comfirmar-compra2:hover{
+                  background-color: var(--primary-color);
+            }
+
+            #mensagem{
+                  color: red;
+                  text-align: center;
+                  margin-left: -0px;
+            }
+
+            .body {
+                  display: none;
+                  justify-content: center;
+                  align-items: center;
+                  min-height: 100vh;
+                  margin: 0;
+                  background-color: #f0f0f0;
+                  font-family: Arial, sans-serif;
+            }
+
+
+            .payment-div {
+                  margin-top: -200px;
+                  text-align: center;
+                  padding: 20px;
+                  background-color: #fff;
+                  border-radius: 10px;
+                  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                  width: 60%;
+                  height: 600px;
+            }
+
+            .payment-div h1{
+                  margin-top: 50px;
+            }
+
+            .payment-div p, button {
+                  margin: 10px 0 40px 0;
+            }
+
+           
+
+            .payment-div h1{
+                  margin-bottom: 20px;
+            }
+
+            .payment-div > .atencao{
+                  margin-bottom: 10px;
+            }
+
+            .larger-text {
+                  font-size: 18px;
+                  background-color: rgba(35, 112, 41, 0.829);
+                  border: 0;
+                  padding: 5px;
+                  border-radius: 3px;
+                  color: white;
+            }
+
+            .copiar{
+                  font-size: 18px;
+                  background-color: rgb(211, 211, 211);
+                  border: 0;
+                  padding: 5px 10px;
+                  border-radius:  3px;
+            }
+
+            .copiar:hover{
+                  background-color: rgb(180, 180, 180);
+                  cursor: pointer;
+            }
+            
+            #valorPix{
+                  margin-left: -290px;
+            }
+
+            #meuInputEmail, #meuNumber{
+                  width: 285px;
+                  padding: 10px;
+                  margin-left: 40px;
+                  margin-bottom: 20px;
+            }

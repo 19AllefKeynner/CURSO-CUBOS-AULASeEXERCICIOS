@@ -110,18 +110,20 @@ for (let item of nomesArray) {
 
       if (cookieValue) {
             var objetoCookie = JSON.parse(cookieValue);
-            console.log(objetoCookie);
+            console.log(objetoCookie.img);
      
             if (exemploDeUso(objetoCookie.imagem) === 'sucesso') {
+                  const listaEstoque = document.getElementById("listaEstoque");
+              
                   listaEstoque.innerHTML +=
-                        `<div class="produtoNoEstoque">
-                                          <div class="imagem">
-                                                <img src="${objetoCookie.imagem}" alt="">
-                                          </div>
-                                          <p class="nomeProduto">${objetoCookie.nome}</p>
-                                          <p class="precoProduto">R$ ${objetoCookie.valor},00</p>
-                                          <button id="editarEstoque">Editar <i class="fa-solid fa-pen-to-square"></i></button>
-                                    </div>`
+                      `<div class="produtoNoEstoque">
+                          <div class="imagem">
+                              <img src="${objetoCookie.imagem}" alt="">
+                          </div>
+                          <p class="nomeProduto">${objetoCookie.nome}</p>
+                          <p class="precoProduto">R$ ${objetoCookie.valor},00</p>
+                          <button id="editarEstoque">Editar <i class="fa-solid fa-pen-to-square"></i></button>
+                      </div>`;
             }else{
                   listaEstoque.innerHTML +=
                         `<div class="produtoNoEstoque">
