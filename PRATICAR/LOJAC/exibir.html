@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Exemplo de Pagamento com QR Code</title>
+</head>
+
+<body>
+      <div id="qrcode-container">
+            <!-- Aqui será exibido o QR Code -->
+      </div>
+
+      <script>
+            // exibir_qr_code.js
+
+            // Função para fazer uma requisição assíncrona e obter o QR Code
+            async function obterQRCode() {
+                  const resposta = await fetch('http://localhost:3000');
+                  const dados = await resposta.json();
+
+                  // O URL do QR Code estará em 'dados.qr.code_url'
+                  const qrCodeURL = dados.qr.code_url;
+
+                  // Exibir o QR Code na página
+                  const container = document.getElementById('qrcode-container');
+                  container.innerHTML = `<img src="${qrCodeURL}" alt="QR Code">`;
+            }
+
+            // Chamar a função ao carregar a página
+            obterQRCode();
+
+      </script>
+</body>
+
+</html>

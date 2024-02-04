@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Classe - 03</title>
+</head>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #EFF5FF;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+  }
+
+  .card {
+    background-color: #FFF;
+    box-shadow: rgba(171, 200, 250, 0.38);
+    width: 530px;
+    padding: 74px 70px 50px 70px;
+
+  }
+
+  h1 {
+    font-family: 'Merriweather', serif;
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  span {
+    color: #494949;
+    font-weight: 600;
+  }
+
+  .categorias {
+    margin-top: 50px;
+    display: flex;
+    ;
+  }
+
+  .tag {
+    width: 94px;
+    height: 44px;
+    display: inline;
+    background: #EFF5FF;
+    border-radius: 45px;
+    color: #2E29FF;
+    font-weight: 600;
+  }
+
+  .alinhar {
+    margin-top: 30px;
+    display: inline-flexbox;
+  }
+
+  .abaixo {
+    color: white;
+    display: flex;
+  }
+</style>
+
+<body>
+  <div class="card">
+    <h1>Doces orgânicos</h1>
+    <p>
+      Doces com adoçantes orgânicos limpos e sabores de frutass reais. Gomas de ingrediente único: ashwagandha, vinagre
+      de maçã, sabugueiro e açafrão.
+    </p>
+    <span class="update">Atualizado 2 horas atrás</span>
+
+    <div class="categorias">
+      <div> <span>Categorias</span></div>
+      <div class="alinhar">
+        <div><span class="tag">Comida</span></div>
+        <div><span class="tag">Doces</span></div>
+        <div><span class="tag">Doces</span></div>
+        <div><span class="tag dobra">Orgânico</span></div>
+
+        <div><span class="tag">Bio</span></div>
+        <div><span class="tag">Vegan</span></div>
+        <div><span class="tag">Sem Glúten</span></div>
+      </div>
+      <div class="abaixo">
+        <a href="#">Home</a>
+        <a href="#">Parceiros</a>
+        <a href="#">Blog</a>
+        <a href="#">Segurança</a>
+        <a href="#">FAQ</a>
+        <a href="#">Como gerar boleto</a>
+        <a href="#">Feirão</a>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>
