@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Seu Site</title>
+      <style>
+            .cookie-banner {
+                  position: fixed;
+                  bottom: 0;
+                  left: 0;
+                  width: 100%;
+                  background-color: #f1f1f1;
+                  padding: 10px;
+                  text-align: center;
+                  box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.5);
+            }
+
+            .cookie-banner button {
+                  margin: 5px;
+                  padding: 5px 10px;
+                  cursor: pointer;
+            }
+      </style>
+</head>
+
+<body>
+      <div id="cookieBanner" class="cookie-banner">
+            <p>Este site usa cookies para garantir que você obtenha a melhor experiência.</p>
+            <button id="acceptCookiesBtn">Aceitar Cookies</button>
+            <button id="declineCookiesBtn">Recusar Cookies</button>
+      </div>
+      <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                  const cookieBanner = document.getElementById("cookieBanner");
+                  const acceptCookiesBtn = document.getElementById("acceptCookiesBtn");
+                  const declineCookiesBtn = document.getElementById("declineCookiesBtn");
+
+                  acceptCookiesBtn.addEventListener("click", function () {
+                        // Defina aqui a lógica para armazenar os cookies
+                        cookieBanner.style.display = "none";
+                  });
+
+                  declineCookiesBtn.addEventListener("click", function () {
+                        // Defina aqui a lógica para não aceitar os cookies
+                        cookieBanner.style.display = "none";
+                  });
+            });
+
+      </script>
+</body>
+
+</html>

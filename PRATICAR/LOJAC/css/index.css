@@ -42,7 +42,7 @@
       text-align: center;
       }
 
-      .btn {
+      .btn, #acceptCookiesBtn {
       padding: 0.75rem 1.5rem;
       outline: none;
       border: none;
@@ -54,7 +54,7 @@
       transition: 0.3s;
       }
 
-      .btn:hover {
+      .btn:hover, #acceptCookiesBtn:hover {
       background-color: var(--primary-color-dark);
       }
 

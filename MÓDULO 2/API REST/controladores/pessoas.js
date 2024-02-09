@@ -11,12 +11,29 @@ function consultarPeloId(req,res){
       const pessoa = listaDePessoas.find(pessoa => {
             return pessoa.id === Number(id)
       })
-      res.json(pessoa) 
 
+      if(!pessoa){
+            res.status(404)
+            res.json({erro: "ID não encontrado!"})
+      }else{
+            res.json(pessoa) 
+      }
 }
 
 function criarPessoa(req, res){
       const objetoRecebido = req.body
+      console.log()
+      if (!req.body.nome || !isNaN(parseInt(req.body.nome))){
+            res.status(400)
+            res.json({erro: "O parâmetro ( nome ) não foi encontrado ou não é valido, impossivel adicionar!"})
+            return
+      }
+
+      if (!req.body.idade || isNaN(parseInt(req.body.idade))){
+            res.status(400)
+            res.json({erro: "O parâmetro ( idade ) não foi encontrado ou não é valido, impossivel adicionar!"})
+            return
+      }
       const novoObjeto = {
             id: novoId,
             ...objetoRecebido
